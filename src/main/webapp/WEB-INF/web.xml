@@ -17,7 +17,7 @@
 
     <servlet>
       <servlet-name>itemLookup</servlet-name>
-      <jsp-file>/WEB-INF/content/itemLookup.jsp</jsp-file>
+      <jsp-file>/WEB-INF/content/item-lookup.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
       <servlet-name>itemLookup</servlet-name>
