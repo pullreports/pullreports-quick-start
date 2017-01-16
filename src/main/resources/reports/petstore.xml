@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="http://www.pullreports.com/catalog-1.0.0" id="petstore" name="Products">
+    <report id="items" name="Pet Store Item Report">
+        <description><![CDATA[
+        <p>Report of the items for sale in Duke's Pet Store.</p>
+        <p>This is a fictional, example report of 
+        <a href='http://www.pullreports.com' target='_blank'>Pull Reports</a> capabilities.</p>]]></description>
+        <table id="item" name="pet_store.item" displayName="Item"> 
+            <description>The items available for sale in Duke's Pet Store.</description>
+            <column id="id" name="id" displayName="Item ID" paramType="java.lang.Long"/>
+            <column id="name" name="name" displayName="Item Name">
+                <url_template>/itemLookup?id=${@id}</url_template>
+                <label_value_list><label_value_query/></label_value_list>
+            </column>
+            <column id="desc" name="description" displayName="Item Description"/>
+            <relationship join="inner" cardinality="one">
+                <join_column columnName="product_fk" referencedColumnName="id" />
+                <table id="product" displayName="Product Type" name="pet_store.product">
+                    <description>Pet Store items have one Product. Products help customers
+                    find items on the website.</description>
+                    <column id="id" name="id" displayName="Product ID" paramType="java.lang.Long"/>
+                    <column id="name" name="name" displayName="Product Name">
+                        <label_value_list><label_value_query/></label_value_list>
+                    </column>
+                    <column id="desc" name="description" displayName="Product Description"/>
+                    <relationship join="inner" cardinality="one">
+                        <join_column columnName="category_fk" referencedColumnName="id" />
+                        <table id="category" displayName="Product Category" name="pet_store.category">
+                            <description>Categories are the highest level of item organization within the
+                            Pet Store.</description>
+                            <column id="id" name="id" displayName="Category ID" paramType="java.lang.Long"/>
+                            <column id="name" name="name" displayName="Category Name">
+                                <label_value_list><label_value_query/></label_value_list>
+                            </column>
+                            <column id="desc" name="description" displayName="Category Description"/>
+                        </table>
+                    </relationship>
+                </table>
+            </relationship>
+            <relationship cardinality="many">
+                <join_column columnName="item_fk" referencedColumnName="id" />
+                <table id="inventory" displayName="Inventory" name="pet_store.item_inventory">
+                    <column id="amount" name="amount" displayName="Inventory Amount" paramType='java.lang.Double'/>
+                    <column id="date" name="inventory_date" displayName="Inventory Date" paramType='java.sql.Date'>
+                        <output_transform>to_char(${this},'MM-DD-YYYY')</output_transform>
+                    </column>
+                    <relationship join="inner" cardinality="one">
+                        <join_column columnName="warehouse_fk" referencedColumnName="id" />
+                        <table_ref id="wh" ref="warehouse"/>
+                    </relationship>
+                </table>
+            </relationship>
+            <relationship cardinality="many">
+                <join_column columnName="item_fk" referencedColumnName="id" />
+                <table id="order_line" displayName="Order Line" name="pet_store.order_line">
+                    <column id="quantity" name="quantity" displayName="Quantity" paramType='java.lang.Integer'/>
+                    <relationship join="left" cardinality="many">
+                        <join_table name="pet_store.customer_order_order_line">
+                            <join_columns>
+                                <join_column columnName="order_line_fk" referencedColumnName="id" />
+                            </join_columns>
+                            <inverse_join_columns>
+                                <join_column columnName="order_fk" referencedColumnName="id" />
+                            </inverse_join_columns>
+                        </join_table>
+                        <table id="order" displayName="Online Order" name="pet_store.customer_order">
+                            <column id='date' name='order_date' displayName='Order Date' paramType='java.sql.Date'>  
+                                <output_transform>to_char(${this},'MM-DD-YYYY')</output_transform>
+                            </column>
+                            <relationship join="left" cardinality="many">
+                                <join_column columnName="id" referencedColumnName="customer_fk" />
+                                <table_ref id='customer' ref="customer"/>
+                            </relationship>
+                        </table>
+                    </relationship>
+                </table>
+            </relationship>
+            <relationship join="left" cardinality="one">
+                <join_column columnName="manufacturer_fk" referencedColumnName="id" />
+                <table id="manufacturer" displayName="Manufacturer" name="pet_store.manufacturer">
+                    <column id="id" name="id" displayName="Manufacturer ID" paramType="java.lang.Long" export='false'/>
+                    <column id="name" name="name" displayName="Manufacturer">
+                        <label_value_list><label_value_query/></label_value_list>
+                    </column>
+                </table>
+            </relationship>
+        </table>
+    </report>
+    <report id="warehouse" name="Warehouse Report">
+        <export_config>
+            <geojson geometryColumnPath="@geojson"/>
+        </export_config>
+        <table_ref id="wh" ref='warehouse'/>
+    </report>
+    <report id="customer" name="Customer Report">
+        <export_config>
+            <geojson geometryColumnPath="@geojson"/>
+        </export_config>
+        <table_ref id="customer" ref='customer'/>
+    </report>
+    <!-- 
+    Global table: customer
+     -->
+    <table id="customer" displayName="Customer" name="pet_store.customer">
+        <column id='id' name='id' paramType='java.lang.Long'/>  
+        <column id='fname' name='firstname'/>
+        <column id='lname' name='lastname'>
+            <label_value_list><label_value_query/></label_value_list>
+        </column>
+        <column id='email' name='email'/>
+        <column id='bd' name='birth_date' paramType='java.sql.Date'>
+            <output_transform>to_char(${this},'MM-DD-YYYY')</output_transform>
+        </column>
+        <column id='age' name='age' paramType='java.lang.Integer'/>
+        <column id="geojson" name="address_point_geojson" displayName="Address Point" export='false'/>
+    </table>
+    <!-- 
+    Global table: warehouse
+     -->
+    <table id="warehouse" displayName="Warehouse" name="pet_store.warehouse">
+        <description>
+        Pet Store inventory is located in 4 warehouses distributed across the
+        United States. Warehouse inventory audits are performed on a semi-annual
+        basis.</description>
+        <column id="name" name="name" displayName="Warehouse Name">
+            <label_value_list><label_value_query/></label_value_list>
+        </column>
+        <column id="geojson" name="location_point_geojson" displayName="Address Point" export='false'/>
+    </table>
+</catalog>

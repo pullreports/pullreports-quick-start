@@ -1,0 +1,163 @@
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'project-report'
+apply plugin: 'com.bmuschko.cargo'
+
+def tomcat8Version= '8.0.39'
+
+configurations {
+	// The jdbcDrivers configuration contains JDBC Driver Jars to be installed 
+    // within Tomcat for JNDI Connection Pools
+    jdbcDrivers 
+	// The tomcat configuration holds downloaded Tomcat instances.
+    tomcat
+}
+
+repositories {
+    jcenter()
+    mavenLocal()
+    mavenCentral()
+
+    ivy {
+        name 'Tomcat'
+        url 'http://archive.apache.org'
+        layout "pattern", {
+            artifact "/dist/tomcat/[module]/v[revision]/bin/apache-tomcat-[revision].[ext]"
+        }
+    }
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+		classpath 'com.bmuschko:gradle-cargo-plugin:2.2.2'
+        classpath 'com.h2database:h2:1.4.184'
+    }
+}
+  
+dependencies {
+    runtime 'org.slf4j:slf4j-simple:1.7.21' // SLF4J implementation
+	runtime 'opensymphony:sitemesh:2.4.2'
+	runtime 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1'
+	runtime 'org.apache.taglibs:taglibs-standard-impl:1.2.5' // Remove?
+	runtime "com.pullreports:pullreports:+"
+
+    providedCompile 'javax.servlet:javax.servlet-api:3.0.1' // Provided by tomcat
+	providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.2.1'
+	
+    jdbcDrivers 'com.h2database:h2:1.4.185'
+    tomcat name: 'tomcat-8', version: "${tomcat8Version}", ext: "zip"
+}
+
+war {
+	archiveName "ROOT.war"
+}
+
+cargo {
+	containerId = 'tomcat8x'
+	port = 8080
+
+	local {
+		// This Apache Tomcat installation is installed via the extractTomcat8
+		// task below
+		homeDir = file("${buildDir}/apache-tomcat-${tomcat8Version}")
+		outputFile = file("${buildDir}/apache-tomcat-${tomcat8Version}/logs/output.log")
+		timeout = 60000
+	}
+	
+}
+
+task startH2() << {
+    String port = '9092'
+    String h2Base = "${buildDir}/temp-h2-base"
+    String databaseName = "petstore"
+
+    org.h2.tools.Server h2 = org.h2.tools.Server.createTcpServer('-tcp','-tcpPort',port,'-baseDir',h2Base)
+    
+    try {
+        h2.start()
+        println "H2 started"
+    } catch (java.sql.SQLException e){
+        println "H2 already started. Trying to start again"
+        org.h2.tools.Server.shutdownTcpServer("tcp://localhost:${port}".toString(),'',true,true)
+        // I've found that letting the TcpServer fully shutdown is often required
+        // I wish I had a way of detecting this or having a callback, but just sleeping
+        // for 1 sec is easier.
+        sleep(1000)
+        h2.start()
+    }
+
+    new File("${h2Base}/${databaseName}.mv.db").delete()
+    
+    // Let the database delete operation finish.
+    sleep(1000)
+
+	String h2Home = "${projectDir}/src/main/database"
+
+    org.h2.tools.RunScript.execute("jdbc:h2:tcp://localhost:${port}/${databaseName}".toString()
+        , 'sa', '', "${h2Home}/pet_store.sql".toString()
+        , java.nio.charset.Charset.forName('UTF-8'), false)
+
+    // Put the H2 driver into the same classloader as Groovy.
+    configurations.jdbcDrivers.files.each {
+        groovy.sql.Sql.classLoader.addURL(it.toURI().toURL())
+    }
+
+    java.sql.DriverManager.registerDriver(
+        groovy.sql.Sql.classLoader.loadClass("org.h2.Driver").newInstance())
+
+    def sql;
+
+    try {
+        
+        def db = [url:"jdbc:h2:tcp://localhost:${port}/${databaseName}".toString()
+            , user:'sa', password:'', driver:'org.h2.Driver']
+    
+        sql = groovy.sql.Sql.newInstance(db.url, db.user, db.password, db.driver)
+        
+        def tables = ['category','product','manufacturer','item','warehouse',
+            'item_inventory','order_line','customer','customer_order','customer_order_order_line']
+        
+        for (t in tables){
+            sql.execute "insert into pet_store.${t} select * from csvread('${h2Home}/${t}.csv',null,'fieldDelimiter=''')".toString()
+        }
+
+    } finally {
+        sql?.close()
+    }
+}
+
+
+/**
+ * Unzip Tomcat 8 from the tomcat configurations into the build
+ * directory. This might work for other versions of tomcat also 
+ * as long as they were part of the tomcat configuration.
+ */
+task extractTomcat8(type: Copy,dependsOn:configurations.tomcat) {
+	
+	from {
+	    configurations.tomcat.asFileTree.each {
+	        from( zipTree(it) )
+     }
+	 // Don't include the actual archives themselves
+	 null
+	}
+	into file("${buildDir}")
+}
+
+/**
+ * Put the JDBC drivers into Tomcat so that Tomcat can provide
+ * the JNDI DataSource
+ */
+task installJdbcDrivers(type: Copy,dependsOn:extractTomcat8) {
+	into "${buildDir}/apache-tomcat-${tomcat8Version}/lib"
+	//from configurations.postgres
+	from configurations.jdbcDrivers
+}
+
+cargoRunLocal.dependsOn assemble
+cargoRunLocal.dependsOn installJdbcDrivers 
+cargoRunLocal.dependsOn startH2 

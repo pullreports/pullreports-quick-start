@@ -1,0 +1,5 @@
+id,name,location_point_geojson
+1,Denver Shipping Center,'{""type"": ""Point"", ""coordinates"": [-104.98251915,39.82752244]}'
+2,California Hub,'{""type"": ""Point"", ""coordinates"": [-122.36029387,40.58531061]}'
+3,Atlanta,'{""type"": ""Point"", ""coordinates"": [-84.46065903,33.89036748]}'
+4,New England Warehouse,'{""type"": ""Point"", ""coordinates"": [-75.71519852,41.35619553]}'

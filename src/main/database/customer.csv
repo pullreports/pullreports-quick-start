@@ -1,0 +1,4 @@
+id,firstname,lastname,email,birth_date,age,address_point_geojson
+1,Mark,Twain,mark_twain@sawyer.com,'1835-11-30',39,
+2,Ernest,Hemingway,ernest@tollsforme.com,'1899-07-21',32,
+3,William,Faulkner,wfaulk@southerngents.com,'1897-09-25',54,'{""type"": ""Point"", ""coordinates"": [-89.0078,34.4943]}'

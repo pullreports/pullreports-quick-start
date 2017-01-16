@@ -1,0 +1,7 @@
+id,name,description,category_fk
+100,Leashes,Dog leashes,1
+101,Food,Nutritious and delicious dog food.,1
+102,Toys,Dog toys like  balls and chews.,1
+103,Clothing,Stylish and functional clothing for dogs.,1
+110,Dry Food,Dry cat food.,2
+111,Wet Food,Wet cat food.,2
