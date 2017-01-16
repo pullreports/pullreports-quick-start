@@ -108,8 +108,3 @@ create table pet_store.customer_order_order_line (
   ,foreign key (order_fk) references pet_store.customer_order(id)
   ,foreign key (order_line_fk) references pet_store.order_line(id)
 );
-
---    @JoinTable(name = "t_order_order_line",
---           joinColumns = {@JoinColumn(name = "order_fk")},
---            inverseJoinColumns = {@JoinColumn(name = "order_line_fk")})
---    private List<OrderLine> orderLines;
