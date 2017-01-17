@@ -10,7 +10,7 @@
     <meta name="description" content="Demonstration of Pull Reports embeddable, web-based ad hoc reporting, mapping, and data services software.">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"></link>
 	<link rel="stylesheet" href="/assets/pullreports.min.css">
-	<script src="/assets/pullreports.js"></script>
+	<script src="/assets/pullreports.min.js"></script>
 	<script>
         var baseLayers = [];
         baseLayers['ESRI World Topo'] = 
