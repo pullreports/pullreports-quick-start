@@ -72,6 +72,8 @@ create table pet_store.order_line(
  ,foreign key (item_fk) references pet_store.item(id)
 );
 
+create sequence pet_store.order_line_seq;
+
 --
 -- customer
 --
@@ -83,7 +85,6 @@ create table pet_store.customer(
  ,birth_date date
  ,age integer
  ,address_point_geojson varchar 
---    private Address homeAddress = new Address();
 );
 
 --
@@ -94,9 +95,9 @@ create table pet_store.customer_order (
     ,order_date date 
     ,customer_fk bigint not null
     ,foreign key (customer_fk) references customer(id)
-    -- address
-    -- credit card
 );
+
+create sequence pet_store.cust_order_seq;
 
 --
 -- customer_order

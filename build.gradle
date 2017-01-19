@@ -119,14 +119,14 @@ task startH2() << {
     
         sql = groovy.sql.Sql.newInstance(db.url, db.user, db.password, db.driver)
         
-        def tables = ['category','product','manufacturer','item','warehouse',
-            'order_line','customer','customer_order','customer_order_order_line']
+        def tables = ['category','product','manufacturer','item','warehouse','customer']
         
         for (t in tables){
             sql.execute "insert into pet_store.${t} select * from csvread('${h2Home}/${t}.csv',null,'fieldDelimiter=''')".toString()
         }
 
         insertItemInventory(sql)
+        insertCustomOrders(sql)
 
     } finally {
         sql?.close()
@@ -157,6 +157,48 @@ private void insertItemInventory(groovy.sql.Sql sql){
     }
 }
 
+/**
+ * Iterate through the customer records and insert 5 to 8 orders
+ * per customer within the past 4 years. Each order has 1 to 3 items. 
+ * @param sql
+ */
+private void insertCustomOrders(groovy.sql.Sql sql){
+    List itemIds = sql.rows('select id from pet_store.item')
+
+    for(def customer: sql.rows('select id from pet_store.customer')){
+        int numOrders = ThreadLocalRandom.current().nextInt(0, 3) + 5
+
+        for (int i = 0;i < numOrders;i++){
+            int dateDelta = ThreadLocalRandom.current().nextInt(0,(365 * 4) + 1)
+            Date dt = (new Date() - dateDelta)
+
+            long customerOrderId = sql.rows("select nextval('pet_store.cust_order_seq')")[0][0]
+            sql.execute """
+                insert into pet_store.customer_order (id,order_date,customer_fk) 
+                values ($customerOrderId,$dt,$customer.id)
+            """
+
+            int numberOfItems = ThreadLocalRandom.current().nextInt(0,3) + 1
+            
+            for (int j = 0;j < numberOfItems;j++){
+
+                long itemId = itemIds[ThreadLocalRandom.current().nextInt(0,itemIds.size())].id
+                long orderLineId = sql.rows("select nextval('pet_store.order_line_seq')")[0][0]
+                int quantity = ThreadLocalRandom.current().nextInt(0,2) + 1
+                
+                sql.execute """
+                    insert into pet_store.order_line (id,quantity,item_fk) 
+                    values ($orderLineId,$quantity,$itemId)
+                """
+
+                sql.execute """
+                    insert into pet_store.customer_order_order_line (order_fk,order_line_fk) 
+                    values ($customerOrderId,$orderLineId)
+                """
+            }
+        }
+    }
+}
 
 /**
  * Unzip Tomcat 8 from the tomcat configurations into the build
