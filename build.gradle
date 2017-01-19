@@ -1,3 +1,4 @@
+import java.util.concurrent.ThreadLocalRandom
 apply plugin: 'war'
 apply plugin: 'eclipse'
 apply plugin: 'project-report'
@@ -119,14 +120,40 @@ task startH2() << {
         sql = groovy.sql.Sql.newInstance(db.url, db.user, db.password, db.driver)
         
         def tables = ['category','product','manufacturer','item','warehouse',
-            'item_inventory','order_line','customer','customer_order','customer_order_order_line']
+            'order_line','customer','customer_order','customer_order_order_line']
         
         for (t in tables){
             sql.execute "insert into pet_store.${t} select * from csvread('${h2Home}/${t}.csv',null,'fieldDelimiter=''')".toString()
         }
 
+        insertItemInventory(sql)
+
     } finally {
         sql?.close()
+    }
+}
+
+/**
+ * Inserts records into pet_store.item_inventory. Each item has a 70% chance
+ * of being in a given warehouse. The inventory amount will be between 0 and 200.
+ * The inventory date will be sometime in the last year.
+ */
+private void insertItemInventory(groovy.sql.Sql sql){
+    for(def item : sql.rows('select id from pet_store.item')){
+        
+        for(def warehouse : sql.rows('select id from pet_store.warehouse')){
+            if (Math.random() > 0.3d){
+
+                int amount = ThreadLocalRandom.current().nextInt(0, 201)
+                int dateDelta = ThreadLocalRandom.current().nextInt(0,366)
+                Date dt = (new Date() - dateDelta)
+
+                sql.execute """
+                    insert into pet_store.item_inventory (item_fk,warehouse_fk,amount,inventory_date) 
+                    values ($item.id,$warehouse.id, $amount, $dt)
+                """
+            }
+        }
     }
 }
 
