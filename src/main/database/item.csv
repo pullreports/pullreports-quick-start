@@ -39,8 +39,8 @@ id,name,description,unit_cost,product_fk,manufacturer_fk
 1600,Soft Paws Single Carpet Pole,Simple carpeted stratching pole.,13.39,112,5
 1601,Tower of Scratch,Three level scratching post with secret kitty hide-out.,38.99,112,
 1602,Tower of Scratch Ultimate,Five level scratch house. Comes with 3 toy centers for your cat. They will love it!,109.83,112,
-1603,"Scatching box (12"" by 16"")",Cardboard scratch box,11.99,112,
-1604,"Scatching box (8"" by 24"")",Cardboard scratch box,12.89,112,
+1603,'Scatching box (12"" by 16"")',Cardboard scratch box,11.99,112,
+1604,'Scatching box (8"" by 24"")',Cardboard scratch box,12.89,112,
 1605,Acme Kitty Post,Carpeted post with flat perch.,18.74,112,4
 1606,Scratch wall (2 feet by 4 feet),An outdoor tree inside. Made with real bark.,38.74,112,
-1607,Cat Masion,Four levels and tree rooms of feline luxury.,78.35,112,
+1607,Cat Mansion,Four levels and tree rooms of feline luxury.,78.35,112,
