@@ -15,6 +15,7 @@
     <div class='container'>
         <h1>Item Summary</h1>
         <p>Simple example of retrieving item attributes via Pull Reports web services.
+        View page source to see the JavaScript AJAX call.</p>
         <table id='attributes' class='table table-striped table-bordered'>
             <tbody></tbody>
         </table>
