@@ -40,7 +40,7 @@ buildscript {
 }
   
 dependencies {
-    runtime 'org.slf4j:slf4j-simple:1.7.21' // SLF4J implementation
+    runtime 'org.slf4j:slf4j-simple:1.7.22' // SLF4J implementation
 	runtime 'opensymphony:sitemesh:2.4.2'
 	runtime 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1'
 	runtime 'org.apache.taglibs:taglibs-standard-impl:1.2.5' // Remove?
