@@ -71,65 +71,67 @@ cargo {
 	
 }
 
-task startH2() << {
-    String port = '9092'
-    String h2Base = "${buildDir}/temp-h2-base"
-    String databaseName = "petstore"
+task startH2() {
+    doLast {
+        String port = '9092'
+        String h2Base = "${buildDir}/temp-h2-base"
+        String databaseName = "petstore"
 
-    org.h2.tools.Server h2 = org.h2.tools.Server.createTcpServer('-tcp','-tcpPort',port,'-baseDir',h2Base)
-    
-    try {
-        h2.start()
-        println "H2 started"
-    } catch (java.sql.SQLException e){
-        println "H2 already started. Trying to start again"
-        org.h2.tools.Server.shutdownTcpServer("tcp://localhost:${port}".toString(),'',true,true)
-        // I've found that letting the TcpServer fully shutdown is often required
-        // I wish I had a way of detecting this or having a callback, but just sleeping
-        // for 1 sec is easier.
-        sleep(1000)
-        h2.start()
-    }
-
-    new File("${h2Base}/${databaseName}.mv.db").delete()
-    
-    // Let the database delete operation finish.
-    sleep(1000)
-
-	String h2Home = "${projectDir}/src/main/database"
-
-    org.h2.tools.RunScript.execute("jdbc:h2:tcp://localhost:${port}/${databaseName}".toString()
-        , 'sa', '', "${h2Home}/pet_store.sql".toString()
-        , java.nio.charset.Charset.forName('UTF-8'), false)
-
-    // Put the H2 driver into the same classloader as Groovy.
-    configurations.jdbcDrivers.files.each {
-        groovy.sql.Sql.classLoader.addURL(it.toURI().toURL())
-    }
-
-    java.sql.DriverManager.registerDriver(
-        groovy.sql.Sql.classLoader.loadClass("org.h2.Driver").newInstance())
-
-    def sql;
-
-    try {
+        org.h2.tools.Server h2 = org.h2.tools.Server.createTcpServer('-tcp','-tcpPort',port,'-baseDir',h2Base)
         
-        def db = [url:"jdbc:h2:tcp://localhost:${port}/${databaseName}".toString()
-            , user:'sa', password:'', driver:'org.h2.Driver']
-    
-        sql = groovy.sql.Sql.newInstance(db.url, db.user, db.password, db.driver)
-        
-        def tables = ['category','product','manufacturer','item','warehouse','customer']
-        
-        for (t in tables){
-            sql.execute "insert into pet_store.${t} select * from csvread('${h2Home}/${t}.csv',null,'fieldDelimiter=''')".toString()
+        try {
+            h2.start()
+            println "H2 started"
+        } catch (java.sql.SQLException e){
+            println "H2 already started. Trying to start again"
+            org.h2.tools.Server.shutdownTcpServer("tcp://localhost:${port}".toString(),'',true,true)
+            // I've found that letting the TcpServer fully shutdown is often required
+            // I wish I had a way of detecting this or having a callback, but just sleeping
+            // for 1 sec is easier.
+            sleep(1000)
+            h2.start()
         }
 
-        insertItemInventory(sql)
-        insertCustomOrders(sql)
+        new File("${h2Base}/${databaseName}.mv.db").delete()
+        
+        // Let the database delete operation finish.
+        sleep(1000)
 
-    } finally {
-        sql?.close()
+        String h2Home = "${projectDir}/src/main/database"
+
+        org.h2.tools.RunScript.execute("jdbc:h2:tcp://localhost:${port}/${databaseName}".toString()
+            , 'sa', '', "${h2Home}/pet_store.sql".toString()
+            , java.nio.charset.Charset.forName('UTF-8'), false)
+
+        // Put the H2 driver into the same classloader as Groovy.
+        configurations.jdbcDrivers.files.each {
+            groovy.sql.Sql.classLoader.addURL(it.toURI().toURL())
+        }
+
+        java.sql.DriverManager.registerDriver(
+            groovy.sql.Sql.classLoader.loadClass("org.h2.Driver").newInstance())
+
+        def sql;
+
+        try {
+            
+            def db = [url:"jdbc:h2:tcp://localhost:${port}/${databaseName}".toString()
+                , user:'sa', password:'', driver:'org.h2.Driver']
+        
+            sql = groovy.sql.Sql.newInstance(db.url, db.user, db.password, db.driver)
+            
+            def tables = ['category','product','manufacturer','item','warehouse','customer']
+            
+            for (t in tables){
+                sql.execute "insert into pet_store.${t} select * from csvread('${h2Home}/${t}.csv',null,'fieldDelimiter=''')".toString()
+            }
+
+            insertItemInventory(sql)
+            insertCustomOrders(sql)
+
+        } finally {
+            sql?.close()
+        }
     }
 }
 
