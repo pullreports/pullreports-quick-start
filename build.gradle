@@ -4,7 +4,7 @@ apply plugin: 'eclipse'
 apply plugin: 'project-report'
 apply plugin: 'com.bmuschko.cargo'
 
-def tomcat8Version= '8.0.39'
+def tomcat8Version= '8.0.41'
 
 configurations {
 	// The jdbcDrivers configuration contains JDBC Driver Jars to be installed 
