@@ -1,8 +1,17 @@
 import java.util.concurrent.ThreadLocalRandom
-apply plugin: 'war'
-apply plugin: 'eclipse'
-apply plugin: 'project-report'
-apply plugin: 'com.bmuschko.cargo'
+
+buildscript {
+    dependencies {
+        classpath 'com.h2database:h2:1.4.193'
+    }
+}
+
+plugins {
+    id 'war'
+    id 'eclipse'
+    id 'project-report'
+    id 'com.bmuschko.cargo' version '2.2.2'
+}
 
 def tomcat8Version= '8.0.41'
 
@@ -25,17 +34,6 @@ repositories {
         layout "pattern", {
             artifact "/dist/tomcat/[module]/v[revision]/bin/apache-tomcat-[revision].[ext]"
         }
-    }
-}
-
-buildscript {
-    repositories {
-        jcenter()
-        mavenCentral()
-    }
-    dependencies {
-		classpath 'com.bmuschko:gradle-cargo-plugin:2.2.2'
-        classpath 'com.h2database:h2:1.4.193'
     }
 }
   
