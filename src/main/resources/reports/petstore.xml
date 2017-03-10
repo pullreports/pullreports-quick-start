@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<catalog xmlns="http://www.pullreports.com/catalog-1.0.0" id="petstore" name="Products">
+<catalog xmlns="http://www.pullreports.com/catalog-1.1.0" id="petstore" name="Products">
     <report id="items" name="Item Report">
         <description><![CDATA[
         <p>Report of the items for sale in Duke's Pet Store.</p>
         <p>This is a fictional, example report of 
-        <a href='http://www.pullreports.com' target='_blank'>Pull Reports</a> capabilities.</p>]]></description>
+        <a href='https://www.pullreports.com' target='_blank'>Pull Reports</a> capabilities.</p>]]></description>
         <table_ref id="item" ref="item"> 
             <relationship join="inner" cardinality="one">
                 <join_column columnName="product_fk" referencedColumnName="id" />
