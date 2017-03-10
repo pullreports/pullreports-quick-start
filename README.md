@@ -1,5 +1,5 @@
 # pullreports-quick-start
-An example [Pull Reports](http://www.pullreports.com) ad hoc reporting and web services application.
+An example [Pull Reports](https://www.pullreports.com) ad hoc reporting and web services application.
 
 ## Installation
 
@@ -13,7 +13,7 @@ Start by cloning this git repository.
 
 Email sales@pullreports.com to obtain a copy of the Pull Reports software and temporary license file.
 
-The [Pull Reports Installation](http://www.pullreports.com/docs/latest/installation.html) guide details the contents of the Pull Reports software. The JAR and POM files are located within the `dist` directory.
+The [Pull Reports Installation](https://www.pullreports.com/docs/latest/installation.html) guide details the contents of the Pull Reports software. The JAR and POM files are located within the `dist` directory.
 
 ### 3) Install the Pull Reports JAR and POM into your local Maven repository.
 
