@@ -46,7 +46,7 @@ You may make changes to the Pull Reports XML Catalog file at `src/main/resources
 
 ## Add a report for your own database
 
-Follow this steps to use the `pullreports-quick-start` application to develop Pull Reports against your own database schema. Since you will make fundamental changes to the Gradle build configuration, be sure to stop the `pullreports-quick-start` application with `Control+C` before beginning.
+Follow these steps to use the `pullreports-quick-start` application to develop Pull Reports against your own database schema. Since you will make fundamental changes to the Gradle build configuration, be sure to stop the `pullreports-quick-start` application with `Control+C` before beginning.
 
 ### 1) Install your database driver into Gretty
 
@@ -64,9 +64,10 @@ For example, to use a PostgreSQL database, add the PostgreSQL driver in `build.g
 
 Add a JNDI connection pool within `src/main/webapp/META-INF/context.xml` appropriate for your database.
 
-For example, to connect to PostgreSQL database the context.xml should look like this:
+For example, to create a connection pool to a PostgreSQL database, add this `<Resource>` to context.xml:
 
     <Context path="" swallowOutput="true">
+      ...
       <Resource name="jdbc/my-datasource"
                 auth="Container"
                 type="javax.sql.DataSource"
@@ -86,10 +87,10 @@ Add a new XML Catalog File (e.g. `my-catalog-file.xml`) to `src/main/resources/r
 
 The XML Catalog File must contain at least one `<report>` to be valid. Read the Pull Reports documentation [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) chapter to learn how to create XML Catalog Files.
 
-In order to associate the JNDI connection pool you created in the previous step with your new report(s), add a `jndiDataSource` property to `pullreports.properties` suffixed with your new `<catalog>` `id`. For example if your new XML Catalog File defines a `<catalog id='my-id'>` as the root element, add this property to `pullreports.properties`:
+In order to associate the JNDI connection pool you created in the previous step with your new report(s), add a `jndiDataSource` property to `pullreports.properties` suffixed with your new `<catalog>` `id`. For example, if your new XML Catalog File defines a `<catalog id='my-id'>` as the root element, add this property to `pullreports.properties`:
 
     jndiDataSource.my-id=java:comp/env/jdbc/my-datasource
  
 ### 4) Start the application
 
-Start the application with `gradlew appRun`. Your new report will be now available within the Switch Report menu of the Pull Reports ad hoc creator.
+Start the application with `gradlew appRun`. Your new report will be now available within the Switch Report menu of the Pull Reports Ad Hoc Creator.
