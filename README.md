@@ -36,6 +36,60 @@ Place the `pullreports.license` file within the `src/main/resources` directory. 
 
 ### 5) Start the application
 
-From the root of the project, run `./gradlew cargoRunLocal`. This command invokes [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html), downloads all necessary dependencies, launches an embedded H2 database, and starts Tomcat with the demonstration application.
+From the root of the project, run `./gradlew appRun`. This command invokes [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html), downloads all necessary dependencies, launches an embedded H2 database, and starts Tomcat 8 with the demonstration application via the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin.
 
 Browse to http://localhost:8080 to see the application.
+
+### 6) Making changes
+
+You may make changes to the Pull Reports XML Catalog file at `src/main/resources/reports/petstore.xml` and the changes will be hot deployed to the running application. Any errors will be logged to the terminal window from which `gradlew` was invoked. 
+
+## Add a report for your own database
+
+Follow this steps to use the `pullreports-quick-start` application to develop Pull Reports against your own database schema. Since you will make fundamental changes to the Gradle build configuration, be sure to stop the `pullreports-quick-start` application with `Control+C` before beginning.
+
+### 1) Install your database driver into Gretty
+
+If your database is not an H2 database, you must add your database JDBC driver to the container's classpath via the `gretty` dependency configuration within `build.gradle`. 
+
+For example, to use a PostgreSQL database, add the PostgreSQL driver in `build.gradle`:
+
+    dependencies {
+        ... 
+        gretty 'org.postgresql:postgresql:9.4.1212'
+        ...
+    }
+    
+### 2) Set your database connection parameters within context.xml
+
+Add a JNDI connection pool within `src/main/webapp/META-INF/context.xml` appropriate for your database.
+
+For example, to connect to PostgreSQL database the context.xml should look like this:
+
+    <Context path="" swallowOutput="true">
+      <Resource name="jdbc/my-datasource"
+                auth="Container"
+                type="javax.sql.DataSource"
+                username="your_username"
+                password="your_password"
+                driverClassName="org.postgresql.Driver"
+                url="jdbc:postgresql://localhost:5432/dbname"
+                maxActive="8"
+                maxIdle="4"/>
+    </Context>
+    
+### 3) Add your own XML Catalog File
+
+Add a new XML Catalog File (e.g. `my-catalog-file.xml`) to `src/main/resources/reports` and reference it within `src/main/resources/pullreports.properties` like so:
+
+    catalogs=classpath:reports/petstore.xml classpath:reports/my-catalog-file.xml
+
+The XML Catalog File must contain at least one `<report>` to be valid. Read the Pull Reports documentation [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) chapter to learn how to create XML Catalog Files.
+
+In order to associate the JNDI connection pool you created in the previous step with your new report(s), add a `jndiDataSource` property to `pullreports.properties` suffixed with your new `<catalog>` `id`. For example if your new XML Catalog File defines a `<catalog id='my-id'>` as the root element, add this property to `pullreports.properties`:
+
+    jndiDataSource.my-id=java:comp/env/jdbc/my-datasource
+ 
+### 4) Start the application
+
+Start the application with `gradlew appRun`. Your new report will be now available within the Switch Report menu of the Pull Reports ad hoc creator.
