@@ -1,12 +1,9 @@
-import java.util.concurrent.ThreadLocalRandom
-
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
         classpath 'org.akhikhl.gretty:gretty:+'
-        classpath 'com.h2database:h2:1.4.193'
     }
 }
 
@@ -15,13 +12,9 @@ plugins {
     id 'eclipse'
     id 'project-report'
     id 'org.akhikhl.gretty' version '1.4.0'
-    
 }
 
-configurations {
-	// The H2 driver configuration for the insertion of records into H2.
-    h2Driver
-}
+apply from: 'build-h2.gradle'
 
 repositories {
     jcenter()
@@ -42,8 +35,6 @@ dependencies {
     gretty 'com.h2database:h2:1.4.193'
     // Ref: https://github.com/akhikhl/gretty/issues/234
     gretty 'org.apache.tomcat:tomcat-dbcp:8.0.23'
-   
-    h2Driver 'com.h2database:h2:1.4.193'
 }
 
 gretty {
@@ -54,137 +45,6 @@ gretty {
 
 war {
 	archiveName "ROOT.war"
-}
-
-task startH2() {
-    doLast {
-        String port = '9092'
-        String h2Base = "${buildDir}/temp-h2-base"
-        String databaseName = "petstore"
-
-        org.h2.tools.Server h2 = org.h2.tools.Server.createTcpServer('-tcp','-tcpPort',port,'-baseDir',h2Base)
-        
-        try {
-            h2.start()
-            println "H2 started"
-        } catch (java.sql.SQLException e){
-            println "H2 already started. Trying to start again"
-            org.h2.tools.Server.shutdownTcpServer("tcp://localhost:${port}".toString(),'',true,true)
-            // I've found that letting the TcpServer fully shutdown is often required
-            // I wish I had a way of detecting this or having a callback, but just sleeping
-            // for 1 sec is easier.
-            sleep(1000)
-            h2.start()
-        }
-
-        new File("${h2Base}/${databaseName}.mv.db").delete()
-        
-        // Let the database delete operation finish.
-        sleep(1000)
-
-        String h2Home = "${projectDir}/src/main/database"
-
-        org.h2.tools.RunScript.execute("jdbc:h2:tcp://localhost:${port}/${databaseName}".toString()
-            , 'sa', '', "${h2Home}/pet_store.sql".toString()
-            , java.nio.charset.Charset.forName('UTF-8'), false)
-
-        // Put the H2 driver into the same classloader as Groovy.
-        configurations.h2Driver.files.each {
-            groovy.sql.Sql.classLoader.addURL(it.toURI().toURL())
-        }
-
-        java.sql.DriverManager.registerDriver(
-            groovy.sql.Sql.classLoader.loadClass("org.h2.Driver").newInstance())
-
-        def sql;
-
-        try {
-            
-            def db = [url:"jdbc:h2:tcp://localhost:${port}/${databaseName}".toString()
-                , user:'sa', password:'', driver:'org.h2.Driver']
-        
-            sql = groovy.sql.Sql.newInstance(db.url, db.user, db.password, db.driver)
-            
-            def tables = ['category','product','manufacturer','item','warehouse','customer']
-            
-            for (t in tables){
-                sql.execute "insert into pet_store.${t} select * from csvread('${h2Home}/${t}.csv',null,'fieldDelimiter=''')".toString()
-            }
-
-            insertItemInventory(sql)
-            insertCustomOrders(sql)
-
-        } finally {
-            sql?.close()
-        }
-    }
-}
-
-/**
- * Inserts records into pet_store.item_inventory. Each item has a 70% chance
- * of being in a given warehouse. The inventory amount will be between 0 and 200.
- * The inventory date will be sometime in the last year.
- */
-private void insertItemInventory(groovy.sql.Sql sql){
-    for(def item : sql.rows('select id from pet_store.item')){
-        
-        for(def warehouse : sql.rows('select id from pet_store.warehouse')){
-            if (Math.random() > 0.3d){
-
-                int amount = ThreadLocalRandom.current().nextInt(0, 201)
-                int dateDelta = ThreadLocalRandom.current().nextInt(0,366)
-                Date dt = (new Date() - dateDelta)
-
-                sql.execute """
-                    insert into pet_store.item_inventory (item_fk,warehouse_fk,amount,inventory_date) 
-                    values ($item.id,$warehouse.id, $amount, $dt)
-                """
-            }
-        }
-    }
-}
-
-/**
- * Iterate through the customer records and insert 5 to 8 orders
- * per customer within the past 4 years. Each order has 1 to 3 items. 
- * @param sql
- */
-private void insertCustomOrders(groovy.sql.Sql sql){
-    List itemIds = sql.rows('select id from pet_store.item')
-
-    for(def customer: sql.rows('select id from pet_store.customer')){
-        int numOrders = ThreadLocalRandom.current().nextInt(0, 3) + 5
-
-        for (int i = 0;i < numOrders;i++){
-            int dateDelta = ThreadLocalRandom.current().nextInt(0,(365 * 4) + 1)
-            Date dt = (new Date() - dateDelta)
-
-            long customerOrderId = sql.rows("select nextval('pet_store.cust_order_seq')")[0][0]
-            sql.execute """
-                insert into pet_store.customer_order (id,order_date,customer_fk) 
-                values ($customerOrderId,$dt,$customer.id)
-            """
-
-            int numberOfItems = ThreadLocalRandom.current().nextInt(0,3) + 1
-            
-            for (int j = 0;j < numberOfItems;j++){
-
-                long itemId = itemIds[ThreadLocalRandom.current().nextInt(0,itemIds.size())].id
-                long orderLineId = sql.rows("select nextval('pet_store.order_line_seq')")[0][0]
-                int quantity = ThreadLocalRandom.current().nextInt(0,2) + 1
-                
-                sql.execute """
-                    insert into pet_store.order_line (id,quantity,item_fk) 
-                    values ($orderLineId,$quantity,$itemId)
-                """
-
-                sql.execute """
-                    insert into pet_store.customer_order_order_line (order_fk,order_line_fk) 
-                    values ($customerOrderId,$orderLineId)
-                """
-            }
-        }
-    }
 }
 
 project.afterEvaluate {
