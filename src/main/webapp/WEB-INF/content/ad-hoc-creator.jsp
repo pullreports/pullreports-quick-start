@@ -32,7 +32,7 @@
             require(['angular','pr-main'], function(angular,prMain) {
                     angular.element(document).ready(function() {
                         prMain.init({
-                        	url:''
+                        	url:'${pageContext.request.contextPath}'
                         	,map: {
                         		options: {
                                     layers:[baseLayers['Open Street Map']]

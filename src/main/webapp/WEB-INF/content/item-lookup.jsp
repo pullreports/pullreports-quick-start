@@ -27,7 +27,7 @@ $(function(){
     var itemId = new URI().search(true).id;
 
     var itemAttributesURL = 
-        '/pullreports/catalog/petstore/report/items/export?filter=@id%3D' + itemId;
+        './pullreports/catalog/petstore/report/items/export?filter=@id%3D' + itemId;
 
     $.get(itemAttributesURL, function( response ) {
         

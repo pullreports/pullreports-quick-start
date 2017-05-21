@@ -8,8 +8,8 @@
 </head>
 <body>
     <ol class='breadcrumb'>
-       <li><a href='/'>Home</a></li>
-       <li><a href='/adHocCreator'>Ad Hoc Creator</a></li>
+       <li><a href='${pageContext.request.contextPath}/'>Home</a></li>
+       <li><a href='${pageContext.request.contextPath}/adHocCreator'>Ad Hoc Creator</a></li>
        <li><decorator:title/></li>
     </ol>
     <decorator:body/>

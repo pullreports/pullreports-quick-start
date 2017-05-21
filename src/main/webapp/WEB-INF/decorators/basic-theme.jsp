@@ -24,8 +24,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class='<%= ("Home".equals(thePage.getProperty("meta.activePage")))?"active":"" %>'><a href="/">Home</a></li>
-            <li class='<%= ("Creator".equals(thePage.getProperty("meta.activePage")))?"active":"" %>'><a href="/adHocCreator">Ad Hoc Reports</a></li>
+            <li class='<%= ("Home".equals(thePage.getProperty("meta.activePage")))?"active":"" %>'>
+                <a href="${pageContext.request.contextPath}/">Home</a></li>
+            <li class='<%= ("Creator".equals(thePage.getProperty("meta.activePage")))?"active":"" %>'>
+                <a href="${pageContext.request.contextPath}/adHocCreator">Ad Hoc Reports</a></li>
           </ul>
         </div>
       </div>
