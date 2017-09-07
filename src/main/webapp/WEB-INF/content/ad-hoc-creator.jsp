@@ -48,7 +48,7 @@
 	</script>
 </head>
 <body>
-    <div class='container'>
+    <div class='container-fluid'>
 	    <section id="report-container" data-pr-creator></section> 
     </div>
 </body>
