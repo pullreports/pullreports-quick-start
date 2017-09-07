@@ -49,7 +49,7 @@
 </head>
 <body>
     <div class='container'>
-	    <section id="report-container" data-pr-layout></section> 
+	    <section id="report-container" data-pr-creator></section> 
     </div>
 </body>
 </html>
