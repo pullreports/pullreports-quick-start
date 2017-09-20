@@ -23,11 +23,11 @@ Copy the `pullreports-x.y.z.jar` file into `$USER_HOME/.m2/repository/com/pullre
 
 Copy the `pom.xml` file into `$USER_HOME/.m2/repository/com/pullreports/pullreports/x.y.z/pullreports-x.y.z.pom`. It is important that you rename the `pom.xml` file to `pullreports-x.y.z.pom` when you copy the file. Again, `x.y.z` must match the version of the Pull Reports software. 
 
-#### Example Pull Reports 1.0.0 local Maven Repository
+#### Example Pull Reports 1.0.1 local Maven Repository
 
-    $ ls -1 ~/.m2/repository/com/pullreports/pullreports/1.0.0
-    pullreports-1.0.0.jar*
-    pullreports-1.0.0.pom*
+    $ ls -1 ~/.m2/repository/com/pullreports/pullreports/1.0.1
+    pullreports-1.0.1.jar*
+    pullreports-1.0.1.pom*
 
 
 ### 4) Install the pullreports.license file
