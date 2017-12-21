@@ -35,6 +35,10 @@ dependencies {
     gretty 'com.h2database:h2:1.4.195'
     // Ref: https://github.com/akhikhl/gretty/issues/234
     gretty 'org.apache.tomcat:tomcat-dbcp:8.0.23'
+    // After upgrading to Groovy 2.4.13, one needs to explicitly define the 
+    // version of Groovy on the gretty classpath to match that required by 
+    // Pull Reports.
+    gretty 'org.codehaus.groovy:groovy-all:2.4.13'
 }
 
 gretty {
