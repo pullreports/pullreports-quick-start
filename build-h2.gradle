@@ -10,12 +10,11 @@ buildscript {
 }
 
 configurations {
-	// The H2 driver configuration for the insertion of records into H2.
+    // The H2 driver configuration for the insertion of records into H2.
     h2Driver
 }
 
 dependencies {
-   
     h2Driver 'com.h2database:h2:1.4.193'
 }
 
