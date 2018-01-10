@@ -1,0 +1,64 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.akhikhl.gretty:gretty:+'
+    }
+}
+
+plugins {
+    id 'war'
+    id 'eclipse'
+    id 'project-report'
+    id 'org.akhikhl.gretty' version '1.4.2'
+}
+
+repositories {
+    jcenter()
+    mavenLocal()
+    mavenCentral()
+}
+  
+dependencies {
+    runtime 'org.slf4j:slf4j-simple:1.7.25' // SLF4J implementation
+    runtime 'opensymphony:sitemesh:2.4.2'
+    runtime 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1'
+    runtime 'org.apache.taglibs:taglibs-standard-impl:1.2.5' // Remove?
+    runtime "com.pullreports:pullreports:+"
+
+    providedCompile 'javax.servlet:javax.servlet-api:3.0.1' // Provided by tomcat
+    providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.2.1'
+	
+    gretty 'com.h2database:h2:1.4.195'
+    // Ref: https://github.com/akhikhl/gretty/issues/234
+    gretty 'org.apache.tomcat:tomcat-dbcp:8.0.23'
+    // After upgrading to Groovy 2.4.13, one needs to explicitly define the 
+    // version of Groovy on the gretty classpath to match that required by 
+    // Pull Reports.
+    gretty 'org.codehaus.groovy:groovy-all:2.4.13'
+}
+
+sourceSets {
+    main {
+        resources {
+            // Include the root projects resource directory to pick
+            // up the license and report configuration.
+            srcDir "${project(':').projectDir}/src/main/resources"
+        }
+    }
+}
+
+gretty {
+    servletContainer 'tomcat8'
+    enableNaming true
+    contextPath ''
+}
+
+war {
+    archiveName "ROOT.war"
+}
+
+project.afterEvaluate {
+    tasks.appRun.dependsOn ':startH2'
+}

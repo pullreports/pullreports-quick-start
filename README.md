@@ -1,6 +1,14 @@
 # pullreports-quick-start
 An example [Pull Reports](https://www.pullreports.com) ad hoc reporting and web services application.
 
+This repository provides three example application configurations as Gradle sub-projects:
+
+1. JEE: A Java EE configuration within the `jee` sub-project. This configuration demonstrates how to embed Pull Reports into a JEE servlet container without any additional build or deployment framework.
+1. Grails: A Grails 3 configuration within the `grails` sub-project. 
+1. Spring Boot: A Spring Boot configuration within the `springboot` sub-project. 
+
+Configuration and code that is common to all three sub-projects resides within the `src` and `build.gradle` file of the root project.
+
 ## Installation
 
 ### 1) Clone the pullreports-quick-start Git Repository
