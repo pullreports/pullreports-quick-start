@@ -1,0 +1,51 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'pullreports-spring-boot'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'org.springframework.boot:spring-boot-devtools'
+    runtime 'org.springframework.boot:spring-boot-starter-freemarker'
+    runtime 'com.pullreports:pullreports:+'
+    runtime 'com.h2database:h2:1.4.195'
+    runtime 'org.apache.tomcat:tomcat-dbcp:8.5.24'
+}
+
+sourceSets {
+    main {
+        resources {
+            // Include the root projects resource directory to pick
+            // up the license and report configuration.
+            srcDir "${project(':').projectDir}/src/main/resources"
+        }
+    }
+}
+
+bootRun {
+	addResources = true
+}
+
+clean.doFirst {
+	delete "${projectDir}/bin"
+}
