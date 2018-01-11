@@ -28,15 +28,14 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class='${("Home".equals(pageProperty(name:"meta.activePage")))?"active":""}'>
+            <li class='${("Home".equals(pageProperty(name:"meta.activePage").toString()))?"active":""}'>
                 <a href="${request.contextPath}/">Home</a></li>
-            <li class='${("Creator".equals(pageProperty(name:"meta.activePage")))?"active":""}'>
+            <li class='${("Creator".equals(pageProperty(name:"meta.activePage").toString()))?"active":""}'>
                 <a href="${request.contextPath}/adHocCreator">Ad Hoc Reports</a></li>
           </ul>
         </div>
       </div>
     </nav>
-
     <g:layoutBody/>
 
     <asset:javascript src="application.js"/>
