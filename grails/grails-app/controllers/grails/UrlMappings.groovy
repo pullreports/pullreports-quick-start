@@ -12,5 +12,7 @@ class UrlMappings {
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')
+		"/adHocCreator"(view:"/ad-hoc-creator")
+		"/itemLookup"(view:"/item-lookup")
     }
 }
