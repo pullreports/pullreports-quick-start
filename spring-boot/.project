@@ -1,30 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>spring-boot</name>
-	<comment></comment>
-	<projects>
-	</projects>
-	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.jdt.core.javabuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-	</buildSpec>
-	<natures>
-		<nature>org.eclipse.jdt.core.javanature</nature>
-	</natures>
-	<linkedResources>
-		<link>
-			<name>main-resources</name>
-			<type>2</type>
-			<location>C:/Users/Jon/Documents/GitHub/pullreports-quick-start/src/main/resources</location>
-		</link>
-	</linkedResources>
 	<filteredResources>
 		<filter>
 			<id>1515555676328</id>
-			<name></name>
+			<name/>
 			<type>30</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
@@ -32,4 +11,23 @@
 			</matcher>
 		</filter>
 	</filteredResources>
+	<name>spring-boot</name>
+	<comment></comment>
+	<projects/>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments/>
+		</buildCommand>
+	</buildSpec>
+	<linkedResources>
+		<link>
+			<name>main-resources</name>
+			<type>2</type>
+			<location>C:/Users/Jon/Documents/GitHub/pullreports-quick-start/src/main/resources</location>
+		</link>
+	</linkedResources>
 </projectDescription>
