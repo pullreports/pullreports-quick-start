@@ -1,0 +1,7 @@
+id,firstname,lastname,email,birth_date,age,address_point_geojson
+1,Mark,Twain,mark_twain@sawyer_com,'1835-11-30',39,'{""type"": ""Point"", ""coordinates"": [-91.3585,39.7084]}'
+2,Ernest,Hemingway,ernest@tollsforme_com,'1899-07-21',32,'{""type"": ""Point"", ""coordinates"": [-81.7800,24.5551]}'
+3,William,Faulkner,wfaulk@southerngents_com,'1897-09-25',54,'{""type"": ""Point"", ""coordinates"": [-89.0078,34.4943]}'
+4,James,Baldwin,baldwin@native_com,'1924-08-04',36,'{""type"": ""Point"", ""coordinates"": [-73.9465,40.8116]}'
+5,W.E.B,Du Bois,web@dubois_org,'1868-02-23',17,'{""type"": ""Point"", ""coordinates"": [-84.3880,33.7490]}'
+6,Emily,Dickinson,the@dickins_org,'1830-12-10',33,'{""type"": ""Point"", ""coordinates"": [-72.5199,42.3732]}'
