@@ -1,0 +1,18 @@
+sourceSets {
+    main {
+        resources {
+            // Include the root projects resource directory to pick
+            // up the license and report configuration.
+            srcDir "${project(':').projectDir}/src/main/resources"
+        }
+    }
+}
+
+dependencies {
+    runtime 'com.pullreports:pullreports:+'
+    runtime "com.h2database:h2"
+}
+
+project.afterEvaluate {
+    tasks.bootRun.dependsOn ':database:startH2'
+}
