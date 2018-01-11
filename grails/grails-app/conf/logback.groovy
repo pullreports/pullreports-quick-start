@@ -34,3 +34,8 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
     logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
 }
 root(ERROR, ['STDOUT'])
+
+// Example: setting all Pull Report loggers to log at the ERROR level.
+logger("com.pullreports", ERROR)
+// Example: setting the Pull Reports SQL logger to DEBUG
+logger("com.pullreports.SQL", DEBUG)
