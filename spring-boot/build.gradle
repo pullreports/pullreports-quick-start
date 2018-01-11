@@ -49,3 +49,7 @@ bootRun {
 clean.doFirst {
 	delete "${projectDir}/bin"
 }
+
+project.afterEvaluate {
+    tasks.bootRun.dependsOn ':database:startH2'
+}
