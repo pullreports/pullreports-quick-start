@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class='container'>
-	    <div class='page-header'><h1>Pet Store Demonstration</h1></div> 
+	    <div class='page-header'><h1>Pet Store JEE Demonstration</h1></div> 
         <p>Congratulations! If you can see this page, it means that you have
         successfully installed the <a href='https://www.pullreports.com'>Pull Reports</a>
         quick start application.
