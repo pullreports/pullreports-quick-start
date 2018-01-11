@@ -1,13 +1,15 @@
 # pullreports-quick-start
-An example [Pull Reports](https://www.pullreports.com) ad hoc reporting and web services application.
+This repository contains three example [Pull Reports](https://www.pullreports.com) ad hoc reporting and web services applications.
 
-This repository provides three example application configurations as Gradle sub-projects:
+The applications demonstrate three different application deployment methods:
 
-1. JEE: A Java EE configuration within the `jee` sub-project. This configuration demonstrates how to embed Pull Reports into a JEE servlet container without any additional build or deployment framework.
-1. Grails: A Grails 3 configuration within the `grails` sub-project. 
-1. Spring Boot: A Spring Boot configuration within the `springboot` sub-project. 
+1. JEE: A Java EE application within the `jee` sub-project. This configuration demonstrates how to embed Pull Reports into a JEE servlet container without any additional deployment framework.
+1. Grails: A [Grails 3](https://grails.org) configuration within the `grails` sub-project. 
+1. Spring Boot: A [Spring Boot](https://projects.spring.io/spring-boot/) configuration within the `spring-boot` sub-project. 
 
-Configuration and code that is common to all three sub-projects resides within the `src` and `build.gradle` file of the root project.
+Additionally, the `database` subproject contains tasks and configuration to start a local, [H2](http://www.h2database.com) database to support reporting from all three application subprojects.
+
+Pull Reports configuration common to all three application sub-projects resides within the `src` directory of the root project.
 
 ## Installation
 

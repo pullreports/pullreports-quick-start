@@ -60,5 +60,5 @@ war {
 }
 
 project.afterEvaluate {
-    tasks.appRun.dependsOn ':startH2'
+    tasks.appRun.dependsOn ':database:startH2'
 }
