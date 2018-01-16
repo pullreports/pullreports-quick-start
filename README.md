@@ -5,8 +5,8 @@ This repository contains three example [Pull Reports](https://www.pullreports.co
 The applications demonstrate how to embed Pull Reports into three different web frameworks:
 
 1. JEE: The `jee` sub-project is a Java EE application which demonstrates how to embed Pull Reports into a JEE servlet container without any additional deployment framework.
-1. Grails: The `grails` sub-project is a [Grails 3](https://grails.org) application.
-1. Spring Boot: The `spring-boot` sub-project is a [Spring Boot](https://projects.spring.io/spring-boot/) application. 
+1. Grails: The `grails` sub-project embeds Pull Reports into a [Grails 3](https://grails.org) application.
+1. Spring Boot: The `spring-boot` sub-project embeds Pull Reports into a [Spring Boot](https://projects.spring.io/spring-boot/) application. 
 
 The `database` sub-project contains tasks and configuration to start a local, [H2](http://www.h2database.com) database to support all three application sub-projects.
 
@@ -34,16 +34,16 @@ Copy the `pullreports-x.y.z.jar` you received from the previous step into `$USER
 
 Copy the `pom.xml` file into `$USER_HOME/.m2/repository/com/pullreports/pullreports/x.y.z/pullreports-x.y.z.pom`. It is important that you rename the `pom.xml` file to `pullreports-x.y.z.pom` when you copy the file. Again, `x.y.z` must match the version of the Pull Reports software. 
 
-#### Example Pull Reports 1.1.2 local Maven Repository
+#### Example Pull Reports 1.1.3 local Maven Repository
 
-    $ ls -1 ~/.m2/repository/com/pullreports/pullreports/1.1.2
-    pullreports-1.1.2.jar*
-    pullreports-1.1.2.pom*
+    $ ls -1 ~/.m2/repository/com/pullreports/pullreports/1.1.3
+    pullreports-1.1.3.jar*
+    pullreports-1.1.3.pom*
 
 
 ### 4) Install the pullreports.license file
 
-Place the `pullreports.license` file within the `src/main/resources` directory. This directory will be include at the root of the classpath in each of the three sub-project application deloyments. 
+Place the `pullreports.license` file within the `src/main/resources` directory. This directory is included at the root of the classpath in each of the three sub-project application deployments. 
 
 ### 5) Start the application(s)
 
@@ -71,11 +71,13 @@ You may make changes to the Pull Reports XML Catalog file at `src/main/resources
 
 ## Add a report for your own database
 
-Follow these steps to use the `pullreports-quick-start` application to develop Pull Reports against your own database schema. Since you will make fundamental changes to the Gradle build configuration, be sure to stop the `pullreports-quick-start` application with `Control+C` before beginning.
+Follow these steps to use the `pullreports-quick-start` application(s) to develop Pull Reports against your own database schema. Since you will make fundamental changes to the Gradle build configuration, be sure to stop the `pullreports-quick-start` application(s) with `Control+C` before beginning.
 
-### 1) Install your database driver into Gretty
+### 1) Install your database driver 
 
-If your database is not an H2 database, you must add your database JDBC driver to the container's classpath via the `gretty` dependency configuration within `build.gradle`. 
+If your database is not an H2 database, you must add your database JDBC driver to the servlet container's classpath in order for the container to provide a JNDI datasource to pull Reports.
+
+via the `gretty` dependency configuration within `build.gradle`. 
 
 For example, to use a PostgreSQL database, add the PostgreSQL driver in `build.gradle`:
 
