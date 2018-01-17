@@ -68,3 +68,9 @@ Browse to http://localhost:8082 to see the application.
 ### 6) Making changes
 
 You may make changes to the Pull Reports XML Catalog file at `src/main/resources/reports/petstore.xml` and the changes will be hot deployed to the running application. Any errors will be logged to the terminal window from which `gradlew` was invoked. 
+
+# Additional Information
+
+See the following Guides for more information about extending the three example applications for your needs:
+
+* [JEE](JEE.md)
