@@ -14,17 +14,17 @@ The following files within the `jee` project contain important configuration rel
 
 ### build.gradle
 
-Key configuration elements within the `build.gradle` file is the use of the [Gradle `war` plugin](https://docs.gradle.org/current/userguide/war_plugin.html) to build a JEE web application and the use of the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin to serve that application within a local [Tomcat](https://tomcat.apache.org) Servlet Container.
+Key configuration elements within the [build.gradle](jee/build.gradle) file are the use of the [Gradle `war` plugin](https://docs.gradle.org/current/userguide/war_plugin.html) to build a JEE web application and the use of the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin to serve that application within a local [Tomcat](https://tomcat.apache.org) Servlet Container.
 
 ### src/main/resources/pullreports.properties
 
-This properties file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) which contain the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used to fill the reports. 
+The [pullreports.properties](src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
 
 Read about more Pull Reports configuration properties within the [Pull Reports administration](https://www.pullreports.com/docs/latest/administration.html) chapter.
 
 ### src/main/webapp/META-INF/context.xml
 
-`context.xml` is a Tomcat specific configuration file which is read on application start up. This `context.xml` file defines a JNDI `javax.sql.DataSource` at the `java:comp/env/jdbc/petstore-datasource` JNDI path. Note the use of the H2 database connection parameters.
+The [context.xml](src/main/webapp/META-INF/context.xml) file is a Tomcat specific configuration file which is read on application start up. This `context.xml` file defines a JNDI `javax.sql.DataSource` at the `java:comp/env/jdbc/petstore-datasource` JNDI path. Note the use of the H2 database connection parameters.
 
 ## src/main/webapp/WEB-INF/sitemesh.xml, decorators.xml, and decorators directory
 
