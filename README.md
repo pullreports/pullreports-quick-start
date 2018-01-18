@@ -73,7 +73,9 @@ Browse to http://localhost:8082 to see the application.
 
 ### 6) Making changes to the example reports
 
-Pull Reports are defined by XML files called Catalog Files because the root XML element is a `<catalog>` that groups one or more `<report>`s. A single XML Catalog File at `src/main/resources/reports/petstore.xml` configures the Pull Reports for each example application. You may experiment with Pull Reports XML configuration by making changes to `petstore.xml`. Any changes will be hot deployed to the running application and visible by refreshing your browser. Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) chapter to learn XML Catalog Files.
+Pull Reports are defined by XML files called Catalog Files because the root XML element is a `<catalog>` which groups one or more `<report>`s. A single XML Catalog File at `src/main/resources/reports/petstore.xml` configures the Pull Reports for each example application. Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) chapter to learn about XML Catalog Files.
+
+You may experiment with Pull Reports XML configuration by making changes to `petstore.xml`. Any changes will be hot deployed to the running application and will be visible after refreshing your browser. Note that some XML Catalog File changes may require you to clear your browser cache to see the change.
 
 If you make a mistake when changing `petstore.xml`, the error will be logged to the terminal window from which `gradlew` was invoked. 
 
