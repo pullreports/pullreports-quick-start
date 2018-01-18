@@ -49,26 +49,30 @@ Add a new XML Catalog File (e.g. `my-catalog-file.xml`) to `jee/src/main/resourc
 
 In the `catalogs` property value, the referenced `classpath:reports/petstore.xml` Pull Reports XML catalog file is at `src/main/resources/` and included within the `jee` sub-project's classpath via this configuration in `jee/build.gradle`.   
 
-    sourceSets {
-        main {
-            resources {
-                srcDir "${project(':').projectDir}/src/main/resources"
-            }
+```java
+sourceSets {
+    main {
+        resources {
+            srcDir "${project(':').projectDir}/src/main/resources"
         }
     }
+}
+```
 
 The referenced `classpath:my-catalog-file.xml` Pull Reports XML catalog file will contain your new report configuration 
 
 Here is a simple Pull Reports XML catalog file which reports one column from one database table. Be sure to replace the `schema_name.table_name`, `column_name`, and `java.lang.String` attributes below with values appropriate for your database schema.
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <catalog xmlns="http://www.pullreports.com/catalog-1.3.0" id="my-catalog" name="My First Catalog">
-        <report id="my-first-report" name="My First Report">
-            <table id="table1" displayName="Table 1" name="schema_name.table_name">
-                <column id="column1" name="column_name" displayName="Column 1" paramType="java.lang.String"/>
-            </table>
-        </report>
-    </catalog>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="http://www.pullreports.com/catalog-1.3.0" id="my-catalog" name="My First Catalog">
+    <report id="my-first-report" name="My First Report">
+        <table id="table1" displayName="Table 1" name="schema_name.table_name">
+            <column id="column1" name="column_name" displayName="Column 1" paramType="java.lang.String"/>
+        </table>
+    </report>
+</catalog>
+```
 
 Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) chapter to learn how to enhance the XML Catalog File.
 
