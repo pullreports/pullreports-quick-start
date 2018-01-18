@@ -9,6 +9,7 @@ sourceSets {
 }
 
 dependencies {
+    runtime 'org.springframework.boot:spring-boot-devtools'
     runtime 'com.pullreports:pullreports:+'
     runtime "com.h2database:h2"
 }
