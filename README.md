@@ -26,11 +26,11 @@ The [Pull Reports Installation](https://www.pullreports.com/docs/latest/installa
 
 ### 3) Install the Pull Reports JAR and POM into your local Maven repository.
 
-Installing the Pull Reports JAR and POM file into the local Maven repository allows [Gradle](https://gradle.org) dependency management to resolve the Pull Reports JAR and all of its transitive dependencies. A local Maven repository is just a specially constructed directory structure located under your user home directory.
+Installing the Pull Reports JAR and POM files into the local Maven repository allows [Gradle](https://gradle.org) dependency management to resolve the Pull Reports JAR and all of its transitive dependencies. A local Maven repository is a specially constructed directory structure located within your user home directory.
 
-Copy the `pullreports-x.y.z.jar` you received from the previous step into `$USER_HOME/.m2/repository/com/pullreports/pullreports/x.y.z` where `x.y.z` is the version of the Pull Reports software.
+First, copy the `pullreports-x.y.z.jar` you received from the previous step into `$USER_HOME/.m2/repository/com/pullreports/pullreports/x.y.z` where `x.y.z` is the version of the Pull Reports software.
 
-Copy the `pom.xml` file into `$USER_HOME/.m2/repository/com/pullreports/pullreports/x.y.z/pullreports-x.y.z.pom`. It is important that you rename the `pom.xml` file to `pullreports-x.y.z.pom` when you copy the file. Again, `x.y.z` must match the version of the Pull Reports software. 
+Then, copy the `pom.xml` file into `$USER_HOME/.m2/repository/com/pullreports/pullreports/x.y.z/pullreports-x.y.z.pom`. It is important that you rename the `pom.xml` file to `pullreports-x.y.z.pom` when you copy the file. Again, `x.y.z` must match the version of the Pull Reports software. 
 
 #### Example Pull Reports 1.1.3 local Maven Repository
 
@@ -47,11 +47,11 @@ Place the `pullreports.license` file within the `src/main/resources` directory. 
 
 ### 5) Start the application(s)
 
-This Pull Report quick start repository contains Gradle wrapper executables at the root of the repository project - `gradlew` for Linux and `gradlew.bat` for Windows. Executing either wrapper file from a terminal window will download all the Gradle dependencies needed to run the example applications.
+This repository contains Gradle wrapper executables at the root of the repository project - `gradlew` for Linux and `gradlew.bat` for Windows. Executing either wrapper file from a terminal window will download all the Gradle dependencies needed to run the example applications.
 
 Before running the following commands, ensure that the JVM, `java` executable is installed on your computer.
 
-Additionally, each application start command will also start an embedded H2 database configured within the `database` sub-project. This database is used by each application when fulfilling report requests. If you start multiple applications at one time, the H2 database will simply restart when each application start.
+Additionally, each application start command will also start an embedded H2 database configured within the `database` sub-project. This database is used by each application when fulfilling report requests. If you start multiple applications at once, the H2 database will simply restart with each application start.
 
 #### JEE
 
@@ -73,15 +73,15 @@ Browse to http://localhost:8082 to see the application.
 
 ### 6) Making changes to the example reports
 
-Pull Reports are defined by XML files called Catalog Files because the root XML element is a `<catalog>` which groups one or more `<report>`s. A single XML Catalog File at `src/main/resources/reports/petstore.xml` configures the Pull Reports for each example application. Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) chapter to learn about XML Catalog Files.
+Pull Reports are defined by XML files called Catalog Files because the root XML element is a `<catalog>` grouping one or more `<report>`s. A single XML Catalog File at `src/main/resources/reports/petstore.xml` configures the Pull Reports for each example application. Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) chapter to learn about XML Catalog Files.
 
-You may experiment with Pull Reports XML configuration by making changes to `petstore.xml`. Any changes will be hot deployed to the running application and will be visible after refreshing your browser. Note that some XML Catalog File changes may require you to clear your browser cache to see the change.
+You may experiment with Pull Reports XML configuration by making changes to `petstore.xml`. Any changes will be hot deployed to the running application and visible after refreshing your browser. Note that some XML Catalog File changes may require you to clear your browser cache to see the change.
 
 If you make a mistake when changing `petstore.xml`, the error will be logged to the terminal window from which `gradlew` was invoked. 
 
 # Additional Information
 
-See the following Guides for more information about how each application works and extending the applications for your needs:
+See the following Guides for more information about how each application works and extending the application for your needs:
 
 * [JEE](JEE.md)
 * [Grails](GRAILS.md)
