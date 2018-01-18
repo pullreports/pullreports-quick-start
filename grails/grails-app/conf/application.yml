@@ -22,8 +22,6 @@ spring:
     groovy:
         template:
             check-template-location: false
-server:
-    port: 8081
 # Spring Actuator Endpoints are Disabled by Default
 endpoints:
     enabled: false

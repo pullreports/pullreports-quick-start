@@ -1,0 +1,6 @@
+---
+grails:
+    agent:
+        enabled: false
+server:
+    port: 8081
