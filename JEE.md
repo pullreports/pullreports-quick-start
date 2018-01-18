@@ -4,6 +4,38 @@ This page contains information about the `jee` sub-project. This sub-project dem
 
 See [README](README.md) for information on installing Pull Reports and starting the `jee` application.
 
+**Contents**
+* [Key files](JEE.md#key-files)
+* [Add a Pull Report configuration against your own database](JEE.md#add-a-pull-report-configuration-against-your-own-database)
+
+# Key files
+
+The following files within the `jee` project contain important configuration related to Pull Reports installation:
+
+### build.gradle
+
+Key configuration elements within the `build.gradle` file is the use of the [Gradle `war` plugin](https://docs.gradle.org/current/userguide/war_plugin.html) to build a JEE web application and the use of the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin to serve that application within a local [Tomcat](https://tomcat.apache.org) Servlet Container.
+
+### src/main/resources/pullreports.properties
+
+This properties file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) which contain the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used to fill the reports. 
+
+Read about more Pull Reports configuration properties within the [Pull Reports administration](https://www.pullreports.com/docs/latest/administration.html) chapter.
+
+### src/main/webapp/META-INF/context.xml
+
+`context.xml` is a Tomcat specific configuration file which is read on application start up. This `context.xml` file defines a JNDI `javax.sql.DataSource` at the `java:comp/env/jdbc/petstore-datasource` JNDI path. Note the use of the H2 database connection parameters.
+
+## src/main/webapp/WEB-INF/sitemesh.xml, decorators.xml, and decorators directory
+
+These two XML files and directory within `WEB-INF` demonstrate the use of [SiteMesh](http://wiki.sitemesh.org/wiki/display/sitemesh/Home) to decorate Pull Reports export results. Additionally, the `WEB-INF/web.xml` file contains additional SiteMesh configuration. 
+
+SiteMesh is an optional decoration configuration and only one method of customizing Pull Reports export results. Reference the Pull Reports documentation, [administration](https://www.pullreports.com/docs/latest/administration.html) chapter, to learn more about export decoration.
+
+## src/main/webapp/WEB-INF/content/ad-hoc-creator.jsp
+
+The JSP file where the [Pull Reports Ad Hoc Creator](https://www.pullreports.com/docs/latest/creator.html) is installed.
+
 # Add a Pull Report configuration against your own database
 
 Follow these steps to use the `pullreports-quick-start` JEE application to develop Pull Reports against your own database schema. Since you will make fundamental changes to the Gradle build configuration, be sure to stop the JEE application with `Control+C` before beginning if you previous started it.
