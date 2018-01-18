@@ -22,14 +22,14 @@ repositories {
   
 dependencies {
     runtime 'org.slf4j:slf4j-simple:1.7.25' // SLF4J implementation
-    runtime 'opensymphony:sitemesh:2.4.2'
-    runtime 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1'
-    runtime 'org.apache.taglibs:taglibs-standard-impl:1.2.5' // Remove?
+    runtime 'opensymphony:sitemesh:2.4.2' // Optional: demonstrates the use of SiteMesh and Pull Reports
     runtime "com.pullreports:pullreports:+"
 
-    providedCompile 'javax.servlet:javax.servlet-api:3.0.1' // Provided by tomcat
+	// Provided by Servlet Container
+    providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
     providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.2.1'
 	
+	// Driver for the H2 database. Must be on the Servlet Container classath.
     gretty 'com.h2database:h2:1.4.195'
     // Ref: https://github.com/akhikhl/gretty/issues/234
     gretty 'org.apache.tomcat:tomcat-dbcp:8.0.23'
