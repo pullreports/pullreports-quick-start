@@ -24,7 +24,7 @@ Start by cloning this git repository.
 
 Email sales@pullreports.com to obtain a copy of the Pull Reports software and temporary license file.
 
-The [Pull Reports Installation](https://www.pullreports.com/docs/latest/installation.html) guide details the contents of the Pull Reports software. The JAR and POM files are located within the `dist` directory.
+The [Pull Reports Installation](https://www.pullreports.com/docs/latest/installation.html) guide details the contents of the Pull Reports software. The JAR and POM files you'll need for the next step are located within the `dist` directory of the Pull Reports distribution zip file.
 
 ### 3) Install the Pull Reports JAR and POM into your local Maven repository.
 
@@ -37,8 +37,8 @@ Copy the `pom.xml` file into `$USER_HOME/.m2/repository/com/pullreports/pullrepo
 #### Example Pull Reports 1.1.3 local Maven Repository
 
     $ ls -1 ~/.m2/repository/com/pullreports/pullreports/1.1.3
-    pullreports-1.1.3.jar*
-    pullreports-1.1.3.pom*
+    pullreports-1.1.3.jar
+    pullreports-1.1.3.pom
 
 
 ### 4) Install the pullreports.license file
@@ -74,3 +74,5 @@ You may make changes to the Pull Reports XML Catalog file at `src/main/resources
 See the following Guides for more information about extending the three example applications for your needs:
 
 * [JEE](JEE.md)
+* [Grails](GRAILS.md)
+* [Spring Boot](SB.md)
