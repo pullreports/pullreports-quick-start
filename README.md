@@ -1,10 +1,8 @@
 # pullreports-quick-start
 
-This repository contains three example [Pull Reports](https://www.pullreports.com) ad hoc reporting and web services applications.
+This repository contains three example [Pull Reports](https://www.pullreports.com) ad hoc reporting and web services applications. Each example uses [Gradle](https://gradle.org) to embed Pull Reports into a different web application framework:
 
-The applications demonstrate how to embed Pull Reports into three different web frameworks:
-
-1. JEE: The `jee` sub-project is a Java EE application which demonstrates how to embed Pull Reports into a JEE servlet container without any additional deployment framework.
+1. JEE: The `jee` sub-project embeds Pull Reports into a JEE servlet container using only the JEE Servlet API.
 1. Grails: The `grails` sub-project embeds Pull Reports into a [Grails 3](https://grails.org) application.
 1. Spring Boot: The `spring-boot` sub-project embeds Pull Reports into a [Spring Boot](https://projects.spring.io/spring-boot/) application. 
 
@@ -28,13 +26,15 @@ The [Pull Reports Installation](https://www.pullreports.com/docs/latest/installa
 
 ### 3) Install the Pull Reports JAR and POM into your local Maven repository.
 
-Installing the Pull Reports JAR and POM file into the local Maven repository allows [Gradle](https://gradle.org) dependency management to resolve the Pull Reports JAR and all of its transitive dependencies.
+Installing the Pull Reports JAR and POM file into the local Maven repository allows [Gradle](https://gradle.org) dependency management to resolve the Pull Reports JAR and all of its transitive dependencies. A local Maven repository is just a specially constructed directory structure located under your user home directory.
 
 Copy the `pullreports-x.y.z.jar` you received from the previous step into `$USER_HOME/.m2/repository/com/pullreports/pullreports/x.y.z` where `x.y.z` is the version of the Pull Reports software.
 
 Copy the `pom.xml` file into `$USER_HOME/.m2/repository/com/pullreports/pullreports/x.y.z/pullreports-x.y.z.pom`. It is important that you rename the `pom.xml` file to `pullreports-x.y.z.pom` when you copy the file. Again, `x.y.z` must match the version of the Pull Reports software. 
 
 #### Example Pull Reports 1.1.3 local Maven Repository
+
+This is what your local maven repository directory structure should look like assuming you have version `1.1.3` of Pull Reports.
 
     $ ls -1 ~/.m2/repository/com/pullreports/pullreports/1.1.3
     pullreports-1.1.3.jar
@@ -43,35 +43,43 @@ Copy the `pom.xml` file into `$USER_HOME/.m2/repository/com/pullreports/pullrepo
 
 ### 4) Install the pullreports.license file
 
-Place the `pullreports.license` file within the `src/main/resources` directory. This directory is included at the root of the classpath in each of the three sub-project application deployments. 
+Place the `pullreports.license` file within the `src/main/resources` directory. This directory is included at the root of the classpath in each of the three sub-project application deployments. Pull Reports requires a valid license file on the Java Virtual Machine (JVM) classpath when it initializes.
 
 ### 5) Start the application(s)
 
+This Pull Report quick start repository contains Gradle wrapper executables at the root of the repository project - `gradlew` for Linux and `gradlew.bat` for Windows. Executing either wrapper file from a terminal window will download all the Gradle dependencies needed to run the example applications.
+
+Before running the following commands, ensure that the JVM, `java` executable is installed on your computer.
+
+Additionally, each application start command will also start an embedded H2 database configured within the `database` sub-project. This database is used by each application when fulfilling report requests. If you start multiple applications at one time, the H2 database will simply restart when each application start.
+
 #### JEE
 
-From the root of the project, run `./gradlew :jee:appRun`. This command starts the embedded H2 database from the `database` sub-project and then starts the JEE Pull Reports application via the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin.
+From the root of the project, run `./gradlew :jee:appRun`. This command starts the JEE Pull Reports application via the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin.
 
 Browse to http://localhost:8080 to see the application.
 
 #### Grails
 
-From the root of the project, run `./gradlew :grails:bootRun`. This command starts the embedded H2 database from the `database` sub-project and then starts the Grails Pull Reports application.
+From the root of the project, run `./gradlew :grails:bootRun`. This command starts the Grails Pull Reports application.
 
 Browse to http://localhost:8081 to see the application.
 
 #### Spring Boot
 
-From the root of the project, run `./gradlew :spring-boot:bootRun`. This command starts the embedded H2 database from the `database` sub-project and then starts the Spring Boot Pull Reports application.
+From the root of the project, run `./gradlew :spring-boot:bootRun`. This command starts the Spring Boot Pull Reports application.
 
 Browse to http://localhost:8082 to see the application.
 
-### 6) Making changes
+### 6) Making changes to the example reports
 
-You may make changes to the Pull Reports XML Catalog file at `src/main/resources/reports/petstore.xml` and the changes will be hot deployed to the running application. Any errors will be logged to the terminal window from which `gradlew` was invoked. 
+Pull Reports are defined by XML files called Catalog Files because the root XML element is a `<catalog>` that groups one or more `<report>`s. A single XML Catalog File at `src/main/resources/reports/petstore.xml` configures the Pull Reports for each example application. You may experiment with Pull Reports XML configuration by making changes to `petstore.xml`. Any changes will be hot deployed to the running application and visible by refreshing your browser. Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) chapter to learn XML Catalog Files.
+
+If you make a mistake when changing `petstore.xml`, the error will be logged to the terminal window from which `gradlew` was invoked. 
 
 # Additional Information
 
-See the following Guides for more information about extending the three example applications for your needs:
+See the following Guides for more information about how each application works and extending the applications for your needs:
 
 * [JEE](JEE.md)
 * [Grails](GRAILS.md)
