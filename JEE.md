@@ -81,9 +81,9 @@ Add a new XML Catalog File (e.g. `my-catalog-file.xml`) to `jee/src/main/resourc
 
     catalogs=classpath:reports/petstore.xml classpath:my-catalog-file.xml
 
-In the `catalogs` property value, the referenced `classpath:reports/petstore.xml` Pull Reports XML catalog file is at `src/main/resources/`. The referenced `classpath:my-catalog-file.xml` Pull Reports XML catalog file will contain your new report configuration. 
+In the `catalogs` property value, the referenced `classpath:reports/petstore.xml` Pull Reports XML catalog file is already in existence at `src/main/resources/`. The referenced `classpath:my-catalog-file.xml` Pull Reports XML catalog file will contain your new report configuration. 
 
-Here is a simple Pull Reports XML catalog file which reports one column from one database table. Be sure to replace the `schema_name.table_name`, `column_name`, and `java.lang.String` attributes below with values appropriate for your database schema.
+Here is a simple Pull Reports XML catalog file which reports one column from one database table. Be sure to replace the `schema_name.table_name`, `column_name`, and `java.lang.String` attribute values below with values appropriate for your database schema.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -96,13 +96,13 @@ Here is a simple Pull Reports XML catalog file which reports one column from one
 </catalog>
 ```
 
-Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) chapter to learn how to enhance the XML Catalog File.
+Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) chapter to learn how to enhance XML Catalog Files.
 
 ## 4) Link your JNDI datasource to your new Report
 
 The current `jee/src/main/resources/pullreports.properties` file defines a default JNDI DataSource to be used by all Pull Reports via the `jndiDataSource` property. Unfortunately, this JNDI DataSource connects to the embedded H2 database configured within the `database` sub-project. This H2 database will not have the database table and column information you configured within the `my-catalog-file.xml` file in the previous step.
 
-In order to associate the new JNDI DataSource from step 2 with your new report(s), add a `jndiDataSource` property to `jee/src/main/resources/pullreports.properties` suffixed with your new `<catalog>` `id`. For example, if your new XML Catalog File defines a `<catalog id="my-catalog">` as the root element, add this property to `pullreports.properties`:
+In order to associate the new JNDI DataSource from step 2 with your new report(s), add an additional `jndiDataSource` property to `jee/src/main/resources/pullreports.properties` suffixed with your new `<catalog>` `id`. For example, if your new XML Catalog File defines `<catalog id="my-catalog">` as the root element, add this property to `pullreports.properties`:
 
     jndiDataSource.my-catalog=java:comp/env/jdbc/my-datasource
 
@@ -112,4 +112,4 @@ Reference the Pull Reports documentation, [Administration](https://www.pullrepor
 
 Start the application by running `gradlew :jee:appRun` from the root of the quick start project. Your new report will be now added to the Switch Report menu of the Pull Reports Ad Hoc Creator. You may access the new report directly at:
 
-http://localhost:8080/adHocCreator?catalogId=my-catalog
+http://localhost:8080/adHocCreator?catalogId=my-catalog&reportId=my-first-report
