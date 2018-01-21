@@ -53,6 +53,10 @@ public class Application {
 
             @Override
             protected void postProcessContext(Context context) {
+                context.getNamingResources().addResource(createH2ContextResource());
+            }
+
+            private ContextResource createH2ContextResource() {
                 ContextResource resource = new ContextResource();
                 resource.setName("jdbc/petstore-datasource");
                 resource.setType(DataSource.class.getName());
@@ -60,8 +64,7 @@ public class Application {
                 resource.setProperty("url",h2Url);
                 resource.setProperty("username", h2Username);
                 resource.setProperty("password", h2Password);
-
-                context.getNamingResources().addResource(resource);
+                return resource;
             }
         };
     }
