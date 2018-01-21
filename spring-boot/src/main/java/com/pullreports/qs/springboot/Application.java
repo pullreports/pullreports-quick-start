@@ -28,20 +28,20 @@ public class Application {
     public EmbeddedServletContainerFactory servletContainer() {
         return new TomcatEmbeddedServletContainerFactory() {
             
-            private String url;
-            private String password;
-            private String username;
+            private String h2Url;
+            private String h2Password;
+            private String h2Username;
             
-            public void setPassword(String password){
-                this.password = password;
+            public void setH2Password(String password){
+                this.h2Password = password;
             }
 
-            public void setUrl(String url){
-                this.url = url;
+            public void setH2Url(String url){
+                this.h2Url = url;
             }
 
-            public void setUsername(String username){
-                this.username = username;
+            public void setH2Username(String username){
+                this.h2Username = username;
             }
 
             @Override
@@ -57,9 +57,9 @@ public class Application {
                 resource.setName("jdbc/petstore-datasource");
                 resource.setType(DataSource.class.getName());
                 resource.setProperty("driverClassName", "org.h2.Driver");
-                resource.setProperty("url", url);
-                resource.setProperty("username", username);
-                resource.setProperty("password", password);
+                resource.setProperty("url",h2Url);
+                resource.setProperty("username", h2Username);
+                resource.setProperty("password", h2Password);
 
                 context.getNamingResources().addResource(resource);
             }
