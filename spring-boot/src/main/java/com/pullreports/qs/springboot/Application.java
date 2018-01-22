@@ -45,8 +45,7 @@ public class Application {
             }
 
             @Override
-            protected TomcatEmbeddedServletContainer getTomcatEmbeddedServletContainer(
-                    Tomcat tomcat) {
+            protected TomcatEmbeddedServletContainer getTomcatEmbeddedServletContainer(Tomcat tomcat) {
                 tomcat.enableNaming();
                 return super.getTomcatEmbeddedServletContainer(tomcat);
             }
