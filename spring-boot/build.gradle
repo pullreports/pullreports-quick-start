@@ -11,6 +11,10 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
+ext {
+    springBootVersion = '1.5.9.RELEASE'
+}
+
 jar {
     baseName = 'pullreports-spring-boot'
 }
@@ -24,9 +28,9 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-web'
-	compile 'org.springframework.boot:spring-boot-devtools'
-    runtime 'org.springframework.boot:spring-boot-starter-freemarker'
+    compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+	compile "org.springframework.boot:spring-boot-devtools:$springBootVersion"
+    runtime "org.springframework.boot:spring-boot-starter-freemarker:$springBootVersion"
     runtime 'com.pullreports:pullreports:+'
     runtime 'com.h2database:h2:1.4.195'
     runtime 'org.apache.tomcat:tomcat-dbcp:8.5.24'
