@@ -6,16 +6,16 @@ import grails.util.Environment
 
 beans = {
 
-	if (Environment.isDevelopmentMode()) {
-		tomcatEmbeddedServletContainerFactory(com.pullreports.qs.grails.JndiTomcatEmbeddedServletContainerFactory)
+    if (Environment.isDevelopmentMode()) {
+        tomcatEmbeddedServletContainerFactory(com.pullreports.qs.grails.JndiTomcatEmbeddedServletContainerFactory)
     }
 
-	pullreportsListener(ServletListenerRegistrationBean) { bean ->
-		 listener = new PullReportsContextListener()
-	}
+    pullreportsListener(ServletListenerRegistrationBean) { bean ->
+         listener = new PullReportsContextListener()
+    }
 
-	pullreportsServlet(ServletRegistrationBean) { bean ->
-		 servlet = new PullReportsServlet()
-		 urlMappings = ['/pullreports/*']
-	}
+    pullreportsServlet(ServletRegistrationBean) { bean ->
+         servlet = new PullReportsServlet()
+         urlMappings = ['/pullreports/*']
+    }
 }

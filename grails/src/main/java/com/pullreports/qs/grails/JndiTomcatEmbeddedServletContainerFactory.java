@@ -13,8 +13,7 @@ import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletCon
 public class JndiTomcatEmbeddedServletContainerFactory extends TomcatEmbeddedServletContainerFactory{
 
     @Override
-    protected TomcatEmbeddedServletContainer getTomcatEmbeddedServletContainer(
-            Tomcat tomcat) {
+    protected TomcatEmbeddedServletContainer getTomcatEmbeddedServletContainer(Tomcat tomcat) {
         tomcat.enableNaming();
         return super.getTomcatEmbeddedServletContainer(tomcat);
     }
