@@ -12,25 +12,25 @@ See [README](README.md) for information on installing Pull Reports and starting 
 
 The following files within the `spring-boot` project contain important configuration related to Pull Reports installation:
 
-### src/main/resources/pullreports.properties
+## src/main/resources/pullreports.properties
 
 The [pullreports.properties](spring-boot/src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
 
 Read about more Pull Reports configuration properties within the [Pull Reports administration](https://www.pullreports.com/docs/latest/administration.html) chapter.
 
-### src/main/resources/META-INF/spring-devtools.properties
+## src/main/resources/META-INF/spring-devtools.properties
 
 Because Pull Reports caches the XML Catalog File configuration in the JVM memory, changes to XML Catalog Files are not hot deployed to the running Spring Boot application during development. To enable hot reloading of XML Catalog Files, explicitly add the Pull Reports JAR to the [spring-boot-devtools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html) `restart` classloader via [spring-devtools.properties](spring-boot/src/main/resources/META-INF/spring-devtools.properties).
 
-### src/main/java/com/pullreports/qs/springboot/Application.java
+## src/main/java/com/pullreports/qs/springboot/Application.java
 
 The [Application class](spring-boot/src/main/java/com/pullreports/qs/springboot/Application.java) contains the following important configuration:
 
-#### `@ServletComponentScan(basePackages="com.pullreports")`
+### `@ServletComponentScan(basePackages="com.pullreports")`
 
 The `ServletComponentScan` annotation tells Spring Boot to scan the `com.pullreports` package and automatically register the Pull Reports `ServletContextListener` and `Servlet` on Servlet Container start up.
 
-#### `@Bean public EmbeddedServletContainerFactory servletContainer() {...}`
+### `@Bean public EmbeddedServletContainerFactory servletContainer() {...}`
 
 The `servletContainer` method overrides the default `EmbeddedServletContainerFactory` Bean with a Tomcat container which instantiates a JNDI `javax.sql.DataSource` at `java:comp/env/jdbc/petstore-datasource`. This `DataSource` is referenced within [pullreports.properties](spring-boot/src/main/resources/pullreports.properties) as the default `DataSource` for Pull Reports.
  
