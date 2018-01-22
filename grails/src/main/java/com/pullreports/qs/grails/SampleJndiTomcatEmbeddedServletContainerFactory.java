@@ -1,4 +1,4 @@
-package example;
+package com.pullreports.qs.grails;
 
 import javax.sql.DataSource;
 

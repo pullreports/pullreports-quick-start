@@ -7,7 +7,7 @@ import grails.util.Environment
 beans = {
 
 	if (Environment.isDevelopmentMode()) {
-		tomcatEmbeddedServletContainerFactory(example.SampleJndiTomcatEmbeddedServletContainerFactory)
+		tomcatEmbeddedServletContainerFactory(com.pullreports.qs.grails.SampleJndiTomcatEmbeddedServletContainerFactory)
     }
 
 	pullreportsListener(ServletListenerRegistrationBean) { bean ->
