@@ -1,4 +1,4 @@
-# JEE Application
+# Pull Reports JEE Application
 
 This page contains information about the `jee` sub-project. This sub-project demonstrates how to embed Pull Reports into a Servlet Container. In addition to this example application, the Pull Reports [installation](https://www.pullreports.com/docs/latest/installation.html) documentation contains detailed instructions on how to install Pull Reports into any JEE WAR file. 
 
