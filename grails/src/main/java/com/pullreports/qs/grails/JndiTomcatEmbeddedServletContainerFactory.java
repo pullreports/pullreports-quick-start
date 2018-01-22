@@ -29,7 +29,7 @@ public class JndiTomcatEmbeddedServletContainerFactory extends TomcatEmbeddedSer
         resource.setName("jdbc/petstore-datasource");
         resource.setType(DataSource.class.getName());
         resource.setProperty("factory", "org.apache.tomcat.jdbc.pool.DataSourceFactory");
-        resource.setProperty("driverClassName", "org.h2.Driver");
+        resource.setProperty("driverClassName", org.h2.Driver.class.getName());
         resource.setProperty("url", "jdbc:h2:tcp://localhost:9092/petstore");
         resource.setProperty("username", "sa");
         resource.setProperty("password", "secret");
