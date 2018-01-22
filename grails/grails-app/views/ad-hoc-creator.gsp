@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta name="layout" content="main"/>
-	<meta name="activePage" content="Creator"/>
+    <meta name="layout" content="main"/>
+    <meta name="activePage" content="Creator"/>
     <title>Pull Reports: Ad hoc report creator demonstration</title>
     <meta name="description" content="Demonstration of Pull Reports embeddable, web-based ad hoc reporting, mapping, and data services software.">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"></link>
-	<link rel="stylesheet" href="${request.contextPath}/static/assets/pullreports.min.css">
-	<script src="${request.contextPath}/static/assets/pullreports.min.js"></script>
-	<script>
+    <link rel="stylesheet" href="${request.contextPath}/static/assets/pullreports.min.css">
+    <script src="${request.contextPath}/static/assets/pullreports.min.js"></script>
+    <script>
         require(['pr-require-config'],function(){
             require(['angular','pr-main','leaflet'], function(angular,prMain,L) {
 
@@ -26,14 +26,14 @@
         
                     angular.element(document).ready(function() {
                         prMain.init({
-                        	url:'${request.contextPath}'
-                        	,map: {
-                        		options: {
+                            url:'${request.contextPath}'
+                            ,map: {
+                                options: {
                                     layers:[baseLayers['Open Street Map']]
-                        		}
+                                }
                                 ,initCallback:initializeMap
-                        	}
-                        	,container:"report-container"
+                            }
+                            ,container:"report-container"
                         });
                     });
 
@@ -44,11 +44,11 @@
                 }
             );
         });
-	</script>
+    </script>
 </head>
 <body>
     <div class='container-fluid'>
-	    <section id="report-container" data-pr-creator></section> 
+        <section id="report-container" data-pr-creator></section> 
     </div>
 </body>
 </html>
