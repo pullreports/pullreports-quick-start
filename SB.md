@@ -46,7 +46,7 @@ Follow these steps to use the `pullreports-quick-start` spring-boot application 
 
 ## 1) Install your database driver 
 
-If your database is not an H2 database, you must add an appropriate database JDBC driver for your database to the spring boot `runtime` Gradle configuration in order for the embedded container to provide a JNDI datasource to Pull Reports.
+If your database is not an H2 database, you must add an appropriate database JDBC driver to the spring boot `runtime` Gradle configuration in order for the embedded container to provide a JNDI datasource to Pull Reports.
 
 For example, to use a PostgreSQL database, add the PostgreSQL driver `runtime` dependency within `spring-boot/build.gradle`:
 

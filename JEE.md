@@ -42,7 +42,7 @@ Follow these steps to use the `pullreports-quick-start` JEE application to devel
 
 ## 1) Install your database driver 
 
-If your database is not an H2 database, you must add an appropriate JDBC driver for your database to the Servlet Container's classpath in order for the container to provide a JNDI datasource to Pull Reports.
+If your database is not an H2 database, you must add an appropriate JDBC driver to the Servlet Container's classpath in order for the container to provide a JNDI datasource to Pull Reports.
 
 Since the `jee` sub-project uses the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin to serve the application, add your database driver to the `gretty` dependency configuration within `jee/build.gradle`. 
 

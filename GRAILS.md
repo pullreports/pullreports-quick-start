@@ -52,7 +52,7 @@ Follow these steps to use the `pullreports-quick-start` grails application to de
 
 ## 1) Install your database driver 
 
-If your database is not an H2 database, you must add an appropriate database JDBC driver for your database to the `compile` Gradle configuration in order for the embedded container to provide a JNDI datasource to Pull Reports.
+If your database is not an H2 database, you must add an appropriate database JDBC driver to the `compile` Gradle configuration in order for the embedded container to provide a JNDI datasource to Pull Reports.
 
 For example, to use a PostgreSQL database, add the PostgreSQL driver `compile` dependency within `grails/build-ext.gradle`:
 
