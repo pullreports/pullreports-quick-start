@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 
-public class SampleJndiTomcatEmbeddedServletContainerFactory extends TomcatEmbeddedServletContainerFactory{
+public class JndiTomcatEmbeddedServletContainerFactory extends TomcatEmbeddedServletContainerFactory{
 
     @Override
     protected TomcatEmbeddedServletContainer getTomcatEmbeddedServletContainer(
