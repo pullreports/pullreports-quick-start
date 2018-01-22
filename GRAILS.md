@@ -10,11 +10,11 @@ See [README](README.md) for information on installing Pull Reports and starting 
 
 # Key files
 
-The following files within the `grails` project contain important configuration related to Pull Reports installation:
+The following files within the `grails` sub-project contain important configuration related to Pull Reports installation:
 
 ## ./build-ext.gradle
 
-The [build-ext.gradle](grails/build-ext.gradle) file extends the Gradle build with configuration for Pull Reports. Since Grails ships with a Gradle build file, keeping additional configuration within a separate Gradle build file makes Grails upgrades easier. 
+The [build-ext.gradle](grails/build-ext.gradle) file extends the Gradle build with configuration necessary for Pull Reports. Since Grails ships with a Gradle build file, keeping additional configuration within a separate Gradle build file makes Grails upgrades easier. 
 
 ## src/main/resources/pullreports.properties
 
@@ -26,9 +26,9 @@ Read about more Pull Reports configuration properties within the [Pull Reports a
 
 ## src/main/resources/META-INF/spring-devtools.properties
 
-Grails uses [spring-loaded](https://github.com/spring-projects/spring-loaded) to hot deploy changes to class files during development. Because Pull Reports deployed within a Servlet Container caches Pull Reports XML Catalog file configuration in the JVM memory, changes to Pull Reports XML Catalog files are not refreshed by `spring-loaded`.
+Grails uses [spring-loaded](https://github.com/spring-projects/spring-loaded) to hot deploy changes to class files during development. Because Pull Reports deployed within a Servlet Container caches Pull Reports XML Catalog File state in the JVM memory, changes to Catalog Files are not refreshed by `spring-loaded`.
 
-In order to hot reload changes to Pull Reports XML Catalog files, the `grails` quick start sub-project uses [spring-boot-devtools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html) for hot reloading. In order to enable `spring-boot-devtools`, it is first declared as a `runtime` dependency in [build-ext.gradle](grails/build-ext.gradle).  Then `spring-loaded` is disabled by the `grails.agent.enabled=false` property in [application-development.properties](grails/grails-app/conf/application-development.properties). Finally, to enable hot reloading of XML Catalog Files, explicitly add the Pull Reports JAR to the [spring-boot-devtools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html) `restart` classloader via [spring-devtools.properties](grails/src/main/resources/META-INF/spring-devtools.properties).
+In order to hot reload changes to Pull Reports XML Catalog Files, the `grails` sub-project uses [spring-boot-devtools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html) for hot reloading instead of `spring-loaded`. In order to enable `spring-boot-devtools`, it is first declared as a `runtime` dependency in [build-ext.gradle](grails/build-ext.gradle).  Then `spring-loaded` is disabled by the `grails.agent.enabled=false` property in [application-development.yml](grails/grails-app/conf/application-development.yml). Finally, to enable hot reloading of XML Catalog Files, explicitly add the Pull Reports JAR to the spring-boot-devtools `restart` classloader via [spring-devtools.properties](grails/src/main/resources/META-INF/spring-devtools.properties).
 
 ## grails-app/conf/spring/resources.groovy
 
@@ -36,7 +36,7 @@ The [resources.groovy](grails/grails-app/conf/spring/resources.groovy) file cont
 
 ### tomcatEmbeddedServletContainerFactory
 
-This bean overrides the default `TomcatEmbeddedServletContainerFactory` used by Grails for development deployment with [JndiTomcatEmbeddedServletContainerFactory class](grails/src/main/java/com/pullreports/qs/grails/JndiTomcatEmbeddedServletContainerFactory.java).  `JndiTomcatEmbeddedServletContainerFactory` instantiates a JNDI `javax.sql.DataSource` at `java:comp/env/jdbc/petstore-datasource`. This `DataSource` is referenced within [pullreports.properties](grails/src/main/resources/pullreports.properties) as the default `DataSource` for Pull Reports.
+This bean overrides the default `TomcatEmbeddedServletContainerFactory` used by Grails for development deployment with the [JndiTomcatEmbeddedServletContainerFactory] (grails/src/main/java/com/pullreports/qs/grails/JndiTomcatEmbeddedServletContainerFactory.java) class.  `JndiTomcatEmbeddedServletContainerFactory` instantiates a JNDI `javax.sql.DataSource` at `java:comp/env/jdbc/petstore-datasource`. This `DataSource` is referenced within [pullreports.properties](grails/src/main/resources/pullreports.properties) as the default `DataSource` for Pull Reports.
 
 ### `pullreportsListener` and `pullreportsListener`
 
@@ -44,7 +44,7 @@ These two Spring beans register the Pull Reports `ServletContextListener` and `S
 
 ## grails-app/views/ad-hoc-creator.gsp
 
-The GSP file where the [Pull Reports Ad Hoc Creator](https://www.pullreports.com/docs/latest/creator.html) is installed. See [UrlMappings.groovy](grails/grails-app/controllers/grails/UrlMappings.groovy) for the mapping between the `/adHocCreator` URL and `ad-hoc-creator.gsp`. 
+The GSP file where the [Pull Reports Ad Hoc Creator](https://www.pullreports.com/docs/latest/creator.html) is installed. See [UrlMappings.groovy](grails/grails-app/controllers/grails/UrlMappings.groovy) for the mapping between the `/adHocCreator` URL and [`ad-hoc-creator.gsp`](grails/grails-app/views/ad-hoc-creator.gsp). 
 
 # Adding a report configuration against your own database
 
