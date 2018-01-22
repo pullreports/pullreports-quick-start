@@ -21,6 +21,10 @@ public class SampleJndiTomcatEmbeddedServletContainerFactory extends TomcatEmbed
 
     @Override
     protected void postProcessContext(Context context) {
+        context.getNamingResources().addResource(createH2ContextResource());
+    }
+
+    private ContextResource createH2ContextResource() {
         ContextResource resource = new ContextResource();
         resource.setName("jdbc/petstore-datasource");
         resource.setType(DataSource.class.getName());
@@ -29,7 +33,6 @@ public class SampleJndiTomcatEmbeddedServletContainerFactory extends TomcatEmbed
         resource.setProperty("url", "jdbc:h2:tcp://localhost:9092/petstore");
         resource.setProperty("username", "sa");
         resource.setProperty("password", "secret");
-
-        context.getNamingResources().addResource(resource);
+        return resource;
     }
 }
