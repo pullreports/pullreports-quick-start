@@ -42,7 +42,7 @@ Follow these steps to use the `pullreports-quick-start` JEE application to devel
 
 ## 1) Install your database driver 
 
-If your database is not an H2 database, you must add your database JDBC driver to the Servlet Container's classpath in order for the container to provide a JNDI datasource to Pull Reports.
+If your database is not an H2 database, you must add an appropriate JDBC driver for your database to the Servlet Container's classpath in order for the container to provide a JNDI datasource to Pull Reports.
 
 Since the `jee` sub-project uses the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin to serve the application, add your database driver to the `gretty` dependency configuration within `jee/build.gradle`. 
 
@@ -81,9 +81,9 @@ Add a new XML Catalog File (e.g. `my-catalog-file.xml`) to `jee/src/main/resourc
 
     catalogs=classpath:reports/petstore.xml classpath:my-catalog-file.xml
 
-In the `catalogs` property value, the referenced `classpath:reports/petstore.xml` Pull Reports XML catalog file is already in existence at `src/main/resources/`. The referenced `classpath:my-catalog-file.xml` Pull Reports XML catalog file will contain your new report configuration. 
+In the `catalogs` property value, the referenced `classpath:reports/petstore.xml` Pull Reports XML Catalog File is already in existence at `src/main/resources/`. The referenced `classpath:my-catalog-file.xml` Pull Reports XML Catalog File will contain your new report configuration. 
 
-Here is a simple Pull Reports XML catalog file which reports one column from one database table. Be sure to replace the `schema_name.table_name`, `column_name`, and `java.lang.String` attribute values below with values appropriate for your database schema.
+Here is a simple Pull Reports XML Catalog File which reports one column from one database table. Be sure to replace the `schema_name.table_name`, `column_name`, and `java.lang.String` attribute values below with values appropriate for your database schema.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -110,6 +110,6 @@ Reference the Pull Reports documentation, [Administration](https://www.pullrepor
  
 ## 5) Start the application
 
-Start the application by running `gradlew :jee:appRun` from the root of the quick start project. Your new report will be now added to the Switch Report menu of the Pull Reports Ad Hoc Creator. You may access the new report directly at:
+Start the application by running `gradlew :jee:appRun` from the root of the quick start project. Your new report is now available in the Switch Report menu of the Pull Reports Ad Hoc Creator. You may access the new report directly at:
 
 http://localhost:8080/adHocCreator?catalogId=my-catalog&reportId=my-first-report

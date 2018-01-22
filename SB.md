@@ -46,9 +46,9 @@ Follow these steps to use the `pullreports-quick-start` spring-boot application 
 
 ## 1) Install your database driver 
 
-If your database is not an H2 database, you must add your database JDBC driver to the spring boot `runtime` Gradle configuration in order for the embedded container to provide a JNDI datasource to Pull Reports.
+If your database is not an H2 database, you must add an appropriate database JDBC driver for your database to the spring boot `runtime` Gradle configuration in order for the embedded container to provide a JNDI datasource to Pull Reports.
 
-For example, to use a PostgreSQL database, add the PostgreSQL driver in `spring-boot/build.gradle`:
+For example, to use a PostgreSQL database, add the PostgreSQL driver `runtime` dependency within `spring-boot/build.gradle`:
 
     dependencies {
         ... 
@@ -122,9 +122,9 @@ Add a new XML Catalog File (e.g. `my-catalog-file.xml`) to `spring-boot/src/main
 
     catalogs=classpath:reports/petstore.xml classpath:my-catalog-file.xml
 
-In the `catalogs` property value, the referenced `classpath:reports/petstore.xml` Pull Reports XML catalog file is already in existence at `src/main/resources/`. The referenced `classpath:my-catalog-file.xml` Pull Reports XML catalog file will contain your new report configuration. 
+In the `catalogs` property value, the referenced `classpath:reports/petstore.xml` Pull Reports XML Catalog File is already in existence at `src/main/resources/`. The referenced `classpath:my-catalog-file.xml` Pull Reports XML Catalog File will contain your new report configuration. 
 
-Here is a simple Pull Reports XML catalog file which reports one column from one database table. Be sure to replace the `schema_name.table_name`, `column_name`, and `java.lang.String` attribute values below with values appropriate for your database schema.
+Here is a simple Pull Reports XML Catalog File which reports one column from one database table. Be sure to replace the `schema_name.table_name`, `column_name`, and `java.lang.String` attribute values below with values appropriate for your database schema.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -141,9 +141,9 @@ Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullre
 
 ## 4) Link your JNDI datasource to your new Report
 
-The current `spring-boot/src/main/resources/pullreports.properties` file defines a default JNDI DataSource to be used by all Pull Reports via the `jndiDataSource` property. Unfortunately, this JNDI DataSource connects to the embedded H2 database configured within the `database` sub-project. This H2 database will not have the database table and column information you configured within the `my-catalog-file.xml` file in the previous step.
+The current [pullreports.properties](spring-boot/src/main/resources/pullreports.properties) file defines a default JNDI DataSource to be used by all Pull Reports via the `jndiDataSource` property. Unfortunately, this JNDI DataSource connects to the embedded H2 database configured within the `database` sub-project. This H2 database will not have the database table and column information you configured within the `my-catalog-file.xml` file in the previous step.
 
-In order to associate the new JNDI DataSource from step 2 with your new report(s), add an additional `jndiDataSource` property to `spring-boot/src/main/resources/pullreports.properties` suffixed with your new `<catalog>` `id`. For example, if your new XML Catalog File defines `<catalog id="my-catalog">` as the root element, add this property to `pullreports.properties`:
+In order to associate the new JNDI DataSource from step 2 with your new report(s), add an additional `jndiDataSource` property to [pullreports.properties](spring-boot/src/main/resources/pullreports.properties) suffixed with your new `<catalog>` `id`. For example, if your new XML Catalog File defines `<catalog id="my-catalog">` as the root element, add this property to `pullreports.properties`:
 
     jndiDataSource.my-catalog=java:comp/env/jdbc/my-datasource
 
@@ -151,6 +151,6 @@ Reference the Pull Reports documentation, [Administration](https://www.pullrepor
  
 ## 5) Start the application
 
-Start the application by running `gradlew :spring-boot:bootRun` from the root of the quick start project. Your new report will be now added to the Switch Report menu of the Pull Reports Ad Hoc Creator. You may access the new report directly at:
+Start the application by running `gradlew :spring-boot:bootRun` from the root of the quick start project. Your new report is now available in the Switch Report menu of the Pull Reports Ad Hoc Creator. You may access the new report directly at:
 
 http://localhost:8082/adHocCreator?catalogId=my-catalog&reportId=my-first-report
