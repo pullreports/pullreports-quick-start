@@ -50,7 +50,7 @@ For example, to use a PostgreSQL database, add the PostgreSQL driver in `jee/bui
 
     dependencies {
         ... 
-        gretty 'org.postgresql:postgresql:9.4.1212'
+        gretty 'org.postgresql:postgresql:42.2.0'
         ...
     }
     
@@ -110,6 +110,6 @@ Reference the Pull Reports documentation, [Administration](https://www.pullrepor
  
 ## 5) Start the application
 
-Start the application by running `gradlew :jee:appRun` from the root of the quick start project. Your new report is now available in the Switch Report menu of the Pull Reports Ad Hoc Creator. You may access the new report directly at:
+Start the application by running `./gradlew :jee:appRun` from the root of the quick start project. Your new report is now available in the Switch Report menu of the Pull Reports Ad Hoc Creator. You may access the new report directly at:
 
 http://localhost:8080/adHocCreator?catalogId=my-catalog&reportId=my-first-report
