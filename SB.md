@@ -38,7 +38,7 @@ The `DataSource` connection pool properties are passed to the `EmbeddedServletCo
 
 ## src/main/resources/templates/ad-hoc-creator.ftl
 
-The JSP file where the [Pull Reports Ad Hoc Creator](https://www.pullreports.com/docs/latest/creator.html) is installed. See [AppController.java](spring-boot/src/main/java/com/pullreports/qs/springboot) for the mapping between the `/adHocCreator` URL and `ad-hoc-creator.ftl`. 
+The JSP file where the [Pull Reports Ad Hoc Creator](https://www.pullreports.com/docs/latest/creator.html) is installed. See [AppController.java](spring-boot/src/main/java/com/pullreports/qs/springboot/AppController.java) for the mapping between the `/adHocCreator` URL and `ad-hoc-creator.ftl`. 
 
 # Adding a report configuration against your own database
 
