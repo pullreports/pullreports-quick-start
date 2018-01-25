@@ -14,21 +14,21 @@ The following files within the `jee` project contain important configuration rel
 
 ## build.gradle
 
-Key configuration elements within the [build.gradle](jee/build.gradle) file are the use of the [Gradle `war` plugin](https://docs.gradle.org/current/userguide/war_plugin.html) to build a JEE web application and the use of the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin to serve that application within a local [Tomcat](https://tomcat.apache.org) Servlet Container.
+Key configuration elements within the [build.gradle](build.gradle) file are the use of the [Gradle `war` plugin](https://docs.gradle.org/current/userguide/war_plugin.html) to build a JEE web application and the use of the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin to serve that application within a local [Tomcat](https://tomcat.apache.org) Servlet Container.
 
 ## src/main/resources/pullreports.properties
 
-The [pullreports.properties](jee/src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
+The [pullreports.properties](src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
 
 Read about more Pull Reports configuration properties within the [Pull Reports administration](https://www.pullreports.com/docs/latest/administration.html) chapter.
 
 ## src/main/webapp/META-INF/context.xml
 
-The [context.xml](jee/src/main/webapp/META-INF/context.xml) file is a Tomcat specific configuration file read on Tomcat start up. This `context.xml` file defines a JNDI `javax.sql.DataSource` at the `java:comp/env/jdbc/petstore-datasource` JNDI path. Note the use of the H2 database connection parameters.
+The [context.xml](src/main/webapp/META-INF/context.xml) file is a Tomcat specific configuration file read on Tomcat start up. This `context.xml` file defines a JNDI `javax.sql.DataSource` at the `java:comp/env/jdbc/petstore-datasource` JNDI path. Note the use of the H2 database connection parameters.
 
 ## src/main/webapp/WEB-INF/sitemesh.xml, decorators.xml, and decorators directory
 
-These two XML files and directory within [WEB-INF](jee/src/main/webapp/WEB-INF) demonstrate the use of [SiteMesh](http://wiki.sitemesh.org/wiki/display/sitemesh/Home) to decorate Pull Reports export results. Note that the JEE [web.xml](jee/src/main/webapp/WEB-INF/web.xml) file contains additional SiteMesh configuration. 
+These two XML files and directory within [WEB-INF](src/main/webapp/WEB-INF) demonstrate the use of [SiteMesh](http://wiki.sitemesh.org/wiki/display/sitemesh/Home) to decorate Pull Reports export results. Note that the JEE [web.xml](src/main/webapp/WEB-INF/web.xml) file contains additional SiteMesh configuration. 
 
 SiteMesh is an optional decoration configuration and only one method of customizing Pull Reports export results. Reference the Pull Reports documentation, [administration](https://www.pullreports.com/docs/latest/administration.html) chapter, to learn more about export decoration.
 
@@ -44,9 +44,9 @@ Follow these steps to use the `pullreports-quick-start` JEE application to devel
 
 If your database is not an H2 database, you must add an appropriate JDBC driver to the Servlet Container's classpath in order for the container to provide a JNDI datasource to Pull Reports.
 
-Since the `jee` sub-project uses the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin to serve the application, add your database driver to the `gretty` dependency configuration within `jee/build.gradle`. 
+Since the `jee` sub-project uses the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin to serve the application, add your database driver to the `gretty` dependency configuration within `build.gradle`. 
 
-For example, to use a PostgreSQL database, add the PostgreSQL driver in `jee/build.gradle`:
+For example, to use a PostgreSQL database, add the PostgreSQL driver in `build.gradle`:
 
     dependencies {
         ... 
@@ -56,7 +56,7 @@ For example, to use a PostgreSQL database, add the PostgreSQL driver in `jee/bui
     
 ## 2) Set your database connection parameters within context.xml
 
-Add a JNDI connection pool within `jee/src/main/webapp/META-INF/context.xml` appropriate for your database. The [Tomcat connection pool documentation](https://tomcat.apache.org/tomcat-8.0-doc/jdbc-pool.html) provides more information on how to configure a JNDI DataSource.
+Add a JNDI connection pool within `src/main/webapp/META-INF/context.xml` appropriate for your database. The [Tomcat connection pool documentation](https://tomcat.apache.org/tomcat-8.0-doc/jdbc-pool.html) provides more information on how to configure a JNDI DataSource.
 
 For example, to create a connection pool to a PostgreSQL database, add this `<Resource>` to context.xml:
 
@@ -77,7 +77,7 @@ For example, to create a connection pool to a PostgreSQL database, add this `<Re
     
 ## 3) Add your own XML Catalog File
 
-Add a new XML Catalog File (e.g. `my-catalog-file.xml`) to `jee/src/main/resources` and reference it within `jee/src/main/resources/pullreports.properties` like so:
+Add a new XML Catalog File (e.g. `my-catalog-file.xml`) to `src/main/resources` and reference it within `src/main/resources/pullreports.properties` like so:
 
     catalogs=classpath:reports/petstore.xml classpath:my-catalog-file.xml
 
@@ -100,9 +100,9 @@ Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullre
 
 ## 4) Link your JNDI datasource to your new Report
 
-The current `jee/src/main/resources/pullreports.properties` file defines a default JNDI DataSource to be used by all Pull Reports via the `jndiDataSource` property. Unfortunately, this JNDI DataSource connects to the embedded H2 database configured within the `database` sub-project. This H2 database will not have the database table and column information you configured within the `my-catalog-file.xml` file in the previous step.
+The current `src/main/resources/pullreports.properties` file defines a default JNDI DataSource to be used by all Pull Reports via the `jndiDataSource` property. Unfortunately, this JNDI DataSource connects to the embedded H2 database configured within the `database` sub-project. This H2 database will not have the database table and column information you configured within the `my-catalog-file.xml` file in the previous step.
 
-In order to associate the new JNDI DataSource from step 2 with your new report(s), add an additional `jndiDataSource` property to `jee/src/main/resources/pullreports.properties` suffixed with your new `<catalog>` `id`. For example, if your new XML Catalog File defines `<catalog id="my-catalog">` as the root element, add this property to `pullreports.properties`:
+In order to associate the new JNDI DataSource from step 2 with your new report(s), add an additional `jndiDataSource` property to `src/main/resources/pullreports.properties` suffixed with your new `<catalog>` `id`. For example, if your new XML Catalog File defines `<catalog id="my-catalog">` as the root element, add this property to `pullreports.properties`:
 
     jndiDataSource.my-catalog=java:comp/env/jdbc/my-datasource
 
