@@ -1,19 +1,8 @@
 package com.pullreports.qs.springboot;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import javax.sql.DataSource;
-
-import org.apache.catalina.Context;
-import org.apache.catalina.startup.Tomcat;
-import org.apache.tomcat.util.descriptor.web.ContextResource;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
-import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
 @ServletComponentScan(basePackages="com.pullreports")
@@ -23,6 +12,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
+    /*
     @Bean
     @ConfigurationProperties(prefix="datasource")
     public EmbeddedServletContainerFactory servletContainer() {
@@ -67,4 +57,5 @@ public class Application {
             }
         };
     }
+    */
 }

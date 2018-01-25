@@ -30,11 +30,11 @@ The [Application class](spring-boot/src/main/java/com/pullreports/qs/springboot/
 
 The `ServletComponentScan` annotation tells Spring Boot to scan the `com.pullreports` package and automatically register the Pull Reports `ServletContextListener` and `Servlet` on Servlet Container start up.
 
-### `@Bean public EmbeddedServletContainerFactory servletContainer() {...}`
+## src/main/java/com/pullreports/qs/JndiTomcatEmbeddedServletContainerFactory
 
-The `servletContainer` method overrides the default `EmbeddedServletContainerFactory` Bean with a Tomcat container which instantiates a JNDI `javax.sql.DataSource` at `java:comp/env/jdbc/petstore-datasource`. This `DataSource` is referenced within [pullreports.properties](spring-boot/src/main/resources/pullreports.properties) as the default `DataSource` for Pull Reports.
+The [JndiTomcatEmbeddedServletContainerFactory](spring-boot/src/main/java/com/pullreports/qs/JndiTomcatEmbeddedServletContainerFactory.java) class overrides the default `EmbeddedServletContainerFactory` Bean with a Tomcat container which instantiates a JNDI `javax.sql.DataSource` at `java:comp/env/jdbc/petstore-datasource`. This `DataSource` is referenced within [pullreports.properties](spring-boot/src/main/resources/pullreports.properties) as the default `DataSource` for Pull Reports.
  
-The `DataSource` connection pool properties are passed to the `EmbeddedServletContainerFactory` bean via the `@ConfigurationProperties(prefix="datasource")` annotation. See [application.properties](spring-boot/src/main/resources/application.properties) for their values.
+The `DataSource` connection pool properties are passed to `JndiTomcatEmbeddedServletContainerFactory` bean via the `@ConfigurationProperties(prefix="datasource")` annotation. See [application.properties](spring-boot/src/main/resources/application.properties) for their values.
 
 ## src/main/resources/templates/ad-hoc-creator.ftl
 
