@@ -20,7 +20,7 @@ Read about more Pull Reports configuration properties within the [Pull Reports a
 
 ## src/main/resources/META-INF/spring-devtools.properties
 
-Because Pull Reports caches the XML Catalog File configuration in the JVM memory, changes to XML Catalog Files are not hot deployed to the running Spring Boot application during development. To enable hot reloading of XML Catalog Files, explicitly add the Pull Reports JAR to the [spring-boot-devtools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html) `restart` classloader via [spring-devtools.properties](src/main/resources/META-INF/spring-devtools.properties).
+Because Pull Reports caches the XML Catalog File configuration in the JVM memory, changes to XML Catalog Files are not hot deployed to the running Spring Boot application during development. To enable hot reloading, explicitly add the Pull Reports JAR to the [spring-boot-devtools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html) `restart` classloader via [spring-devtools.properties](src/main/resources/META-INF/spring-devtools.properties).
 
 ## src/main/java/com/pullreports/qs/springboot/Application.java
 
