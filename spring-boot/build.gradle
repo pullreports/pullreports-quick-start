@@ -30,9 +30,9 @@ targetCompatibility = 1.8
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
     compile "org.springframework.boot:spring-boot-devtools:$springBootVersion"
+    compile 'com.h2database:h2:1.4.195'
     runtime "org.springframework.boot:spring-boot-starter-freemarker:$springBootVersion"
     runtime 'com.pullreports:pullreports:+'
-    runtime 'com.h2database:h2:1.4.195'
     runtime 'org.apache.tomcat:tomcat-dbcp:8.5.24'
 }
 
