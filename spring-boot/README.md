@@ -5,8 +5,8 @@ This page contains information about the [`spring-boot`](/spring-boot) sub-proje
 See [README](../README.md) for information on installing Pull Reports and starting the `spring-boot` application.
 
 **Contents**
-* [Key files](SB.md#key-files)
-* [Adding a report configuration against your own database](SB.md#adding-a-report-configuration-against-your-own-database)
+* [Key files](#key-files)
+* [Adding a report configuration against your own database](#adding-a-report-configuration-against-your-own-database)
 
 # Key files
 
