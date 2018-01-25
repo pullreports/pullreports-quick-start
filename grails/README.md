@@ -14,11 +14,11 @@ The following files within the `grails` sub-project contain important configurat
 
 ## ./build-ext.gradle
 
-The [build-ext.gradle](grails/build-ext.gradle) file extends the Gradle build with configuration necessary for Pull Reports. Since Grails ships with a Gradle build file, keeping additional configuration within a separate Gradle build file makes Grails upgrades easier. 
+The [build-ext.gradle](build-ext.gradle) file extends the Gradle build with configuration necessary for Pull Reports. Since Grails ships with a Gradle build file, keeping additional configuration within a separate Gradle build file makes Grails upgrades easier. 
 
 ## src/main/resources/pullreports.properties
 
-The [pullreports.properties](grails/src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
+The [pullreports.properties](src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
 
 Additionally, Grails requires that the `static.resource.prefix=/static` property be set in order to correctly serve Pull Reports static resources in the `html` and `geojson` export formats.
 
@@ -28,15 +28,15 @@ Read about more Pull Reports configuration properties within the [Pull Reports a
 
 Grails uses [spring-loaded](https://github.com/spring-projects/spring-loaded) to hot deploy changes to class files during development. Because Pull Reports deployed within a Servlet Container caches Pull Reports XML Catalog File state in the JVM memory, changes to Catalog Files are not refreshed by `spring-loaded`.
 
-In order to hot reload changes to Pull Reports XML Catalog Files, the `grails` sub-project uses [spring-boot-devtools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html) for hot reloading instead of `spring-loaded`. In order to enable `spring-boot-devtools`, it is first declared as a `runtime` dependency in [build-ext.gradle](grails/build-ext.gradle).  Then `spring-loaded` is disabled by the `grails.agent.enabled=false` property in [application-development.yml](grails/grails-app/conf/application-development.yml). Finally, to enable hot reloading of XML Catalog Files, explicitly add the Pull Reports JAR to the spring-boot-devtools `restart` classloader via [spring-devtools.properties](grails/src/main/resources/META-INF/spring-devtools.properties).
+In order to hot reload changes to Pull Reports XML Catalog Files, the `grails` sub-project uses [spring-boot-devtools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html) for hot reloading instead of `spring-loaded`. In order to enable `spring-boot-devtools`, it is first declared as a `runtime` dependency in [build-ext.gradle](build-ext.gradle).  Then `spring-loaded` is disabled by the `grails.agent.enabled=false` property in [application-development.yml](grails-app/conf/application-development.yml). Finally, to enable hot reloading of XML Catalog Files, explicitly add the Pull Reports JAR to the spring-boot-devtools `restart` classloader via [spring-devtools.properties](src/main/resources/META-INF/spring-devtools.properties).
 
 ## grails-app/conf/spring/resources.groovy
 
-The [resources.groovy](grails/grails-app/conf/spring/resources.groovy) file contains three Spring beans necessary for Pull Reports installation.
+The [resources.groovy](grails-app/conf/spring/resources.groovy) file contains three Spring beans necessary for Pull Reports installation.
 
 ### tomcatEmbeddedServletContainerFactory
 
-This bean overrides the default `TomcatEmbeddedServletContainerFactory` used by Grails for development deployment with the [JndiTomcatEmbeddedServletContainerFactory] (grails/src/main/java/com/pullreports/qs/grails/JndiTomcatEmbeddedServletContainerFactory.java) class.  `JndiTomcatEmbeddedServletContainerFactory` instantiates a JNDI `javax.sql.DataSource` at `java:comp/env/jdbc/petstore-datasource`. This `DataSource` is referenced within [pullreports.properties](grails/src/main/resources/pullreports.properties) as the default `DataSource` for Pull Reports.
+This bean overrides the default `TomcatEmbeddedServletContainerFactory` used by Grails for development deployment with the [JndiTomcatEmbeddedServletContainerFactory] (src/main/java/com/pullreports/qs/grails/JndiTomcatEmbeddedServletContainerFactory.java) class.  `JndiTomcatEmbeddedServletContainerFactory` instantiates a JNDI `javax.sql.DataSource` at `java:comp/env/jdbc/petstore-datasource`. This `DataSource` is referenced within [pullreports.properties](src/main/resources/pullreports.properties) as the default `DataSource` for Pull Reports.
 
 ### `pullreportsListener` and `pullreportsListener`
 
@@ -44,7 +44,7 @@ These two Spring beans register the Pull Reports `ServletContextListener` and `S
 
 ## grails-app/views/ad-hoc-creator.gsp
 
-The GSP file where the [Pull Reports Ad Hoc Creator](https://www.pullreports.com/docs/latest/creator.html) is installed. See [UrlMappings.groovy](grails/grails-app/controllers/grails/UrlMappings.groovy) for the mapping between the `/adHocCreator` URL and [`ad-hoc-creator.gsp`](grails/grails-app/views/ad-hoc-creator.gsp). 
+The GSP file where the [Pull Reports Ad Hoc Creator](https://www.pullreports.com/docs/latest/creator.html) is installed. See [UrlMappings.groovy](grails-app/controllers/grails/UrlMappings.groovy) for the mapping between the `/adHocCreator` URL and [`ad-hoc-creator.gsp`](grails-app/views/ad-hoc-creator.gsp). 
 
 # Adding a report configuration against your own database
 
@@ -54,7 +54,7 @@ Follow these steps to use the `pullreports-quick-start` grails application to de
 
 If your database is not an H2 database, you must add an appropriate database JDBC driver to the `compile` Gradle configuration in order for the embedded container to provide a JNDI datasource to Pull Reports.
 
-For example, to use a PostgreSQL database, add the PostgreSQL driver `compile` dependency within `grails/build-ext.gradle`:
+For example, to use a PostgreSQL database, add the PostgreSQL driver `compile` dependency within `build-ext.gradle`:
 
     dependencies {
         ... 
@@ -64,7 +64,7 @@ For example, to use a PostgreSQL database, add the PostgreSQL driver `compile` d
     
 ## 2) Establish the JNDI DataSource in JndiTomcatEmbeddedServletContainerFactory.java
 
-Add a second `ContextResource` within the [JndiTomcatEmbeddedServletContainerFactory.java](grails/src/main/java/com/pullreports/qs/grails/JndiTomcatEmbeddedServletContainerFactory.java) `TomcatEmbeddedServletContainer` bean appropriate for your database. 
+Add a second `ContextResource` within the [JndiTomcatEmbeddedServletContainerFactory.java](src/main/java/com/pullreports/qs/grails/JndiTomcatEmbeddedServletContainerFactory.java) `TomcatEmbeddedServletContainer` bean appropriate for your database. 
 
 For example, to create a connection pool to a PostgreSQL database, add this code to the `JndiTomcatEmbeddedServletContainerFactory` bean:
 
@@ -96,7 +96,7 @@ public class JndiTomcatEmbeddedServletContainerFactory extends TomcatEmbeddedSer
     
 ## 3) Add your own XML Catalog File
 
-Add a new XML Catalog File (e.g. `my-catalog-file.xml`) to `grails/src/main/resources` and reference it within `grails/src/main/resources/pullreports.properties` like so:
+Add a new XML Catalog File (e.g. `my-catalog-file.xml`) to `src/main/resources` and reference it within `src/main/resources/pullreports.properties` like so:
 
     catalogs=classpath:reports/petstore.xml classpath:my-catalog-file.xml
 
@@ -119,9 +119,9 @@ Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullre
 
 ## 4) Link your JNDI datasource to your new Report
 
-The current [pullreports.properties](grails/src/main/resources/pullreports.properties) file defines a default JNDI DataSource to be used by all Pull Reports via the `jndiDataSource` property. Unfortunately, this JNDI DataSource connects to the embedded H2 database configured within the `database` sub-project. This H2 database will not have the database table and column information you configured within the `my-catalog-file.xml` file in the previous step.
+The current [pullreports.properties](src/main/resources/pullreports.properties) file defines a default JNDI DataSource to be used by all Pull Reports via the `jndiDataSource` property. Unfortunately, this JNDI DataSource connects to the embedded H2 database configured within the `database` sub-project. This H2 database will not have the database table and column information you configured within the `my-catalog-file.xml` file in the previous step.
 
-In order to associate the new JNDI DataSource from step 2 with your new report(s), add an additional `jndiDataSource` property to [pullreports.properties](grails/src/main/resources/pullreports.properties) suffixed with your new `<catalog>` `id`. For example, if your new XML Catalog File defines `<catalog id="my-catalog">` as the root element, add this property to `pullreports.properties`:
+In order to associate the new JNDI DataSource from step 2 with your new report(s), add an additional `jndiDataSource` property to [pullreports.properties](src/main/resources/pullreports.properties) suffixed with your new `<catalog>` `id`. For example, if your new XML Catalog File defines `<catalog id="my-catalog">` as the root element, add this property to `pullreports.properties`:
 
     jndiDataSource.my-catalog=java:comp/env/jdbc/my-datasource
 
