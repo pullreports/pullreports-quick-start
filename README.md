@@ -97,6 +97,6 @@ sourceSets {
 
 See the following Guides for more information about how each application works and extending the application for your needs:
 
-* [JEE](jee/README.md)
-* [Grails](GRAILS.md)
-* [Spring Boot](SB.md)
+* [JEE](jee)
+* [Grails](grails)
+* [Spring Boot](spring-boot)

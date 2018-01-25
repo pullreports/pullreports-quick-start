@@ -2,7 +2,7 @@
 
 This page contains information about the [`grails`](/grails) sub-project. This sub-project demonstrates how to embed Pull Reports into a [Grails](https://grails.org) application. In addition to this example application, the Pull Reports [installation](https://www.pullreports.com/docs/latest/installation.html) documentation contains detailed instructions on how to install Pull Reports into any Grails application. 
 
-See [README](README.md) for information on installing Pull Reports and starting the `grails` application.
+See [README](../README.md) for information on installing Pull Reports and starting the `grails` application.
 
 **Contents**
 * [Key files](GRAILS.md#key-files)

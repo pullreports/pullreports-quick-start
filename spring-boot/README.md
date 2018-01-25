@@ -2,7 +2,7 @@
 
 This page contains information about the [`spring-boot`](/spring-boot) sub-project. This sub-project demonstrates how to embed Pull Reports into a [Spring Boot](https://projects.spring.io/spring-boot/) application. In addition to this example application, the Pull Reports [installation](https://www.pullreports.com/docs/latest/installation.html) documentation contains detailed instructions on how to install Pull Reports into any Spring Boot application. 
 
-See [README](README.md) for information on installing Pull Reports and starting the `spring-boot` application.
+See [README](../README.md) for information on installing Pull Reports and starting the `spring-boot` application.
 
 **Contents**
 * [Key files](SB.md#key-files)
