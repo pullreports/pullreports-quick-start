@@ -53,55 +53,52 @@ For example, to use a PostgreSQL database, add the PostgreSQL driver `runtime` d
         ...
     }
     
-## 2) Establish the JNDI DataSource in Application.java
+## 2) Establish the JNDI DataSource in JndiTomcatEmbeddedServletContainerFactory
 
-Add a second `ContextResource` within the [Application.java](spring-boot/src/main/java/com/pullreports/qs/springboot/Application.java) `EmbeddedServletContainerFactory` bean appropriate for your database. To follow the same configuration pattern used for the existing H2 JNDI DataSource, add java bean setters and corresponding properties with `application.properties` for your new database connection.
+Add a second `ContextResource` within [JndiTomcatEmbeddedServletContainerFactory.java](spring-boot/src/main/java/com/pullreports/qs/springboot/JndiTomcatEmbeddedServletContainerFactor.java) component appropriate for your database. To follow the same configuration pattern used for the existing H2 JNDI DataSource, add java bean setters and corresponding properties with `application.properties` for your new database connection.
 
-For example, to create a connection pool to a PostgreSQL database, add this code to the `EmbeddedServletContainerFactory` bean in `Application.java`:
+For example, to create a connection pool to a PostgreSQL database, add this code to `JndiTomcatEmbeddedServletContainerFactory`:
 
 ```java
-@Bean
-@ConfigurationProperties(prefix="datasource")
-public EmbeddedServletContainerFactory servletContainer() {
-    return new TomcatEmbeddedServletContainerFactory() {
+...
+public class JndiTomcatEmbeddedServletContainerFactory extends TomcatEmbeddedServletContainerFactory{
         
-        ...
-        private String postgresqlUrl;
-        private String postgresqlPassword;
-        private String postgresqlUsername;
-        
-        ...
-        public void setPostgresqlPassword(String password){
-            this.postgresqlPassword = password;
-        }
+    ...
+    private String postgresqlUrl;
+    private String postgresqlPassword;
+    private String postgresqlUsername;
+    
+    ...
+    public void setPostgresqlPassword(String password){
+        this.postgresqlPassword = password;
+    }
 
-        public void setPostgresqlUrl(String url){
-            this.postgresqlUrl = url;
-        }
+    public void setPostgresqlUrl(String url){
+        this.postgresqlUrl = url;
+    }
 
-        public void setPostgresqlUsername(String username){
-            this.postgresqlUsername = username;
-        }
+    public void setPostgresqlUsername(String username){
+        this.postgresqlUsername = username;
+    }
 
+    ...
+    @Override
+    protected void postProcessContext(Context context) {
         ...
-        @Override
-        protected void postProcessContext(Context context) {
-            ...
-            context.getNamingResources().addResource(createPostgresqlContextResource());
-        }
+        context.getNamingResources().addResource(createPostgresqlContextResource());
+    }
 
-        ...
-        private ContextResource createPostgresqlContextResource() {
-            ContextResource resource = new ContextResource();
-            resource.setName("jdbc/my-datasource");
-            resource.setType(DataSource.class.getName());
-            resource.setProperty("driverClassName", "org.postgresql.Driver");
-            resource.setProperty("url",postgresqlUrl);
-            resource.setProperty("username", postgresqlUsername);
-            resource.setProperty("password", postgresqlPassword);
-            return resource;
-        }
-    };
+    ...
+    private ContextResource createPostgresqlContextResource() {
+        ContextResource resource = new ContextResource();
+        resource.setName("jdbc/my-datasource");
+        resource.setType(DataSource.class.getName());
+        resource.setProperty("driverClassName", "org.postgresql.Driver");
+        resource.setProperty("url",postgresqlUrl);
+        resource.setProperty("username", postgresqlUsername);
+        resource.setProperty("password", postgresqlPassword);
+        return resource;
+    }
 }
 ```
     
