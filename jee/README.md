@@ -5,8 +5,8 @@ This page contains information about the [`jee`](/jee) sub-project. This sub-pro
 See [README](../README.md) for information on installing Pull Reports and starting the `jee` application.
 
 **Contents**
-* [Key files](JEE.md#key-files)
-* [Adding a report configuration against your own database](JEE.md#adding-a-report-configuration-against-your-own-database)
+* [Key files](#key-files)
+* [Adding a report configuration against your own database](#adding-a-report-configuration-against-your-own-database)
 
 # Key files
 

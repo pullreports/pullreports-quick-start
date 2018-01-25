@@ -5,8 +5,8 @@ This page contains information about the [`grails`](/grails) sub-project. This s
 See [README](../README.md) for information on installing Pull Reports and starting the `grails` application.
 
 **Contents**
-* [Key files](GRAILS.md#key-files)
-* [Adding a report configuration against your own database](GRAILS.md#adding-a-report-configuration-against-your-own-database)
+* [Key files](#key-files)
+* [Adding a report configuration against your own database](#adding-a-report-configuration-against-your-own-database)
 
 # Key files
 
