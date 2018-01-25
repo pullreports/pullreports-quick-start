@@ -24,11 +24,8 @@ Because Pull Reports caches the XML Catalog File configuration in the JVM memory
 
 ## src/main/java/com/pullreports/qs/springboot/Application.java
 
-The [Application class](spring-boot/src/main/java/com/pullreports/qs/springboot/Application.java) contains the following important configuration:
-
-### `@ServletComponentScan(basePackages="com.pullreports")`
-
-The `ServletComponentScan` annotation tells Spring Boot to scan the `com.pullreports` package and automatically register the Pull Reports `ServletContextListener` and `Servlet` on Servlet Container start up.
+The [Application class](spring-boot/src/main/java/com/pullreports/qs/springboot/Application.java) contains the
+`@ServletComponentScan(basePackages="com.pullreports")` annotation which tells Spring Boot to scan the `com.pullreports` package and automatically register the Pull Reports `ServletContextListener` and `Servlet` on Servlet Container start up.
 
 ## src/main/java/com/pullreports/qs/JndiTomcatEmbeddedServletContainerFactory
 
