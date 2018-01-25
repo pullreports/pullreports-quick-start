@@ -55,7 +55,7 @@ For example, to use a PostgreSQL database, add the PostgreSQL driver `runtime` d
     
 ## 2) Establish the JNDI DataSource in JndiTomcatEmbeddedServletContainerFactory
 
-Add a second `ContextResource` within [JndiTomcatEmbeddedServletContainerFactory.java] (src/main/java/com/pullreports/qs/springboot/JndiTomcatEmbeddedServletContainerFactory.java) component appropriate for your database. To follow the same configuration pattern used for the existing H2 JNDI DataSource, add java bean setters and corresponding properties with `application.properties` for your new database connection. 
+Add a second `ContextResource` within [JndiTomcatEmbeddedServletContainerFactory.java](src/main/java/com/pullreports/qs/springboot/JndiTomcatEmbeddedServletContainerFactory.java) component appropriate for your database. To follow the same configuration pattern used for the existing H2 JNDI DataSource, add java bean setters and corresponding properties with `application.properties` for your new database connection. 
 
 For example, to create a connection pool to a PostgreSQL database, add this code to `JndiTomcatEmbeddedServletContainerFactory`:
 
