@@ -27,6 +27,10 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+configurations {
+    all*.exclude group:'org.hibernate', module:'hibernate-validator'
+}
+
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
     compile "org.springframework.boot:spring-boot-devtools:$springBootVersion"
