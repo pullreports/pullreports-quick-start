@@ -106,7 +106,7 @@ Here is a simple Pull Reports XML Catalog File which reports one column from one
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<catalog xmlns="http://www.pullreports.com/catalog-1.3.0" id="my-catalog" name="My First Catalog">
+<catalog xmlns="http://www.pullreports.com/catalog-1.4.0" id="my-catalog" name="My First Catalog">
     <report id="my-first-report" name="My First Report">
         <table id="table1" displayName="Table 1" name="schema_name.table_name">
             <column id="column1" name="column_name" displayName="Column 1" paramType="java.lang.String"/>
