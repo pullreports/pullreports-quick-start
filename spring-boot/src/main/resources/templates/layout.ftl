@@ -26,7 +26,7 @@
             <li class="${(activePage == 'Home')?then('active','')}">
                 <a href="${springMacroRequestContext.contextPath}/">Home</a></li>
             <li class="${(activePage == 'Creator')?then('active','')}">
-                <a href="${springMacroRequestContext.contextPath}/adHocCreator">Ad Hoc Reports</a></li>
+                <a href="${springMacroRequestContext.contextPath}/d/adHocCreator">Ad Hoc Reports</a></li>
           </ul>
         </div>
       </div>

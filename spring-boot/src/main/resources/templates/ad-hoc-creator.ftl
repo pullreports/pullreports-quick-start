@@ -7,7 +7,8 @@
         <script src="${springMacroRequestContext.contextPath}/assets/pullreports.min.js"></script>
         <script>
             require(['pr-require-config'],function(){
-                require(['angular','pr-main','leaflet'], function(angular,prMain,L) {
+                require(['angular','pr-main','leaflet',
+                    'https://unpkg.com/esri-leaflet@2.1.4/dist/esri-leaflet-debug.js'], function(angular,prMain,L,esri) {
 
                         var baseLayers = [];
                         baseLayers['ESRI World Topo'] = 
@@ -20,6 +21,8 @@
                             attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
                             ,maxZoom: 18
                         });
+
+                        baseLayers['ESRI Streets'] = esri.basemapLayer('Streets');
             
                         angular.element(document).ready(function() {
                             prMain.init({
@@ -38,8 +41,7 @@
                             L.control.layers(baseLayers, {'Student residences':geojsonLayer}).addTo(map);
                         }
 
-                    }
-                );
+                });
             });
         </script>
     </@layout.head>

@@ -12,7 +12,7 @@
         successfully installed the <a href='https://www.pullreports.com'>Pull Reports</a>
         quick start application.
         </p>
-        <p>Navigate to the <a href='${springMacroRequestContext.contextPath}/adHocCreator'>Ad Hoc Creator</a> page to see an example installation
+        <p>Navigate to the <a href='${springMacroRequestContext.contextPath}/d/adHocCreator'>Ad Hoc Creator</a> page to see an example installation
         of the <a href='https://www.pullreports.com/docs/latest/creator.html'>Pull Reports ad hoc report creator</a>.
         </p>
         <h2>Credit</h2>
