@@ -39,7 +39,7 @@ public class JndiTomcatEmbeddedServletContainerFactory extends TomcatEmbeddedSer
     @Override
     protected void postProcessContext(Context context) {
         context.getNamingResources().addResource(createH2ContextResource());
-        context.addWelcomeFile("/index.html");
+        context.addWelcomeFile("d/");
 
     }
 
