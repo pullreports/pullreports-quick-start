@@ -22,7 +22,7 @@ Start by cloning this git repository.
 
 Email sales@pullreports.com to obtain a copy of the Pull Reports software and temporary license file.
 
-The [Pull Reports Installation](https://www.pullreports.com/docs/latest/installation.html) guide details the contents of the Pull Reports software. The JAR and POM files you'll need for the next step are located within the `dist` directory of the Pull Reports distribution zip file.
+The [Pull Reports Installation](https://www.pullreports.com/docs/latest/install-guide/) guide details the contents of the Pull Reports software. The JAR and POM files you'll need for the next step are located within the `dist` directory of the Pull Reports distribution zip file.
 
 ### 3) Install the Pull Reports JAR and POM into your local Maven repository.
 
@@ -73,7 +73,7 @@ Browse to http://localhost:8082 to see the application.
 
 ### 6) Making changes to the example reports
 
-Pull Reports are defined by XML files called Catalog Files because the root XML element is a `<catalog>` grouping one or more `<report>`s. A single XML Catalog File at [src/main/resources/reports/petstore.xml](src/main/resources/reports/petstore.xml) configures the Pull Reports for each example application. Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) chapter to learn about XML Catalog Files.
+Pull Reports are defined by XML files called Catalog Files because the root XML element is a `<catalog>` grouping one or more `<report>`s. A single XML Catalog File at [src/main/resources/reports/petstore.xml](src/main/resources/reports/petstore.xml) configures the Pull Reports for each example application. Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-config/) chapter to learn about XML Catalog Files.
 
 You may experiment with Pull Reports XML configuration by making changes to `petstore.xml`. Any changes will be hot deployed to the running application and visible after refreshing your browser. Note that some XML Catalog File changes may require you to clear your browser cache to see the change.
 
