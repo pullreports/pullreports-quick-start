@@ -1,6 +1,6 @@
 # Pull Reports JEE Application
 
-This page contains information about the `jee` sub-project. This sub-project demonstrates how to embed Pull Reports into a Servlet Container. In addition to this example application, the Pull Reports [installation](https://www.pullreports.com/docs/latest/installation.html) documentation contains detailed instructions on how to install Pull Reports into any JEE WAR file. 
+This page contains information about the `jee` sub-project. This sub-project demonstrates how to embed Pull Reports into a Servlet Container. In addition to this example application, the Pull Reports [installation](https://www.pullreports.com/docs/latest/install-guide/) documentation contains detailed instructions on how to install Pull Reports into any JEE WAR file. 
 
 See [README](../README.md) for information on installing Pull Reports and starting the `jee` application.
 
@@ -18,9 +18,9 @@ Key configuration elements within the [build.gradle](build.gradle) file are the 
 
 ## src/main/resources/pullreports.properties
 
-The [pullreports.properties](src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
+The [pullreports.properties](src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-config/) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
 
-Read about more Pull Reports configuration properties within the [Pull Reports administration](https://www.pullreports.com/docs/latest/administration.html) chapter.
+Read about more Pull Reports configuration properties within the [Pull Reports administration](https://www.pullreports.com/docs/latest/admin-guide/) chapter.
 
 ## src/main/webapp/META-INF/context.xml
 
@@ -30,11 +30,11 @@ The [context.xml](src/main/webapp/META-INF/context.xml) file is a Tomcat specifi
 
 These two XML files and directory within [WEB-INF](src/main/webapp/WEB-INF) demonstrate the use of [SiteMesh](http://wiki.sitemesh.org/wiki/display/sitemesh/Home) to decorate Pull Reports export results. Note that the JEE [web.xml](src/main/webapp/WEB-INF/web.xml) file contains additional SiteMesh configuration. 
 
-SiteMesh is an optional decoration configuration and only one method of customizing Pull Reports export results. Reference the Pull Reports documentation, [administration](https://www.pullreports.com/docs/latest/administration.html) chapter, to learn more about export decoration.
+SiteMesh is an optional decoration configuration and only one method of customizing Pull Reports export results. Reference the Pull Reports documentation, [administration](https://www.pullreports.com/docs/latest/admin-guide/) chapter, to learn more about export decoration.
 
 ## src/main/webapp/WEB-INF/content/ad-hoc-creator.jsp
 
-The JSP file where the [Pull Reports Ad Hoc Creator](https://www.pullreports.com/docs/latest/creator.html) is installed.
+The JSP file where the [Pull Reports Ad Hoc Creator](https://www.pullreports.com/docs/latest/creator/) is installed.
 
 # Adding a report configuration against your own database
 
@@ -87,7 +87,7 @@ Here is a simple Pull Reports XML Catalog File which reports one column from one
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<catalog xmlns="http://www.pullreports.com/catalog-1.4.0" id="my-catalog" name="My First Catalog">
+<catalog xmlns="http://www.pullreports.com/catalog-1.5.0" id="my-catalog" name="My First Catalog">
     <report id="my-first-report" name="My First Report">
         <table id="table1" displayName="Table 1" name="schema_name.table_name">
             <column id="column1" name="column_name" displayName="Column 1" paramType="java.lang.String"/>
@@ -96,7 +96,7 @@ Here is a simple Pull Reports XML Catalog File which reports one column from one
 </catalog>
 ```
 
-Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) chapter to learn how to enhance XML Catalog Files.
+Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-config/) chapter to learn how to enhance XML Catalog Files.
 
 ## 4) Link your JNDI datasource to your new Report
 
@@ -106,7 +106,7 @@ In order to associate the new JNDI DataSource from step 2 with your new report(s
 
     jndiDataSource.my-catalog=java:comp/env/jdbc/my-datasource
 
-Reference the Pull Reports documentation, [Administration](https://www.pullreports.com/docs/latest/administration.html) chapter to learn about additional configuration properties.
+Reference the Pull Reports documentation, [Administration](https://www.pullreports.com/docs/latest/admin-guide/) chapter to learn about additional configuration properties.
  
 ## 5) Start the application
 

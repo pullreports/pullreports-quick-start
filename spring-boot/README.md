@@ -1,6 +1,6 @@
 # Pull Reports Spring Boot Application
 
-This page contains information about the `spring-boot` sub-project. This sub-project demonstrates how to embed Pull Reports into a [Spring Boot](https://projects.spring.io/spring-boot/) application. In addition to this example application, the Pull Reports [installation](https://www.pullreports.com/docs/latest/installation.html) documentation contains detailed instructions on how to install Pull Reports into any Spring Boot application. 
+This page contains information about the `spring-boot` sub-project. This sub-project demonstrates how to embed Pull Reports into a [Spring Boot](https://projects.spring.io/spring-boot/) application. In addition to this example application, the Pull Reports [installation](https://www.pullreports.com/docs/latest/install-guide/) documentation contains detailed instructions on how to install Pull Reports into any Spring Boot application. 
 
 See [README](../README.md) for information on installing Pull Reports and starting the `spring-boot` application.
 
@@ -14,9 +14,9 @@ The following files within the `spring-boot` project contain important configura
 
 ## src/main/resources/pullreports.properties
 
-The [pullreports.properties](src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
+The [pullreports.properties](src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-config/) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
 
-Read about more Pull Reports configuration properties within the [Pull Reports administration](https://www.pullreports.com/docs/latest/administration.html) chapter.
+Read about more Pull Reports configuration properties within the [Pull Reports administration](https://www.pullreports.com/docs/latest/admin-guide/) chapter.
 
 ## src/main/resources/META-INF/spring-devtools.properties
 
@@ -35,7 +35,7 @@ The `DataSource` connection pool properties are passed to `JndiTomcatEmbeddedSer
 
 ## src/main/resources/templates/ad-hoc-creator.ftl
 
-The JSP file where the [Pull Reports Ad Hoc Creator](https://www.pullreports.com/docs/latest/creator.html) is installed. See [AppController.java](src/main/java/com/pullreports/qs/springboot/AppController.java) for the mapping between the `/adHocCreator` URL and `ad-hoc-creator.ftl`. 
+The JSP file where the [Pull Reports Ad Hoc Creator](https://www.pullreports.com/docs/latest/creator/) is installed. See [AppController.java](src/main/java/com/pullreports/qs/springboot/AppController.java) for the mapping between the `/adHocCreator` URL and `ad-hoc-creator.ftl`. 
 
 # Adding a report configuration against your own database
 
@@ -122,7 +122,7 @@ Here is a simple Pull Reports XML Catalog File which reports one column from one
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<catalog xmlns="http://www.pullreports.com/catalog-1.4.0" id="my-catalog" name="My First Catalog">
+<catalog xmlns="http://www.pullreports.com/catalog-1.5.0" id="my-catalog" name="My First Catalog">
     <report id="my-first-report" name="My First Report">
         <table id="table1" displayName="Table 1" name="schema_name.table_name">
             <column id="column1" name="column_name" displayName="Column 1" paramType="java.lang.String"/>
@@ -131,7 +131,7 @@ Here is a simple Pull Reports XML Catalog File which reports one column from one
 </catalog>
 ```
 
-Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-files.html) chapter to learn how to enhance XML Catalog Files.
+Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-config/) chapter to learn how to enhance XML Catalog Files.
 
 ## 4) Link your JNDI datasource to your new Report
 
@@ -141,7 +141,7 @@ In order to associate the new JNDI DataSource from step 2 with your new report(s
 
     jndiDataSource.my-catalog=java:comp/env/jdbc/my-datasource
 
-Reference the Pull Reports documentation, [Administration](https://www.pullreports.com/docs/latest/administration.html) chapter to learn about additional configuration properties.
+Reference the Pull Reports documentation, [Administration](https://www.pullreports.com/docs/latest/admin-guide/) chapter to learn about additional configuration properties.
  
 ## 5) Start the application
 

@@ -13,7 +13,7 @@
         quick start application.
         </p>
         <p>Navigate to the <a href='${springMacroRequestContext.contextPath}/d/adHocCreator'>Ad Hoc Creator</a> page to see an example installation
-        of the <a href='https://www.pullreports.com/docs/latest/creator.html'>Pull Reports ad hoc report creator</a>.
+        of the <a href='https://www.pullreports.com/docs/latest/creator/'>Pull Reports ad hoc report creator</a>.
         </p>
         <h2>Credit</h2>
         <p>Thank you to <a href='https://github.com/agoncal/agoncal-application-petstore-ee6'>agoncal-application-petstore-ee6</a>
