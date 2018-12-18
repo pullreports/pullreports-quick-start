@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<catalog xmlns="http://www.pullreports.com/catalog-1.5.0" id="petstore" name="Products">
+<catalog xmlns="http://www.pullreports.com/catalog-1.5.0" id="petstore" name="Products"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.pullreports.com/catalog-1.5.0
+    https://www.pullreports.com/docs/xsd/pullreports-catalog-1.5.0.xsd">
     <report id="items" name="Item Report">
         <description><![CDATA[
         <p>Report of the items for sale in Duke's Pet Store.</p>
@@ -65,7 +68,7 @@
                     </relationship>
                 </table>
             </relationship>
-            <relationship join="left" cardinality="one">
+            <relationship cardinality="one">
                 <join_column columnName="manufacturer_fk" referencedColumnName="id" />
                 <table id="manufacturer" displayName="Manufacturer" name="pet_store.manufacturer">
                     <column id="id" name="id" displayName="Manufacturer ID" paramType="java.lang.Long" export="false"/>
