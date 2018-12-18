@@ -21,7 +21,13 @@ jar {
 
 repositories {
     mavenCentral()
-    mavenLocal()
+    maven {
+        url 's3://repo.pullreports.com/maven2'
+        credentials(AwsCredentials) {
+            accessKey project.getProperty('accessKey')
+            secretKey project.getProperty('secretKey')
+        }
+    }
 }
 
 sourceCompatibility = 1.8

@@ -8,6 +8,16 @@ sourceSets {
     }
 }
 
+repositories {
+    maven {
+        url "s3://repo.pullreports.com/maven2"
+        credentials(AwsCredentials) {
+            accessKey project.getProperty('accessKey')
+            secretKey project.getProperty('secretKey')
+        }
+    }
+}
+
 dependencies {
     runtime 'org.springframework.boot:spring-boot-devtools'
     runtime 'com.pullreports:pullreports:+'

@@ -13,11 +13,17 @@ plugins {
     id 'project-report'
     id 'org.gretty' version '2.2.0'
 }
-  
+
 repositories {
     jcenter()
-    mavenLocal()
     mavenCentral()
+    maven {
+        url "s3://repo.pullreports.com/maven2"
+        credentials(AwsCredentials) {
+            accessKey project.getProperty('accessKey')
+            secretKey project.getProperty('secretKey')
+        }
+    }
 }
 
 dependencies {
