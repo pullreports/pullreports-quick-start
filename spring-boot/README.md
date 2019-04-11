@@ -35,7 +35,7 @@ The `DataSource` connection pool properties are passed to `JndiTomcatEmbeddedSer
 
 ## src/main/resources/templates/ad-hoc-creator.ftl
 
-The JSP file where the [Pull Reports Ad Hoc Creator](https://www.pullreports.com/docs/latest/creator/) is installed. See [AppController.java](src/main/java/com/pullreports/qs/springboot/AppController.java) for the mapping between the `/adHocCreator` URL and `ad-hoc-creator.ftl`. 
+The FrameMaker file where the [Pull Reports Ad Hoc Creator](https://www.pullreports.com/docs/latest/creator/) is installed. See [AppController.java](src/main/java/com/pullreports/qs/springboot/AppController.java) for the mapping between the `/adHocCreator` URL and `ad-hoc-creator.ftl`. 
 
 # Adding a report configuration against your own database
 
@@ -122,7 +122,7 @@ Here is a simple Pull Reports XML Catalog File which reports one column from one
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<catalog xmlns="http://www.pullreports.com/catalog-1.5.0" id="my-catalog" name="My First Catalog">
+<catalog xmlns="http://www.pullreports.com/catalog-1.6.0" id="my-catalog" name="My First Catalog">
     <report id="my-first-report" name="My First Report">
         <table id="table1" displayName="Table 1" name="schema_name.table_name">
             <column id="column1" name="column_name" displayName="Column 1" paramType="java.lang.String"/>
@@ -147,4 +147,4 @@ Reference the Pull Reports documentation, [Administration](https://www.pullrepor
 
 Start the application by running `gradlew :spring-boot:bootRun` from the root of the quick start project. Your new report is now available in the Switch Report menu of the Pull Reports Ad Hoc Creator. You may access the new report directly at:
 
-http://localhost:8082/adHocCreator?catalogId=my-catalog&reportId=my-first-report
+http://localhost:8082/d/adHocCreator?catalogId=my-catalog&reportId=my-first-report
