@@ -11,6 +11,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"></link>
 	<link rel="stylesheet" href="/assets/pullreports.min.css">
 	<script src="/assets/pullreports.min.js"></script>
+    <link href='/navbar.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
     <div class='container-fluid'>

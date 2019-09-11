@@ -8,6 +8,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"></link>
     <link rel="stylesheet" href="${request.contextPath}/static/assets/pullreports.min.css">
     <script src="${request.contextPath}/static/assets/pullreports.min.js"></script>
+    <asset:stylesheet src="navbar.css"/>
 </head>
 <body>
     <div class='container-fluid'>
