@@ -2,16 +2,13 @@ buildscript {
     repositories {
         jcenter()
     }
-    dependencies {
-        classpath 'org.gretty:gretty:2.3.1'
-    }
 }
 
 plugins {
     id 'war'
     id 'eclipse'
     id 'project-report'
-    id 'org.gretty' version '2.2.0'
+    id 'org.gretty' version '2.3.1'
 }
 
 repositories {
