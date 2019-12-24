@@ -1,0 +1,20 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+plugins {
+    id 'java'
+    id 'eclipse'
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.seleniumhq.selenium:selenium-server:3.141.59'
+    compile 'junit:junit:4.12'
+}
