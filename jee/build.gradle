@@ -39,8 +39,6 @@ dependencies {
     // Ref: https://github.com/akhikhl/gretty/issues/234
     gretty 'org.apache.tomcat:tomcat-dbcp:8.0.23'
 
-    testCompile 'org.seleniumhq.selenium:selenium-server:3.141.59'
-    testCompile 'junit:junit:4.12'
     testCompile project(path:':common-test',configuration:'default')
 }
 
