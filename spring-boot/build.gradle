@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.9.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.11.RELEASE")
     }
 }
 
@@ -41,7 +41,7 @@ dependencies {
     compile 'com.h2database:h2:1.4.200'
     runtime "org.springframework.boot:spring-boot-starter-freemarker"
     runtime 'com.pullreports:pullreports:+'
-    runtime 'org.apache.tomcat:tomcat-dbcp:8.5.39'
+    runtime 'org.apache.tomcat:tomcat-dbcp:9.0.29'
     testCompile project(path:':common-test',configuration:'default')
 }
 
