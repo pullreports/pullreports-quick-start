@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix="datasource")
-public class JndiTomcatEmbeddedServletContainerFactory extends TomcatServletWebServerFactory {
+public class JndiTomcatServletWebServerFactory extends TomcatServletWebServerFactory {
 
     private String h2Url;
     private String h2Password;
