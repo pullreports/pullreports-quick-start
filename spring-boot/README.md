@@ -14,24 +14,24 @@ The following files within the `spring-boot` project contain important configura
 
 ## src/main/resources/pullreports.properties
 
-The [pullreports.properties](src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-config/) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
+The [pullreports.properties](src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/schema/intro.html/) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
 
 Read about more Pull Reports configuration properties within the [Pull Reports administration](https://www.pullreports.com/docs/latest/admin-guide/) chapter.
 
 ## src/main/resources/META-INF/spring-devtools.properties
 
-Because Pull Reports caches the XML Catalog File configuration in the JVM memory, changes to XML Catalog Files are not hot deployed to the running Spring Boot application during development. To enable hot reloading, explicitly add the Pull Reports JAR to the [spring-boot-devtools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html) `restart` classloader via [spring-devtools.properties](src/main/resources/META-INF/spring-devtools.properties).
+Because Pull Reports caches the XML Catalog File configuration in the JVM memory, changes to XML Catalog Files are not hot deployed to the running Spring Boot application during development. To enable hot reloading, explicitly add the Pull Reports JAR to the [spring-boot-devtools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-devtools) `restart` classloader via [spring-devtools.properties](src/main/resources/META-INF/spring-devtools.properties).
 
 ## src/main/java/com/pullreports/qs/springboot/Application.java
 
 The [Application class](src/main/java/com/pullreports/qs/springboot/Application.java) contains the
 `@ServletComponentScan(basePackages="com.pullreports")` annotation which tells Spring Boot to scan the `com.pullreports` package and automatically register the Pull Reports `ServletContextListener` and `Servlet` on Servlet Container start up.
 
-## src/main/java/com/pullreports/qs/springboot/JndiTomcatEmbeddedServletContainerFactory
+## src/main/java/com/pullreports/qs/springboot/JndiTomcatServletWebServerFactory
 
-The [JndiTomcatEmbeddedServletContainerFactory](src/main/java/com/pullreports/qs/springboot/JndiTomcatEmbeddedServletContainerFactory.java) class overrides the default `EmbeddedServletContainerFactory` Bean with a Tomcat container which instantiates a JNDI `javax.sql.DataSource` at `java:comp/env/jdbc/petstore-datasource`. This `DataSource` is referenced within [pullreports.properties](src/main/resources/pullreports.properties) as the default `DataSource` for Pull Reports.
+The [JndiTomcatServletWebServerFactory](src/main/java/com/pullreports/qs/springboot/JndiTomcatServletWebServerFactory.java) class overrides the default `ConfigurableServletWebServerFactory` Bean with a Tomcat container which instantiates a JNDI `javax.sql.DataSource` at `java:comp/env/jdbc/petstore-datasource`. This `DataSource` is referenced within [pullreports.properties](src/main/resources/pullreports.properties) as the default `DataSource` for Pull Reports.
  
-The `DataSource` connection pool properties are passed to `JndiTomcatEmbeddedServletContainerFactory` bean via the `@ConfigurationProperties(prefix="datasource")` annotation. See [application.properties](src/main/resources/application.properties) for their values.
+The `DataSource` connection pool properties are passed to `JndiTomcatServletWebServerFactory` bean via the `@ConfigurationProperties(prefix="datasource")` annotation. See [application.properties](src/main/resources/application.properties) for their values.
 
 ## src/main/resources/templates/ad-hoc-creator.ftl
 
@@ -49,20 +49,24 @@ For example, to use a PostgreSQL database, add the PostgreSQL driver `runtime` d
 
     dependencies {
         ... 
-        runtime 'org.postgresql:postgresql:42.2.0'
+        runtime 'org.postgresql:postgresql:42.2.9'
         ...
     }
     
-## 2) Establish the JNDI DataSource in JndiTomcatEmbeddedServletContainerFactory
+## 2) Establish the JNDI DataSource in JndiTomcatServletWebServerFactory
 
-Add a second `ContextResource` within [JndiTomcatEmbeddedServletContainerFactory.java](src/main/java/com/pullreports/qs/springboot/JndiTomcatEmbeddedServletContainerFactory.java) component appropriate for your database. To follow the same configuration pattern used for the existing H2 JNDI DataSource, add java bean setters and corresponding properties with `application.properties` for your new database connection. 
+Add a second `ContextResource` within [JndiTomcatServletWebServerFactory.java](src/main/java/com/pullreports/qs/springboot/JndiTomcatServletWebServerFactory.java) component appropriate for your database. To follow the same configuration pattern used for the existing H2 JNDI DataSource, add java bean setters and corresponding properties with `application.properties` for your new database connection. 
 
-For example, to create a connection pool to a PostgreSQL database, add this code to `JndiTomcatEmbeddedServletContainerFactory`:
+For example, to create a connection pool to a PostgreSQL database, add this code to `JndiTomcatServletWebServerFactory`:
 
 ```java
 ...
-public class JndiTomcatEmbeddedServletContainerFactory extends TomcatEmbeddedServletContainerFactory{
         
+public class JndiTomcatServletWebServerFactory extends TomcatServletWebServerFactory{
+    ...
+    private String postgresqlUrl;
+    ...
+    private String postgresqlUrl;
     ...
     private String postgresqlUrl;
     private String postgresqlPassword;
@@ -131,7 +135,7 @@ Here is a simple Pull Reports XML Catalog File which reports one column from one
 </catalog>
 ```
 
-Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-config/) chapter to learn how to enhance XML Catalog Files.
+Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/schema/) chapter to learn how to enhance XML Catalog Files.
 
 ## 4) Link your JNDI datasource to your new Report
 
@@ -148,3 +152,9 @@ Reference the Pull Reports documentation, [Administration](https://www.pullrepor
 Start the application by running `gradlew :spring-boot:bootRun` from the root of the quick start project. Your new report is now available in the Switch Report menu of the Pull Reports Ad Hoc Creator. You may access the new report directly at:
 
 http://localhost:8082/d/adHocCreator?catalogId=my-catalog&reportId=my-first-report
+
+# Testing
+
+This project contains a simple Selenium test, [SpringBootBasicBehaviorTest](src/test/java/com/pullreports/sb/SpringBootBasicBehaviorTest.java) to verify basic application capability.
+
+Before running the test, start the application with `gradlew :spring-boot:bootRun` and install the latest Selenium [ChromeDriver](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver) executable in your path. Then invoke `gradlew :spring-boot:test` to run the test.
