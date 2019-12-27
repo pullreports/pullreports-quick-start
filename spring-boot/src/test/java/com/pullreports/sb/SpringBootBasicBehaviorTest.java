@@ -1,7 +1,6 @@
 package com.pullreports.sb;
 
 import com.pullreports.commontest.AbstractBasicBehaviorTest;
-import org.junit.BeforeClass;
 
 public class SpringBootBasicBehaviorTest extends AbstractBasicBehaviorTest{
 
