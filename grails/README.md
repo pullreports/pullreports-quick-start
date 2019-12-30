@@ -18,7 +18,7 @@ The [build-ext.gradle](build-ext.gradle) file extends the Gradle build with conf
 
 ## src/main/resources/pullreports.properties
 
-The [pullreports.properties](src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-config/) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
+The [pullreports.properties](src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/schema/) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
 
 Additionally, Grails requires that the `static.resource.prefix=/static` property be set in order to correctly serve Pull Reports static resources in the `html` and `geojson` export formats.
 
@@ -28,7 +28,7 @@ Read about more Pull Reports configuration properties within the [Pull Reports a
 
 Grails uses [spring-loaded](https://github.com/spring-projects/spring-loaded) to hot deploy changes to class files during development. Because Pull Reports deployed within a Servlet Container caches Pull Reports XML Catalog File state in the JVM memory, changes to Catalog Files are not refreshed by `spring-loaded`.
 
-In order to hot reload changes to Pull Reports XML Catalog Files, the `grails` sub-project uses [spring-boot-devtools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html) for hot reloading instead of `spring-loaded`. In order to enable `spring-boot-devtools`, it is first declared as a `runtime` dependency in [build-ext.gradle](build-ext.gradle).  Then `spring-loaded` is disabled by the `grails.agent.enabled=false` property in [application-development.yml](grails-app/conf/application-development.yml). Finally, to enable hot reloading of XML Catalog Files, explicitly add the Pull Reports JAR to the spring-boot-devtools `restart` classloader via [spring-devtools.properties](src/main/resources/META-INF/spring-devtools.properties).
+In order to hot reload changes to Pull Reports XML Catalog Files, the `grails` sub-project uses [spring-boot-devtools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-devtools) for hot reloading instead of `spring-loaded`. In order to enable `spring-boot-devtools`, it is first declared as a `runtime` dependency in [build-ext.gradle](build-ext.gradle).  Then `spring-loaded` is disabled by the `grails.agent.enabled=false` property in [application-development.yml](grails-app/conf/application-development.yml). Finally, to enable hot reloading of XML Catalog Files, explicitly add the Pull Reports JAR to the spring-boot-devtools `restart` classloader via [spring-devtools.properties](src/main/resources/META-INF/spring-devtools.properties).
 
 ## grails-app/conf/spring/resources.groovy
 
@@ -58,7 +58,7 @@ For example, to use a PostgreSQL database, add the PostgreSQL driver `compile` d
 
     dependencies {
         ... 
-        compile 'org.postgresql:postgresql:42.2.0'
+        compile 'org.postgresql:postgresql:42.2.9'
         ...
     }
     
@@ -115,7 +115,7 @@ Here is a simple Pull Reports XML Catalog File which reports one column from one
 </catalog>
 ```
 
-Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-config/) chapter to learn how to enhance XML Catalog Files.
+Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/schema/) chapter to learn how to enhance XML Catalog Files.
 
 ## 4) Link your JNDI datasource to your new Report
 

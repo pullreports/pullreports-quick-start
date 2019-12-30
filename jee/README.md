@@ -18,7 +18,7 @@ Key configuration elements within the [build.gradle](build.gradle) file are the 
 
 ## src/main/resources/pullreports.properties
 
-The [pullreports.properties](src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-config/) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
+The [pullreports.properties](src/main/resources/pullreports.properties) file defines the location of the [Pull Reports XML Catalog Files](https://www.pullreports.com/docs/latest/schema/intro.html) containing the Pull Reports configuration plus the default JNDI `javax.sql.DataSource` to be used when exporting the reports. 
 
 Read about more Pull Reports configuration properties within the [Pull Reports administration](https://www.pullreports.com/docs/latest/admin-guide/) chapter.
 
@@ -50,7 +50,7 @@ For example, to use a PostgreSQL database, add the PostgreSQL driver in `build.g
 
     dependencies {
         ... 
-        gretty 'org.postgresql:postgresql:42.2.0'
+        gretty 'org.postgresql:postgresql:42.2.9'
         ...
     }
     
@@ -96,7 +96,7 @@ Here is a simple Pull Reports XML Catalog File which reports one column from one
 </catalog>
 ```
 
-Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-config/) chapter to learn how to enhance XML Catalog Files.
+Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/schema/) chapter to learn how to enhance XML Catalog Files.
 
 ## 4) Link your JNDI datasource to your new Report
 
@@ -113,3 +113,9 @@ Reference the Pull Reports documentation, [Administration](https://www.pullrepor
 Start the application by running `./gradlew :jee:appRun` from the root of the quick start project. Your new report is now available in the Switch Report menu of the Pull Reports Ad Hoc Creator. You may access the new report directly at:
 
 http://localhost:8080/adHocCreator?catalogId=my-catalog&reportId=my-first-report
+
+# Testing
+
+This project contains a simple Selenium test, [JeeBasicBehaviorTest](src/test/java/com/pullreports/jee/JeeBasicBehaviorTest.java) to verify basic application capability.
+
+Before running the test, start the application with `gradlew :jee:appRun` and install the latest Selenium [ChromeDriver](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver) executable in your path. Then invoke `gradlew :jee:test` to run the test.

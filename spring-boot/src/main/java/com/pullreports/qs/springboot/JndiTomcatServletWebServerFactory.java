@@ -5,14 +5,14 @@ import javax.sql.DataSource;
 import org.apache.catalina.Context;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.tomcat.util.descriptor.web.ContextResource;
-import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.embedded.tomcat.TomcatWebServer;
 import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix="datasource")
-public class JndiTomcatEmbeddedServletContainerFactory extends TomcatEmbeddedServletContainerFactory{
+public class JndiTomcatServletWebServerFactory extends TomcatServletWebServerFactory {
 
     private String h2Url;
     private String h2Password;
@@ -31,9 +31,9 @@ public class JndiTomcatEmbeddedServletContainerFactory extends TomcatEmbeddedSer
     }
 
     @Override
-    protected TomcatEmbeddedServletContainer getTomcatEmbeddedServletContainer(Tomcat tomcat) {
+    protected TomcatWebServer getTomcatWebServer(Tomcat tomcat) {
         tomcat.enableNaming();
-        return super.getTomcatEmbeddedServletContainer(tomcat);
+        return super.getTomcatWebServer(tomcat);
     }
 
     @Override

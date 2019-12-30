@@ -1,1 +1,1 @@
-include 'database','jee', 'grails','spring-boot'
+include 'database','jee', 'grails','spring-boot','common-test'
