@@ -155,6 +155,6 @@ http://localhost:8082/d/adHocCreator?catalogId=my-catalog&reportId=my-first-repo
 
 # Testing
 
-This project contains a simple Selenium test, [SpringBootBasicBehaviorTest](src/test/java/com/pullreports/sb/SpringBootBasicBehaviorTest.java) to verify basic application capability.
+This project contains a simple Selenium test, [SpringBootBasicBehaviorTest](src/test/java/com/pullreports/sb/SpringBootBasicBehaviorTest.java), to verify basic application capability.
 
 Before running the test, start the application with `gradlew :spring-boot:bootRun` and install the latest Selenium [ChromeDriver](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver) executable in your path. Then invoke `gradlew :spring-boot:test` to run the test.
