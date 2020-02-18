@@ -18,7 +18,7 @@ See the [Pull Reports Documentation and User Guide](https://www.pullreports.com/
 
 ### 1) Obtain credentials to the Pull Reports Maven repository
 
-Email sales@pullreports.com to obtain temporary credentials to the Pull Reports Maven repository so as to download the software and dependencies. A sales representative will send you an access key and secret to use in the step 3.
+Email sales@pullreports.com to obtain temporary credentials to the Pull Reports Maven repository so as to download the software and dependencies. A sales representative will send you an access key and secret to use in step 3.
 
 ### 2) Clone the pullreports-quick-start Git Repository
 
