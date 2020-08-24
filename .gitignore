@@ -8,3 +8,4 @@ pullreports.license
 .classpath
 .settings
 .idea
+*.iml
