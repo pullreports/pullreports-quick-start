@@ -20,16 +20,20 @@ repositories {
             accessKey project.getProperty('accessKey')
             secretKey project.getProperty('secretKey')
         }
+        content {
+            includeGroupByRegex "com\\.pullreports.*"
+        }
     }
 }
 
 dependencies {
-    runtime 'org.slf4j:slf4j-simple:1.7.29' // SLF4J implementation
-    runtime 'opensymphony:sitemesh:2.4.2' // Optional: demonstrates the use of SiteMesh and Pull Reports
-    runtime 'org.apache.taglibs:taglibs-standard-impl:1.2.5'
-    runtime "com.pullreports:pullreports:+"
+    runtimeOnly 'org.slf4j:slf4j-simple:1.7.30' // SLF4J implementation
+    runtimeOnly 'opensymphony:sitemesh:2.4.2' // Optional: demonstrates the use of SiteMesh and Pull Reports
+    runtimeOnly 'org.apache.taglibs:taglibs-standard-impl:1.2.5'
+    runtimeOnly 'com.pullreports:pullreports:+'
 
-	// Provided by Servlet Container
+	// Provided by Servlet Container. 'providedCompile' configuration
+    // from WAR plugin.
     providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
     providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.2.1'
 	
@@ -39,7 +43,7 @@ dependencies {
     // Ref: https://github.com/akhikhl/gretty/issues/234
     gretty 'org.apache.tomcat:tomcat-dbcp:8.0.23'
 
-    testCompile project(path:':common-test',configuration:'default')
+    testImplementation project(path:':common-test',configuration:'default')
 }
 
 sourceSets {
