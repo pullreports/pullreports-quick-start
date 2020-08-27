@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.11.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.16.RELEASE")
     }
 }
 
@@ -25,6 +25,9 @@ repositories {
             accessKey project.getProperty('accessKey')
             secretKey project.getProperty('secretKey')
         }
+    }
+    content {
+        includeGroupByRegex "com\\.pullreports.*"
     }
 }
 
