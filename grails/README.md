@@ -2,8 +2,6 @@
 
 This page contains information about the `grails` sub-project. This sub-project demonstrates how to embed Pull Reports into a [Grails](https://grails.org) application. In addition to this example application, the Pull Reports [installation](https://www.pullreports.com/docs/latest/install-guide/) documentation contains detailed instructions on how to install Pull Reports into any Grails application. 
 
-See [README](../README.md) for information on installing Pull Reports and starting the `grails` application.
-
 **Contents**
 * [Key files](#key-files)
 * [Adding a report configuration against your own database](#adding-a-report-configuration-against-your-own-database)
@@ -34,9 +32,9 @@ In order to hot reload changes to Pull Reports XML Catalog Files, the `grails` s
 
 The [resources.groovy](grails-app/conf/spring/resources.groovy) file contains three Spring beans necessary for Pull Reports installation.
 
-### tomcatEmbeddedServletContainerFactory
+### tomcatServletWebServerFactory
 
-This bean overrides the default `TomcatEmbeddedServletContainerFactory` used by Grails for development deployment with the [JndiTomcatEmbeddedServletContainerFactory] (src/main/java/com/pullreports/qs/grails/JndiTomcatEmbeddedServletContainerFactory.java) class.  `JndiTomcatEmbeddedServletContainerFactory` instantiates a JNDI `javax.sql.DataSource` at `java:comp/env/jdbc/petstore-datasource`. This `DataSource` is referenced within [pullreports.properties](src/main/resources/pullreports.properties) as the default `DataSource` for Pull Reports.
+This bean overrides the default `TomcatServletWebServerFactory` used by Grails for development deployment with the [JndiTomcatServletWebServerFactory] (src/main/java/com/pullreports/qs/grails/JndiTomcatServletWebServerFactory.java) class.  `JndiTomcatServletWebServerFactory` instantiates a JNDI `javax.sql.DataSource` at `java:comp/env/jdbc/petstore-datasource`. This `DataSource` is referenced within [pullreports.properties](src/main/resources/pullreports.properties) as the default `DataSource` for Pull Reports.
 
 ### `pullreportsListener` and `pullreportsListener`
 
@@ -62,15 +60,15 @@ For example, to use a PostgreSQL database, add the PostgreSQL driver `compile` d
         ...
     }
     
-## 2) Establish the JNDI DataSource in JndiTomcatEmbeddedServletContainerFactory.java
+## 2) Establish the JNDI DataSource in JndiTomcatServletWebServerFactory.java
 
-Add a second `ContextResource` within the [JndiTomcatEmbeddedServletContainerFactory.java](src/main/java/com/pullreports/qs/grails/JndiTomcatEmbeddedServletContainerFactory.java) `TomcatEmbeddedServletContainer` bean appropriate for your database. 
+Add a second `ContextResource` within the [JndiTomcatServletWebServerFactory.java](src/main/java/com/pullreports/qs/grails/JndiTomcatServletWebServerFactory.java) `TomcatServletWebServerFactory` bean appropriate for your database. 
 
-For example, to create a connection pool to a PostgreSQL database, add this code to the `JndiTomcatEmbeddedServletContainerFactory` bean:
+For example, to create a connection pool to a PostgreSQL database, add this code to the `JndiTomcatServletWebServerFactory` bean:
 
 ```java
 ...
-public class JndiTomcatEmbeddedServletContainerFactory extends TomcatEmbeddedServletContainerFactory{
+public class JndiTomcatServletWebServerFactory extends TomcatServletWebServerFactory {
 
     @Override
     protected void postProcessContext(Context context) {

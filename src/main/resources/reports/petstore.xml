@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<catalog xmlns="http://www.pullreports.com/catalog-1.6.0" id="petstore" name="Products"
+<catalog xmlns="http://www.pullreports.com/catalog-1.6.1" id="petstore" name="Products"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.pullreports.com/catalog-1.6.0
-    https://www.pullreports.com/docs/xsd/pullreports-catalog-1.6.0.xsd">
+    xsi:schemaLocation="http://www.pullreports.com/catalog-1.6.1
+    https://www.pullreports.com/docs/xsd/pullreports-catalog-1.6.1.xsd">
     <report id="items" name="Item Report">
         <description><![CDATA[
         <p>Report of the items for sale in Duke's Pet Store.</p>
         <p>This is a fictional, example report of 
         <a href='https://www.pullreports.com' target='_blank'>Pull Reports</a> capabilities.</p>]]></description>
         <export_config defaultColumns="id,name"/>
-        <table_ref id="item" ref="item"> 
+        <table_ref id="item" ref="item">
             <relationship join="inner" cardinality="one">
                 <join_column columnName="product_fk" referencedColumnName="id" />
                 <table id="product" displayName="Product Type" name="pet_store.product">
@@ -45,7 +45,8 @@
             </relationship>
             <relationship>
                 <join_column columnName="item_fk" referencedColumnName="id" />
-                <table id="order_line" displayName="Order Line" name="pet_store.order_line">
+                <table id="order_line" displayName="Order Line" name="pet_store.order_line" primaryKeyColumns="id">
+                    <column id="id" name="id" displayName="Order Line Id" paramType='java.lang.Long'/>
                     <column id="quantity" name="quantity" displayName="Quantity" paramType='java.lang.Integer'/>
                     <relationship>
                         <join_table name="pet_store.customer_order_order_line">
@@ -56,8 +57,9 @@
                                 <join_column columnName="order_fk" referencedColumnName="id" />
                             </inverse_join_columns>
                         </join_table>
-                        <table id="order" displayName="Online Order" name="pet_store.customer_order">
-                            <column id='date' name='order_date' displayName='Order Date' paramType='java.sql.Date'>  
+                        <table id="order" displayName="Online Order" name="pet_store.customer_order" primaryKeyColumns="id">
+                            <column id="id" name="id" displayName="Online Order Id" paramType='java.lang.Long'/>
+                            <column id='date' name='order_date' displayName='Order Date' paramType='java.sql.Date'>
                                 <output_transform>to_char(${this},'MM-DD-YYYY')</output_transform>
                             </column>
                             <relationship>
@@ -120,7 +122,7 @@
     <!-- 
     Global table: item
      -->
-    <table id="item" name="pet_store.item" displayName="Item"> 
+    <table id="item" name="pet_store.item" displayName="Item" primaryKeyColumns="id">
         <description>The items available for sale in Duke's Pet Store.</description>
         <column id="id" name="id" displayName="Item ID" paramType="java.lang.Long"/>
         <column id="name" name="name" displayName="Item Name">
@@ -141,7 +143,7 @@
     <!-- 
     Global table: warehouse
      -->
-    <table id="warehouse" displayName="Warehouse" name="pet_store.warehouse">
+    <table id="warehouse" displayName="Warehouse" name="pet_store.warehouse" primaryKeyColumns="name">
         <description>
         Pet Store inventory is located in 4 warehouses distributed across the
         United States. Warehouse inventory audits are performed on a semi-annual

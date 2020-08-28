@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    h2Driver 'com.h2database:h2:1.4.193'
+    h2Driver 'com.h2database:h2:1.4.200'
 }
 
 ext {

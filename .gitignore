@@ -7,3 +7,5 @@ pullreports.license
 .project
 .classpath
 .settings
+.idea
+*.iml

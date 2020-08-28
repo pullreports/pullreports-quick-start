@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.11.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.16.RELEASE")
     }
 }
 
@@ -25,6 +25,9 @@ repositories {
             accessKey project.getProperty('accessKey')
             secretKey project.getProperty('secretKey')
         }
+        content {
+            includeGroupByRegex "com\\.pullreports.*"
+        }
     }
 }
 
@@ -36,13 +39,13 @@ configurations {
 }
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter-web"
-    compile "org.springframework.boot:spring-boot-devtools"
-    compile 'com.h2database:h2:1.4.200'
-    runtime "org.springframework.boot:spring-boot-starter-freemarker"
-    runtime 'com.pullreports:pullreports:+'
-    runtime 'org.apache.tomcat:tomcat-dbcp:9.0.29'
-    testCompile project(path:':common-test',configuration:'default')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'com.h2database:h2:1.4.200'
+    implementation 'org.springframework.boot:spring-boot-starter-freemarker'
+    implementation 'com.pullreports:pullreports:+'
+    implementation 'org.apache.tomcat:tomcat-dbcp:9.0.29'
+    testImplementation project(path:':common-test',configuration:'default')
 }
 
 sourceSets {
