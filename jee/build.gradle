@@ -39,6 +39,7 @@ dependencies {
 	
 	// Driver for the H2 database. Must be on the Servlet Container classpath.
     gretty 'com.h2database:h2:1.4.200'
+    gretty 'commons-dbcp:commons-dbcp:1.4'
 
     testImplementation project(path:':common-test',configuration:'default')
 }

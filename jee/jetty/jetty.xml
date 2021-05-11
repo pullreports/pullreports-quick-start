@@ -18,9 +18,10 @@
         <Arg></Arg>
         <Arg>jdbc/petstore-datasource</Arg>
         <Arg>
-            <New class="org.h2.jdbcx.JdbcDataSource">
+            <New class="org.apache.commons.dbcp.BasicDataSource">
+                <Set name="driverClassName">org.h2.Driver</Set>
                 <Set name="url">jdbc:h2:tcp://localhost:9092/petstore</Set>
-                <Set name="user">sa</Set>
+                <Set name="username">sa</Set>
                 <Set name="password">secret</Set>
             </New>
         </Arg>
