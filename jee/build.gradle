@@ -8,7 +8,7 @@ plugins {
     id 'war'
     id 'eclipse'
     id 'project-report'
-    id 'org.gretty' version '2.3.1'
+    id 'org.gretty' version '3.0.4'
 }
 
 repositories {
@@ -37,11 +37,8 @@ dependencies {
     providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
     providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.2.1'
 	
-	// Driver for the H2 database. Must be on the Servlet Container classath.
+	// Driver for the H2 database. Must be on the Servlet Container classpath.
     gretty 'com.h2database:h2:1.4.200'
-	
-    // Ref: https://github.com/akhikhl/gretty/issues/234
-    gretty 'org.apache.tomcat:tomcat-dbcp:8.0.23'
 
     testImplementation project(path:':common-test',configuration:'default')
 }
@@ -57,8 +54,7 @@ sourceSets {
 }
 
 gretty {
-    servletContainer 'tomcat8'
-    enableNaming true
+    servletContainer 'jetty9.3'
     contextPath ''
 }
 
