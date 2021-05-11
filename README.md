@@ -38,19 +38,19 @@ In the following Gradle commands, `[accessKey]` and `[secretKey]` represent the 
 
 #### JEE
 
-From the root of the project, run `./gradlew -PaccessKey=[accessKey] -PsecretKey=[secretKey] :jee:appRun`. This command starts the JEE Pull Reports application via the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin.
+From the root of the project, run `./gradlew -PaccessKey=[accessKey] -PsecretKey=[secretKey] jee:appRun`. This command starts the JEE Pull Reports application via the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin.
 
 Browse to http://localhost:8080 to see the application.
 
 #### Grails
 
-From the root of the project, run `./gradlew -PaccessKey=[accessKey] -PsecretKey=[secretKey] :grails:bootRun`. This command starts the Grails Pull Reports application.
+From the root of the project, run `./gradlew -PaccessKey=[accessKey] -PsecretKey=[secretKey] grails:bootRun`. This command starts the Grails Pull Reports application.
 
 Browse to http://localhost:8081 to see the application.
 
 #### Spring Boot
 
-From the root of the project, run `./gradlew -PaccessKey=[accessKey] -PsecretKey=[secretKey] :spring-boot:bootRun`. This command starts the Spring Boot Pull Reports application.
+From the root of the project, run `./gradlew -PaccessKey=[accessKey] -PsecretKey=[secretKey] spring-boot:bootRun`. This command starts the Spring Boot Pull Reports application.
 
 Browse to http://localhost:8082 to see the application.
 
