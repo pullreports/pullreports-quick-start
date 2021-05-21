@@ -3,7 +3,7 @@
 This repository contains three example [Pull Reports](https://www.pullreports.com) ad hoc reporting and web services applications. Each example uses [Gradle](https://gradle.org) to embed Pull Reports into a different web application framework:
 
 1. JEE: The [`jee`](/jee) sub-project embeds Pull Reports into a JEE servlet container using only the JEE Servlet API.
-1. Grails: The [`grails`](/grails) sub-project embeds Pull Reports into a [Grails 3](https://grails.org) application.
+1. Grails: The [`grails`](/grails) sub-project embeds Pull Reports into a [Grails 4](https://grails.org) application.
 1. Spring Boot: The [`spring-boot`](/spring-boot) sub-project embeds Pull Reports into a [Spring Boot](https://projects.spring.io/spring-boot/) application. 
 
 The `database` sub-project contains tasks and configuration to start a local, [H2](http://www.h2database.com) database to support all three application sub-projects.
