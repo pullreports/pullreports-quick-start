@@ -33,9 +33,9 @@ The [JndiTomcatServletWebServerFactory](src/main/java/com/pullreports/qs/springb
  
 The `DataSource` connection pool properties are passed to `JndiTomcatServletWebServerFactory` bean via the `@ConfigurationProperties(prefix="datasource")` annotation. See [application.properties](src/main/resources/application.properties) for their values.
 
-## src/main/resources/templates/ad-hoc-creator.ftl
+## src/main/resources/templates/ad-hoc-creator.ftlh
 
-The FrameMaker file where the [Pull Reports Ad Hoc Creator](https://www.pullreports.com/docs/latest/creator/) is installed. See [AppController.java](src/main/java/com/pullreports/qs/springboot/AppController.java) for the mapping between the `/adHocCreator` URL and `ad-hoc-creator.ftl`. 
+The FrameMaker file where the [Pull Reports Ad Hoc Creator](https://www.pullreports.com/docs/latest/creator/) is installed. See [AppController.java](src/main/java/com/pullreports/qs/springboot/AppController.java) for the mapping between the `/adHocCreator` URL and `ad-hoc-creator.ftlh`. 
 
 # Adding a report configuration against your own database
 

@@ -48,9 +48,9 @@ public class Application {
             @Override
             public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-                response.sendRedirect(request.getServletContext().getContextPath() + "/d/" + request.getServletPath() + "?" + request.getQueryString());
+                response.sendRedirect(request.getServletContext().getContextPath() + "/d" + request.getServletPath() + "?" + request.getQueryString());
             }
-        },"/itemLookup*","/itemLookup");
+        },"/itemLookup/*","/itemLookup");
 
         return registration;
     }

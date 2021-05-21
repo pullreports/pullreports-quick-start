@@ -14,7 +14,7 @@ The following files within the `jee` project contain important configuration rel
 
 ## build.gradle
 
-Key configuration elements within the [build.gradle](build.gradle) file are the use of the [Gradle `war` plugin](https://docs.gradle.org/current/userguide/war_plugin.html) to build a JEE web application and the use of the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin to serve that application within a local [Tomcat](https://tomcat.apache.org) Servlet Container.
+Key configuration elements within the [build.gradle](build.gradle) file are the use of the [Gradle `war` plugin](https://docs.gradle.org/current/userguide/war_plugin.html) to build a JEE web application and the use of the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin to serve that application within a local [Jetty](https://www.eclipse.org/jetty) Servlet Container.
 
 ## src/main/resources/pullreports.properties
 
@@ -22,9 +22,9 @@ The [pullreports.properties](src/main/resources/pullreports.properties) file def
 
 Read about more Pull Reports configuration properties within the [Pull Reports administration](https://www.pullreports.com/docs/latest/admin-guide/) chapter.
 
-## src/main/webapp/META-INF/context.xml
+## src/jetty/jetty.xml
 
-The [context.xml](src/main/webapp/META-INF/context.xml) file is a Tomcat specific configuration file read on Tomcat start up. This `context.xml` file defines a JNDI `javax.sql.DataSource` at the `java:comp/env/jdbc/petstore-datasource` JNDI path. Note the use of the H2 database connection parameters.
+The [jetty.xml](src/jetty/jetty.xml) file is a Jetty specific configuration file read on start up. This `jetty.xml` file defines a JNDI `javax.sql.DataSource` at the `java:comp/env/jdbc/petstore-datasource` JNDI path. Note the use of the H2 database connection parameters.
 
 ## src/main/webapp/WEB-INF/sitemesh.xml, decorators.xml, and decorators directory
 
@@ -50,29 +50,32 @@ For example, to use a PostgreSQL database, add the PostgreSQL driver in `build.g
 
     dependencies {
         ... 
-        gretty 'org.postgresql:postgresql:42.2.9'
+        gretty 'org.postgresql:postgresql:42.2.20'
         ...
     }
     
-## 2) Set your database connection parameters within context.xml
+## 2) Set your database connection parameters within jetty.xml
 
-Add a JNDI connection pool within `src/main/webapp/META-INF/context.xml` appropriate for your database. The [Tomcat connection pool documentation](https://tomcat.apache.org/tomcat-8.0-doc/jdbc-pool.html) provides more information on how to configure a JNDI DataSource.
+Add a JNDI connection pool within `src/jetty/jetty.xml` appropriate for your database.
 
-For example, to create a connection pool to a PostgreSQL database, add this `<Resource>` to context.xml:
+For example, to create a connection pool to a PostgreSQL database, add this JNDI resource definition to `jetty.xml`:
 
 ```xml
-<Context path="" swallowOutput="true">
+<Configure id="Server" class="org.eclipse.jetty.server.Server">
   ...
-  <Resource name="jdbc/my-datasource"
-            auth="Container"
-            type="javax.sql.DataSource"
-            username="your_username"
-            password="your_password"
-            driverClassName="org.postgresql.Driver"
-            url="jdbc:postgresql://localhost:5432/dbname"
-            maxActive="8"
-            maxIdle="4"/>
-</Context>
+  <New id="MyDatasource" class="org.eclipse.jetty.plus.jndi.Resource">
+      <Arg></Arg>
+      <Arg>jdbc/my-datasource</Arg>
+      <Arg>
+          <New class="org.apache.commons.dbcp.BasicDataSource">
+              <Set name="driverClassName">org.postgresql.Driver</Set>
+              <Set name="url">jdbc:postgresql://localhost:5432/dbname</Set>
+              <Set name="username">your_username</Set>
+              <Set name="password">your_password</Set>
+          </New>
+      </Arg>
+  </New>
+</Configure>
 ```
     
 ## 3) Add your own XML Catalog File

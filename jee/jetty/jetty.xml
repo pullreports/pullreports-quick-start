@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://www.eclipse.org/jetty/configure_10_0.dtd">
+<Configure id="Server" class="org.eclipse.jetty.server.Server">
+    <Get name="ThreadPool">
+      <Set name="minThreads">10</Set>
+      <Set name="maxThreads">2000</Set>
+      <Set name="detailedDump">false</Set>
+    </Get>
+    <Call name="addConnector">
+      <Arg>
+        <New class="org.eclipse.jetty.server.ServerConnector">
+          <Arg name="server"><Ref refid="Server"/></Arg>
+          <Set name="port">8080</Set>
+        </New>
+      </Arg>
+    </Call>
+    <New id="PetStoreDatasource" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg></Arg>
+        <Arg>jdbc/petstore-datasource</Arg>
+        <Arg>
+            <New class="org.apache.commons.dbcp.BasicDataSource">
+                <Set name="driverClassName">org.h2.Driver</Set>
+                <Set name="url">jdbc:h2:tcp://localhost:9092/petstore</Set>
+                <Set name="username">sa</Set>
+                <Set name="password">secret</Set>
+            </New>
+        </Arg>
+    </New>
+</Configure>
