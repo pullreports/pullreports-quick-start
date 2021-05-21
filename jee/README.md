@@ -56,7 +56,7 @@ For example, to use a PostgreSQL database, add the PostgreSQL driver in `build.g
     
 ## 2) Set your database connection parameters within jetty.xml
 
-Add a JNDI connection pool within `src/jetty/jetty.xml` appropriate for your database.
+Add a JNDI connection pool within `jetty/jetty.xml` appropriate for your database.
 
 For example, to create a connection pool to a PostgreSQL database, add this JNDI resource definition to `jetty.xml`:
 
