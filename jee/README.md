@@ -22,9 +22,9 @@ The [pullreports.properties](src/main/resources/pullreports.properties) file def
 
 Read about more Pull Reports configuration properties within the [Pull Reports administration](https://www.pullreports.com/docs/latest/admin-guide/) chapter.
 
-## src/jetty/jetty.xml
+## jetty/jetty.xml
 
-The [jetty.xml](src/jetty/jetty.xml) file is a Jetty specific configuration file read on start up. This `jetty.xml` file defines a JNDI `javax.sql.DataSource` at the `java:comp/env/jdbc/petstore-datasource` JNDI path. Note the use of the H2 database connection parameters.
+The [jetty.xml](jetty/jetty.xml) file is a Jetty specific configuration file read on start up. This `jetty.xml` file defines a JNDI `javax.sql.DataSource` at the `java:comp/env/jdbc/petstore-datasource` JNDI path. Note the use of the H2 database connection parameters.
 
 ## src/main/webapp/WEB-INF/sitemesh.xml, decorators.xml, and decorators directory
 
