@@ -1,9 +1,3 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-}
-
 plugins {
     id 'war'
     id 'eclipse'
@@ -12,7 +6,7 @@ plugins {
 }
 
 repositories {
-    jcenter()
+    gradlePluginPortal()
     mavenCentral()
     maven {
         url "s3://repo.pullreports.com/maven2"
