@@ -14,7 +14,7 @@
         });
         baseLayers['Open Street Map'] = 
             L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+            attribution: 'Map data ï¿½ <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
             ,maxZoom: 18
         });
         
@@ -29,6 +29,7 @@
             ,initCallback:initializeMap
         };
     </script>
+    <%@include file="breadcrumb-style.html"%>
 </head>
 <body>
     <ol class='breadcrumb'>

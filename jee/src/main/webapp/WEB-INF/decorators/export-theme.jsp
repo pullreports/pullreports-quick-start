@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Demonstration Pull Report</title>
     <decorator:head />
+    <%@include file="breadcrumb-style.html"%>
 </head>
 <body>
     <ol class='breadcrumb'>
