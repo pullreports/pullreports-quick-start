@@ -6,5 +6,6 @@
     to map the 'format' HTTP parameter to the 'html' and 'map' decorators.
      -->
     <decorator name="html" page="export-theme.jsp"></decorator>
+    <decorator name="htmltree" page="export-theme.jsp"></decorator>
     <decorator name="map" page="export-map-theme.jsp"></decorator>
 </decorators>
