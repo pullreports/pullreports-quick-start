@@ -1,4 +1,4 @@
-<#import "/layout.ftl" as layout />
+<#import "/layout.ftlh" as layout />
 <!DOCTYPE html>
 <html>
     <@layout.head title="My title">
@@ -22,7 +22,7 @@
                 });
                 baseLayers['Open Street Map'] = 
                     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+                    attribution: 'Map data ï¿½ <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
                     ,maxZoom: 18
                 });
 

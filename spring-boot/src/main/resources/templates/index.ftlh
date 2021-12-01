@@ -1,4 +1,4 @@
-<#import "/layout.ftl" as layout />
+<#import "/layout.ftlh" as layout />
 <!DOCTYPE html>
 <html>
     <@layout.head title="My title">
