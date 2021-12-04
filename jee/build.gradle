@@ -9,11 +9,7 @@ repositories {
     gradlePluginPortal()
     mavenCentral()
     maven {
-        url "s3://repo.pullreports.com/maven2"
-        credentials(AwsCredentials) {
-            accessKey project.getProperty('accessKey')
-            secretKey project.getProperty('secretKey')
-        }
+        url "https://repo2.pullreports.com/maven2"
         content {
             includeGroupByRegex "com\\.pullreports.*"
         }
