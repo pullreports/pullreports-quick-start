@@ -16,17 +16,13 @@ See the [Pull Reports Documentation and User Guide](https://www.pullreports.com/
 
 ## Installation
 
-### 1) Obtain credentials to the Pull Reports Maven repository
-
-Email sales@pullreports.com to obtain temporary credentials to the Pull Reports Maven repository so as to download the software and dependencies. A sales representative will send you an access key and secret to use in step 3.
-
-### 2) Clone the pullreports-quick-start Git Repository
+### 1) Clone the pullreports-quick-start Git Repository
 
 Cloning this git repository.
 
 `git clone https://github.com/pullreports/pullreports-quick-start.git`
 
-### 3) Start the application(s)
+### 2) Start the application(s)
 
 The cloned git repository contains Gradle wrapper executables at the root of the repository project, `gradlew` for Linux and `gradlew.bat` for Windows. Executing either wrapper file from a terminal window will download all the Gradle dependencies needed to run the example applications.
 
@@ -34,27 +30,25 @@ Before running the following commands, ensure that the JVM, `java` executable is
 
 Additionally, each application start command will also start an embedded H2 database configured within the `database` sub-project. This database is used by each application when fulfilling report requests. If you start multiple applications at once, the H2 database will simply restart with each application start.
 
-In the following Gradle commands, `[accessKey]` and `[secretKey]` represent the Pull Reports Maven repository credentials you obtained in step 1.
-
 #### JEE
 
-From the root of the project, run `./gradlew -PaccessKey=[accessKey] -PsecretKey=[secretKey] jee:appRun`. This command starts the JEE Pull Reports application via the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin.
+From the root of the project, run `./gradlew jee:appRun`. This command starts the JEE Pull Reports application via the [Gretty Gradle](http://akhikhl.github.io/gretty-doc/index.html) plugin.
 
 Browse to http://localhost:8080 to see the application.
 
 #### Grails
 
-From the root of the project, run `./gradlew -PaccessKey=[accessKey] -PsecretKey=[secretKey] grails:bootRun`. This command starts the Grails Pull Reports application.
+From the root of the project, run `./gradlew grails:bootRun`. This command starts the Grails Pull Reports application.
 
 Browse to http://localhost:8081 to see the application.
 
 #### Spring Boot
 
-From the root of the project, run `./gradlew -PaccessKey=[accessKey] -PsecretKey=[secretKey] spring-boot:bootRun`. This command starts the Spring Boot Pull Reports application.
+From the root of the project, run `./gradlew spring-boot:bootRun`. This command starts the Spring Boot Pull Reports application.
 
 Browse to http://localhost:8082 to see the application.
 
-### 4) Making changes to the example reports
+### 3) Making changes to the example reports
 
 Pull Reports are defined by XML files called Catalog Files because the root XML element is a `<catalog>` grouping one or more `<report>`s. A single XML Catalog File at [src/main/resources/reports/petstore.xml](src/main/resources/reports/petstore.xml) configures the Pull Reports for each example application. Reference the Pull Reports documentation, [XML Catalog Files](https://www.pullreports.com/docs/latest/catalog-config/) chapter to learn about XML Catalog Files.
 
