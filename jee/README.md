@@ -121,4 +121,4 @@ http://localhost:8080/adHocCreator?catalogId=my-catalog&reportId=my-first-report
 
 This project contains a simple Selenium test, [JeeBasicBehaviorTest](src/test/java/com/pullreports/jee/JeeBasicBehaviorTest.java), to verify basic application capability.
 
-Before running the test, start the application with `gradlew :jee:appRun` and install the latest Selenium [ChromeDriver](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver) executable in your path. Then invoke `gradlew :jee:test` to run the test.
+Before running the test, start the application with `gradlew :jee:appRun` and install the appropriate [ChromeDriver](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver) executable in your path. Then invoke `gradlew :jee:test` to run the test.
