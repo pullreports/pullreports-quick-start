@@ -37,7 +37,7 @@ configurations {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-devtools'
-    implementation 'com.h2database:h2:1.4.200'
+    implementation 'com.h2database:h2:2.1.214'
     implementation 'org.springframework.boot:spring-boot-starter-freemarker'
     implementation 'com.pullreports:pullreports:+'
     implementation 'org.apache.tomcat:tomcat-dbcp:9.0.29'

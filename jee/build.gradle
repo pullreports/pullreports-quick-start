@@ -28,7 +28,7 @@ dependencies {
     providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.2.1'
 	
 	// Driver for the H2 database. Must be on the Servlet Container classpath.
-    gretty 'com.h2database:h2:1.4.200'
+    gretty 'com.h2database:h2:2.1.214'
     gretty 'commons-dbcp:commons-dbcp:1.4'
 
     testImplementation project(path:':common-test',configuration:'default')
@@ -51,11 +51,6 @@ gretty {
 
 war {
     archiveName "ROOT.war"
-}
-
-clean.doFirst {
-	delete "${projectDir}/bin"
-	delete "${projectDir}/tomcat.8080"
 }
 
 project.afterEvaluate {

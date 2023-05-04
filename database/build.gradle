@@ -1,3 +1,10 @@
+import groovy.sql.Sql
+import org.h2.tools.RunScript
+import org.h2.tools.Server
+
+import java.nio.charset.Charset
+import java.sql.DriverManager
+import java.sql.SQLException
 import java.util.concurrent.ThreadLocalRandom
 
 buildscript {
@@ -5,7 +12,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.h2database:h2:1.4.193'
+        classpath 'com.h2database:h2:2.1.214'
     }
 }
 
@@ -21,7 +28,7 @@ repositories {
 }
 
 dependencies {
-    h2Driver 'com.h2database:h2:1.4.200'
+    h2Driver 'com.h2database:h2:2.1.214'
 }
 
 ext {
@@ -29,20 +36,20 @@ ext {
     tcpPassword = 'tcpPassword'
 }
 
-task startH2() {
+tasks.register('startH2') {
     doLast {
         String h2Base = "${buildDir}/temp-h2-base"
         String databaseName = "petstore"
 
-        org.h2.tools.Server h2 = org.h2.tools.Server.createTcpServer(
-			'-tcp','-tcpPort',port,'-baseDir',h2Base,'-tcpPassword',tcpPassword)
-		
+        Server h2 = Server.createTcpServer(
+                '-tcp','-ifNotExists','-tcpPort', port, '-baseDir', h2Base, '-tcpPassword', tcpPassword)
+
         try {
             h2.start()
             println "H2 started"
-        } catch (java.sql.SQLException e){
+        } catch (SQLException e) {
             println "H2 already started. Trying to start again"
-            org.h2.tools.Server.shutdownTcpServer("tcp://localhost:${port}".toString(),tcpPassword,true,true)
+            Server.shutdownTcpServer("tcp://localhost:${port}".toString(), tcpPassword, true, true)
             // I've found that letting the TcpServer fully shutdown is often required
             // I wish I had a way of detecting this or having a callback, but just sleeping
             // for 1.5 sec is easier.
@@ -51,36 +58,36 @@ task startH2() {
         }
 
         new File("${h2Base}/${databaseName}.mv.db").delete()
-        
+
         // Let the database delete operation finish.
         sleep(1000)
 
         String h2Home = "${projectDir}/src/main/database"
 
-        org.h2.tools.RunScript.execute("jdbc:h2:tcp://localhost:${port}/${databaseName}".toString()
-            , 'sa', 'secret', "${h2Home}/pet_store.sql".toString()
-            , java.nio.charset.Charset.forName('UTF-8'), false)
+        RunScript.execute("jdbc:h2:tcp://localhost:${port}/${databaseName}".toString()
+                , 'sa', 'secret', "${h2Home}/pet_store.sql".toString()
+                , Charset.forName('UTF-8'), false)
 
         // Put the H2 driver into the same classloader as Groovy.
         configurations.h2Driver.files.each {
-            groovy.sql.Sql.classLoader.addURL(it.toURI().toURL())
+            Sql.classLoader.addURL(it.toURI().toURL())
         }
 
-        java.sql.DriverManager.registerDriver(
-            groovy.sql.Sql.classLoader.loadClass("org.h2.Driver").newInstance())
+        DriverManager.registerDriver(
+                Sql.classLoader.loadClass("org.h2.Driver").newInstance())
 
         def sql;
 
         try {
-            
-            def db = [url:"jdbc:h2:tcp://localhost:${port}/${databaseName}".toString()
-                , user:'sa', password:'secret', driver:'org.h2.Driver']
-        
-            sql = groovy.sql.Sql.newInstance(db.url, db.user, db.password, db.driver)
-            
-            def tables = ['category','product','manufacturer','item','warehouse','customer']
-            
-            for (t in tables){
+
+            def db = [url   : "jdbc:h2:tcp://localhost:${port}/${databaseName}".toString()
+                      , user: 'sa', password: 'secret', driver: 'org.h2.Driver']
+
+            sql = Sql.newInstance(db.url, db.user, db.password, db.driver)
+
+            def tables = ['category', 'product', 'manufacturer', 'item', 'warehouse', 'customer']
+
+            for (t in tables) {
                 sql.execute "insert into pet_store.${t} select * from csvread('${h2Home}/${t}.csv',null,'fieldDelimiter=''')".toString()
             }
 
@@ -93,10 +100,9 @@ task startH2() {
     }
 }
 
-task stopH2() {
+tasks.register('stopH2') {
     doLast {
-        org.h2.tools.Server h2 = org.h2.tools.Server.shutdownTcpServer("tcp://localhost:${port}".toString()
-			,tcpPassword,true,true)
+        Server.shutdownTcpServer("tcp://localhost:${port}".toString(), tcpPassword, true, true)
     }
 }
 
@@ -105,7 +111,7 @@ task stopH2() {
  * of being in a given warehouse. The inventory amount will be between 0 and 200.
  * The inventory date will be sometime in the last year.
  */
-private void insertItemInventory(groovy.sql.Sql sql){
+private static void insertItemInventory(Sql sql){
     for(def item : sql.rows('select id from pet_store.item')){
         
         for(def warehouse : sql.rows('select id from pet_store.warehouse')){
@@ -129,7 +135,7 @@ private void insertItemInventory(groovy.sql.Sql sql){
  * per customer within the past 4 years. Each order has 1 to 3 items. 
  * @param sql
  */
-private void insertCustomOrders(groovy.sql.Sql sql){
+private static void insertCustomOrders(Sql sql){
     List itemIds = sql.rows('select id from pet_store.item')
 
     for(def customer: sql.rows('select id from pet_store.customer')){
