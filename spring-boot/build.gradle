@@ -14,17 +14,7 @@ apply plugin: 'io.spring.dependency-management'
 
 
 jar {
-    baseName = 'pullreports-spring-boot'
-}
-
-repositories {
-    mavenCentral()
-    maven {
-        url "https://repo2.pullreports.com/maven2"
-        content {
-            includeGroupByRegex "com\\.pullreports.*"
-        }
-    }
+    archiveBaseName = 'pullreports-spring-boot'
 }
 
 sourceCompatibility = 1.8

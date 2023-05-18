@@ -5,17 +5,6 @@ plugins {
     id 'org.gretty' version '3.0.5'
 }
 
-repositories {
-    gradlePluginPortal()
-    mavenCentral()
-    maven {
-        url "https://repo2.pullreports.com/maven2"
-        content {
-            includeGroupByRegex "com\\.pullreports.*"
-        }
-    }
-}
-
 dependencies {
     runtimeOnly 'org.slf4j:slf4j-simple:1.7.30' // SLF4J implementation
     runtimeOnly 'opensymphony:sitemesh:2.4.2' // Optional: demonstrates the use of SiteMesh and Pull Reports
@@ -50,7 +39,7 @@ gretty {
 }
 
 war {
-    archiveName "ROOT.war"
+    archiveFileName="ROOT.war"
 }
 
 project.afterEvaluate {

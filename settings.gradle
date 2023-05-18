@@ -1,2 +1,14 @@
 rootProject.name = 'pullreports-quick-start'
 include 'database','jee', 'grails','spring-boot','common-test'
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://repo2.pullreports.com/maven2"
+            content {
+                includeGroup "com.pullreports"
+            }
+        }
+    }
+}
