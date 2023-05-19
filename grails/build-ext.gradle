@@ -12,7 +12,7 @@ repositories {
     maven {
         url "https://repo2.pullreports.com/maven2"
         content {
-            includeGroupByRegex "com\\.pullreports.*"
+            includeGroup "com.pullreports"
         }
     }
 }
