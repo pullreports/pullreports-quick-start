@@ -2,7 +2,7 @@ import groovy.sql.Sql
 import org.h2.tools.RunScript
 import org.h2.tools.Server
 
-import java.nio.charset.Charset
+import java.nio.charset.StandardCharsets
 import java.sql.DriverManager
 import java.sql.SQLException
 import java.util.concurrent.ThreadLocalRandom
@@ -16,20 +16,22 @@ buildscript {
     }
 }
 
-apply plugin: 'eclipse'
+plugins {
+    id 'java'
+    id 'eclipse'
+}
 
 configurations {
     // The H2 driver configuration for the insertion of records into H2.
     h2Driver
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     h2Driver 'com.h2database:h2:2.1.214'
 }
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 ext {
 	port = '9092'
@@ -47,7 +49,7 @@ tasks.register('startH2') {
         try {
             h2.start()
             println "H2 started"
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
             println "H2 already started. Trying to start again"
             Server.shutdownTcpServer("tcp://localhost:${port}".toString(), tcpPassword, true, true)
             // I've found that letting the TcpServer fully shutdown is often required
@@ -63,10 +65,17 @@ tasks.register('startH2') {
         sleep(1000)
 
         String h2Home = "${projectDir}/src/main/database"
+        String dbUrl = "jdbc:h2:tcp://localhost:${port}/${databaseName}".toString()
 
-        RunScript.execute("jdbc:h2:tcp://localhost:${port}/${databaseName}".toString()
-                , 'sa', 'secret', "${h2Home}/pet_store.sql".toString()
-                , Charset.forName('UTF-8'), false)
+        RunScript.execute(dbUrl, 'sa', 'secret', "${h2Home}/pet_store.sql".toString()
+                , StandardCharsets.UTF_8, false)
+
+        String tmpSchema = System.getProperty("java.io.tmpdir") + "/schema.sql"
+        String schema = "https://www.pullreports.com/docs/2.2/userquery/h2/user_queries-schema.sql"
+        download(schema, tmpSchema)
+
+        RunScript.execute(dbUrl, "sa", "secret", tmpSchema
+                , StandardCharsets.UTF_8, false);
 
         // Put the H2 driver into the same classloader as Groovy.
         configurations.h2Driver.files.each {
@@ -170,5 +179,13 @@ private static void insertCustomOrders(Sql sql){
                 """
             }
         }
+    }
+}
+
+private static void download(String remoteUrl, String localUrl)
+{
+    def f = new File(localUrl)
+    if (!f.exists()) {
+        new URL(remoteUrl).withInputStream{ i -> f.withOutputStream{ it << i }}
     }
 }

@@ -6,7 +6,7 @@ This repository contains three example [Pull Reports](https://www.pullreports.co
 1. Grails: The [`grails`](/grails) sub-project embeds Pull Reports into a [Grails 4](https://grails.org) application.
 1. Spring Boot: The [`spring-boot`](/spring-boot) sub-project embeds Pull Reports into a [Spring Boot](https://projects.spring.io/spring-boot/) application. 
 
-The `database` sub-project contains tasks and configuration to start a local, [H2](http://www.h2database.com) database to support all three application sub-projects.
+The `common` sub-project contains tasks and configuration to start a local, [H2](http://www.h2database.com) database to support all three application sub-projects.
 
 Pull Reports configuration common to all three application sub-projects resides within the `src` directory of the root project.
 
@@ -28,7 +28,7 @@ The cloned git repository contains Gradle wrapper executables at the root of the
 
 Before running the following commands, ensure that the JVM, `java` executable is installed on your computer.
 
-Additionally, each application start command will also start an embedded H2 database configured within the `database` sub-project. This database is used by each application when fulfilling report requests. If you start multiple applications at once, the H2 database will simply restart with each application start.
+Additionally, each application start command will also start an embedded H2 database configured within the `common` sub-project. This database is used by each application when fulfilling report requests. If you start multiple applications at once, the H2 database will simply restart with each application start.
 
 #### JEE
 
