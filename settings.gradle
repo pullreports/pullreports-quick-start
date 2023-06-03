@@ -1,5 +1,5 @@
 rootProject.name = 'pullreports-quick-start'
-include 'database','jee', 'grails','spring-boot','common-test'
+include 'common','jee', 'grails','spring-boot','common-test'
 
 dependencyResolutionManagement {
     repositories {

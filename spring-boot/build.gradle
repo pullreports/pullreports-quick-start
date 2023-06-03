@@ -49,5 +49,5 @@ clean.doFirst {
 }
 
 project.afterEvaluate {
-    tasks.bootRun.dependsOn ':database:startH2'
+    tasks.bootRun.dependsOn ':common:startH2'
 }
