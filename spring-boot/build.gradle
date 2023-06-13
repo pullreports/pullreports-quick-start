@@ -37,9 +37,9 @@ dependencies {
 sourceSets {
     main {
         resources {
-            // Include the root projects resource directory to pick
-            // up the license and report configuration.
-            srcDir "${project(':').projectDir}/src/main/resources"
+            // Include the root projects resource directory to include
+            // report configuration.
+//            srcDir "${project(':').projectDir}/src/main/resources"
         }
     }
 }
