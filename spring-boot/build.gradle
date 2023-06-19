@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.4.13")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.5.15")
     }
 }
 
@@ -39,7 +39,7 @@ sourceSets {
         resources {
             // Include the root projects resource directory to include
             // report configuration.
-//            srcDir "${project(':').projectDir}/src/main/resources"
+            srcDir "${project(':').projectDir}/src/main/resources"
         }
     }
 }
