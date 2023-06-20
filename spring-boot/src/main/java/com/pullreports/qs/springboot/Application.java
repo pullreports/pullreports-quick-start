@@ -24,21 +24,6 @@ public class Application {
     }
 
     @Bean
-    public DispatcherServlet dispatcherServlet() {
-        return new DispatcherServlet();
-    }
- 
-    @Bean
-    public DispatcherServletRegistrationBean dispatcherServletRegistration() {
-
-        DispatcherServletRegistrationBean registration = 
-                new DispatcherServletRegistrationBean(dispatcherServlet(),"/d/*");
-        registration.setName(DispatcherServletAutoConfiguration.DEFAULT_DISPATCHER_SERVLET_REGISTRATION_BEAN_NAME);
-
-        return registration;
-    }
-
-    @Bean
     public ServletRegistrationBean<HttpServlet> itemLookupServletRegistration() {
 
         ServletRegistrationBean<HttpServlet> registration = new ServletRegistrationBean<>(
@@ -54,4 +39,5 @@ public class Application {
 
         return registration;
     }
+
 }
