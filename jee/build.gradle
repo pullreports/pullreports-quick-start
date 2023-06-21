@@ -9,7 +9,7 @@ dependencies {
     runtimeOnly 'org.slf4j:slf4j-simple:1.7.30' // SLF4J implementation
     runtimeOnly 'opensymphony:sitemesh:2.4.2' // Optional: demonstrates the use of SiteMesh and Pull Reports
     runtimeOnly 'org.apache.taglibs:taglibs-standard-impl:1.2.5'
-    implementation 'com.pullreports:pullreports:+'
+    implementation project(':common')
 
     // Provided by Servlet Container. 'providedCompile' configuration
     // from WAR plugin.

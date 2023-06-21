@@ -10,8 +10,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management' 
-
+apply plugin: 'io.spring.dependency-management'
 
 jar {
     archiveBaseName = 'pullreports-spring-boot'
@@ -29,8 +28,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-devtools'
     implementation 'com.h2database:h2:2.1.214'
     implementation 'org.springframework.boot:spring-boot-starter-freemarker'
-    implementation 'com.pullreports:pullreports:+'
     implementation 'org.apache.tomcat:tomcat-dbcp:9.0.29'
+    implementation project(':common')
     testImplementation project(path:':common-test',configuration:'default')
 }
 
