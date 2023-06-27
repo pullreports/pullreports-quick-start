@@ -9,8 +9,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 /**
  * Common test methods for verifying common behavior
@@ -22,7 +25,11 @@ public abstract class AbstractBasicBehaviorTest {
 
     @BeforeClass
     public static void setUpDriver(){
-        driver = new ChromeDriver();
+        ChromeOptions ops = new ChromeOptions();
+        ops.addArguments("--remote-allow-origins=*");
+        ops.addArguments("--remote-allow-origins=*");
+
+        driver = new ChromeDriver(ops);
     }
 
     @AfterClass
@@ -36,7 +43,7 @@ public abstract class AbstractBasicBehaviorTest {
     @Test
     public void testWelcomePage() {
         driver.get(getBaseUrl());
-        WebElement welcomeHeader = new WebDriverWait(driver, 10)
+        WebElement welcomeHeader = new WebDriverWait(driver, Duration.ofSeconds(2L))
             .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("h1")));
         assertTrue(welcomeHeader.getText().matches("Pet Store.*Demonstration"));
     }
@@ -44,7 +51,7 @@ public abstract class AbstractBasicBehaviorTest {
     @Test
     public void testReportRepository() {
         driver.get(getBaseUrl() + getReportCreatorPath());
-        WebElement reportLink = new WebDriverWait(driver, 10)
+        WebElement reportLink = new WebDriverWait(driver, Duration.ofSeconds(2L))
             .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("h4 a")));
         assertTrue(reportLink.getText().matches("Item Report"));
     }
@@ -53,11 +60,11 @@ public abstract class AbstractBasicBehaviorTest {
     public void testReportCreatorTableMode() {
         driver.get(getBaseUrl() + getReportCreatorPath() + "?catalogId=petstore&reportId=items");
 
-        new WebDriverWait(driver, 10)
+        new WebDriverWait(driver, Duration.ofSeconds(2L))
             .until(ExpectedConditions.presenceOfElementLocated(
                     By.cssSelector("#pr-preview-table tbody")));
 
-        WebElement previewTable = new WebDriverWait(driver, 10)
+        WebElement previewTable = new WebDriverWait(driver, Duration.ofSeconds(2L))
             .until(ExpectedConditions.presenceOfElementLocated(
                     By.cssSelector("#pr-preview-table")));
 
