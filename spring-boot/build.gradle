@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.7.12")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.7.18")
     }
 }
 
@@ -26,9 +26,9 @@ configurations {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-devtools'
-    implementation 'com.h2database:h2:2.1.214'
+    implementation libs.h2.driver
     implementation 'org.springframework.boot:spring-boot-starter-freemarker'
-    implementation 'org.apache.tomcat:tomcat-dbcp:9.0.29'
+    implementation 'org.apache.tomcat:tomcat-dbcp:9.0.95'
     implementation project(':common')
     testImplementation project(path:':common-test',configuration:'default')
 }

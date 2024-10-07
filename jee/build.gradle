@@ -2,7 +2,7 @@ plugins {
     id 'war'
     id 'eclipse'
     id 'project-report'
-    id 'org.gretty' version '3.0.5'
+    id 'org.gretty' version '3.1.4'
 }
 
 dependencies {
@@ -13,12 +13,12 @@ dependencies {
 
     // Provided by Servlet Container. 'providedCompile' configuration
     // from WAR plugin.
-    providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
+    providedCompile 'jakarta.servlet:jakarta.servlet-api:4.0.4'
     providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.2.1'
-	
+
 	// Driver for the H2 database. Must be on the Servlet Container classpath.
-    gretty 'com.h2database:h2:2.1.214'
-    gretty 'commons-dbcp:commons-dbcp:1.4'
+    grettyRunnerJetty10 libs.h2.driver
+    grettyRunnerJetty10 'commons-dbcp:commons-dbcp:1.4'
 
     testImplementation project(path:':common-test',configuration:'default')
 }
@@ -34,7 +34,7 @@ sourceSets {
 }
 
 gretty {
-    servletContainer 'jetty9.3'
+    servletContainer 'jetty10'
     contextPath ''
 }
 
