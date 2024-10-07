@@ -27,8 +27,8 @@ configurations {
 }
 
 dependencies {
-    h2Driver 'com.h2database:h2:2.1.214'
-    compileOnly 'javax.servlet:javax.servlet-api:3.0.1'
+    h2Driver libs.h2.driver
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:4.0.4'
     implementation 'com.pullreports:pullreports:+'
 }
 
