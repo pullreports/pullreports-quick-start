@@ -28,15 +28,15 @@ configurations {
 
 dependencies {
     h2Driver libs.h2.driver
-    compileOnly 'jakarta.servlet:jakarta.servlet-api:4.0.4'
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.0.0'
     implementation 'com.pullreports:pullreports:+'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
 
 ext {
-	port = '9092'
+    port = '9092'
     tcpPassword = 'tcpPassword'
 }
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<catalog xmlns="http://www.pullreports.com/catalog-1.7.0" id="petstore" name="Products"
+<catalog xmlns="http://www.pullreports.com/catalog-1.6.1" id="petstore" name="Products"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.pullreports.com/catalog-1.7.0
-    https://www.pullreports.com/docs/xsd/pullreports-catalog-1.7.0.xsd">
+    xsi:schemaLocation="http://www.pullreports.com/catalog-1.6.1
+    https://www.pullreports.com/docs/xsd/pullreports-catalog-1.6.1.xsd">
     <report id="items" name="Item Report">
         <description><![CDATA[
         <p>Report of the items for sale in Duke's Pet Store.</p>

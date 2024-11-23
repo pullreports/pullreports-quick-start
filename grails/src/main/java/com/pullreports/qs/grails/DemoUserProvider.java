@@ -1,7 +1,7 @@
-package com.pullreports.demo;
+package com.pullreports.qs.grails;
 
 import com.pullreports.userquery.UserProvider;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import java.util.Optional;
 

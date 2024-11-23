@@ -1,5 +1,3 @@
-<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +6,7 @@
     <title>Pull Reports Pet Store Demonstration</title>
     <meta name="description" content="Quick start Pull Reports demonstration.">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
-    <decorator:head/>
-    <decorator:usePage id='thePage'/>
+    <sitemesh:write property="head"/>
     <style>
         .navbar-inverse {
             background-color:#1A237E;
@@ -24,14 +21,14 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class='<%= ("Home".equals(thePage.getProperty("meta.activePage")))?"active":"" %>'>
+            <li class='<%= ("Home".equals(request.getAttribute("activePage")))?"active":"" %>'>
                 <a href="${pageContext.request.contextPath}/">Home</a></li>
-            <li class='<%= ("Creator".equals(thePage.getProperty("meta.activePage")))?"active":"" %>'>
+            <li class='<%= ("Creator".equals(request.getAttribute("activePage")))?"active":"" %>'>
                 <a href="${pageContext.request.contextPath}/adHocCreator">Ad Hoc Reports</a></li>
           </ul>
         </div>
       </div>
     </nav>
-    <decorator:body />
+    <sitemesh:write property="body"/>
 </body>
 </html>

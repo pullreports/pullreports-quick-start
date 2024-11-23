@@ -2,23 +2,21 @@ plugins {
     id 'war'
     id 'eclipse'
     id 'project-report'
-    id 'org.gretty' version '3.1.4'
+    id 'org.gretty' version '4.1.5'
 }
 
 dependencies {
-    runtimeOnly 'org.slf4j:slf4j-simple:1.7.30' // SLF4J implementation
-    runtimeOnly 'opensymphony:sitemesh:2.4.2' // Optional: demonstrates the use of SiteMesh and Pull Reports
-    runtimeOnly 'org.apache.taglibs:taglibs-standard-impl:1.2.5'
+    runtimeOnly 'org.slf4j:slf4j-simple:2.0.16' // SLF4J implementation
+    implementation 'org.sitemesh:sitemesh:3.2.1' // Optional: demonstrates the use of SiteMesh and Pull Reports
     implementation project(':common')
 
     // Provided by Servlet Container. 'providedCompile' configuration
     // from WAR plugin.
-    providedCompile 'jakarta.servlet:jakarta.servlet-api:4.0.4'
-    providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.2.1'
+    providedCompile 'jakarta.servlet:jakarta.servlet-api:6.0.0'
 
 	// Driver for the H2 database. Must be on the Servlet Container classpath.
-    grettyRunnerJetty10 libs.h2.driver
-    grettyRunnerJetty10 'commons-dbcp:commons-dbcp:1.4'
+    grettyRunnerJetty11 libs.h2.driver
+    grettyRunnerJetty11 'commons-dbcp:commons-dbcp:1.4'
 
     testImplementation project(path:':common-test',configuration:'default')
 }
@@ -28,13 +26,13 @@ sourceSets {
         resources {
             // Include the root projects resource directory to pick
             // up the license and report configuration.
-            srcDir "${project(':').projectDir}/src/main/resources"
+            srcDirs += "${project(':').projectDir}/src/main/resources"
         }
     }
 }
 
 gretty {
-    servletContainer 'jetty10'
+    servletContainer 'jetty11'
     contextPath ''
 }
 

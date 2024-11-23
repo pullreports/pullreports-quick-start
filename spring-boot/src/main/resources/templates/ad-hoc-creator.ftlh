@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/assets/pullreports.min.css">
         <script src="${springMacroRequestContext.contextPath}/assets/pullreports.min.js"></script>
         <script src="https://unpkg.com/esri-leaflet@2.1.4/dist/esri-leaflet-debug.js"></script>
-        <link href='/d/navbar.css' rel='stylesheet' type='text/css'>
+        <link href='/navbar.css' rel='stylesheet' type='text/css'>
     </@layout.head>
     <@layout.body activePage="Creator">
         <div class='container-fluid'>
