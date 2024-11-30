@@ -8,6 +8,6 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.seleniumhq.selenium:selenium-java:4.10.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.25.0'
     implementation 'junit:junit:4.13.1'
 }

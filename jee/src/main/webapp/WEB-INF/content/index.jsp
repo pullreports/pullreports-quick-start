@@ -1,11 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% request.setAttribute("activePage", "Home"); %>
+<% request.setAttribute("decorator.name", "/WEB-INF/decorators/basic-theme.jsp"); %>
 <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="decorator" content="basic-theme"/>
-	<meta name="activePage" content="Home"/>
     <title>Pull Reports: Ad hoc report creator demonstration</title>
     <meta name="description" content="Quick Start demonstration of Pull Reports.">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"></link>

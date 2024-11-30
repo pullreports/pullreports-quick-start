@@ -1,7 +1,6 @@
 package grails
 
 class UrlMappings {
-
     static mappings = {
         "/$controller/$action?/$id?(.$format)?"{
             constraints {
